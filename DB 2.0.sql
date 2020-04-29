@@ -113,7 +113,11 @@ BEGIN Tran
             )
             
             COMMIT Tran
-            Print 'Completed Successfully'
+	    Print 'DB and Tables Created Successfully, Creating Default Roles...'
+	    insert into [Role](RoleName) values ('Manager'), ('TeamLeader'), ('Member'), ('Client')
+
+
+            Print 'DB Completed Successfully'
         END TRY
         Begin catch 
             THROW
