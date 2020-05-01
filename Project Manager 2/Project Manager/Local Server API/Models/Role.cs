@@ -24,5 +24,11 @@ namespace Local_Server_API.Models
         [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> User { get; set; }
+
+        public const string Manager = "Manager";
+        public const string TeamLeader = "TeamLeader";
+        public const string Member = "Member";
+        public const string Client = "Client";
+        public const string Developper = "Developper";
     }
 }

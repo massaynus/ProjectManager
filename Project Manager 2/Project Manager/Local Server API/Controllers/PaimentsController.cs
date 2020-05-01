@@ -12,17 +12,18 @@ using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
+    [AuthorizaAttr]
     public class PaimentsController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        // GET: api/Paiments
+        [AuthorizaAttr(new string[] { Role.Manager, Role.Client})]
         public IQueryable<Paiments> GetPaiments()
         {
             return db.Paiments;
         }
 
-        // GET: api/Paiments/5
+        [AuthorizaAttr(new string[] { Role.Manager, Role.Client})]
         [ResponseType(typeof(Paiments))]
         public IHttpActionResult GetPaiments(int id)
         {
@@ -35,7 +36,7 @@ namespace Local_Server_API.Controllers
             return Ok(paiments);
         }
 
-        // PUT: api/Paiments/5
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPaiments(int id, Paiments paiments)
         {
@@ -70,7 +71,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Paiments
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(Paiments))]
         public IHttpActionResult PostPaiments(Paiments paiments)
         {
@@ -85,7 +86,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = paiments.PaymentID }, paiments);
         }
 
-        // DELETE: api/Paiments/5
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(Paiments))]
         public IHttpActionResult DeletePaiments(int id)
         {

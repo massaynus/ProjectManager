@@ -12,17 +12,16 @@ using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
+    [AuthorizaAttr]
     public class TeamsController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        // GET: api/Teams
         public IQueryable<Team> GetTeam()
         {
             return db.Team;
         }
 
-        // GET: api/Teams/5
         [ResponseType(typeof(Team))]
         public IHttpActionResult GetTeam(int id)
         {
@@ -35,7 +34,7 @@ namespace Local_Server_API.Controllers
             return Ok(team);
         }
 
-        // PUT: api/Teams/5
+        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader})]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTeam(int id, Team team)
         {
@@ -70,7 +69,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Teams
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(Team))]
         public IHttpActionResult PostTeam(Team team)
         {
@@ -85,7 +84,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = team.TeamID }, team);
         }
 
-        // DELETE: api/Teams/5
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(Team))]
         public IHttpActionResult DeleteTeam(int id)
         {

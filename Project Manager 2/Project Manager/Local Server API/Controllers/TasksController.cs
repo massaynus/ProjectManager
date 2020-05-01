@@ -12,17 +12,16 @@ using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
+    [AuthorizaAttr]
     public class TasksController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        // GET: api/Tasks
         public IQueryable<Task> GetTask()
         {
             return db.Task;
         }
 
-        // GET: api/Tasks/5
         [ResponseType(typeof(Task))]
         public IHttpActionResult GetTask(int id)
         {
@@ -35,7 +34,7 @@ namespace Local_Server_API.Controllers
             return Ok(task);
         }
 
-        // PUT: api/Tasks/5
+        [AuthorizaAttr(Role.TeamLeader)]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTask(int id, Task task)
         {
@@ -70,10 +69,11 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Tasks
+        [AuthorizaAttr(Role.TeamLeader)]
         [ResponseType(typeof(Task))]
         public IHttpActionResult PostTask(Task task)
         {
+            var req = RequestContext;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -85,7 +85,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = task.TaskID }, task);
         }
 
-        // DELETE: api/Tasks/5
+        [AuthorizaAttr(Role.TeamLeader)]
         [ResponseType(typeof(Task))]
         public IHttpActionResult DeleteTask(int id)
         {

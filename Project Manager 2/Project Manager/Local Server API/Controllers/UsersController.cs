@@ -19,6 +19,7 @@ namespace Local_Server_API.Controllers
     {
         private Local_DB_Model db = new Local_DB_Model();
 
+        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
         public IEnumerable<User> GetUser()
         {
             var res = db.User.ToList();
@@ -37,6 +38,7 @@ namespace Local_Server_API.Controllers
             return Ok(user);
         }
 
+        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
@@ -71,7 +73,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [AuthorizaAttr("Developper")]
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(User))]
         public IHttpActionResult PostUser(User user)
         {
@@ -80,7 +82,7 @@ namespace Local_Server_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            user.Password = HashPassword(user.Password).ToString();
+            user.Password = AuthController.HashPassword(user.Password).ToString();
 
             db.User.Add(user);
             db.SaveChanges();
@@ -88,6 +90,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = user.UserID }, user);
         }
 
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(int id)
         {
@@ -116,18 +119,6 @@ namespace Local_Server_API.Controllers
         {
             return db.User.Count(e => e.UserID == id) > 0;
         }
-        /// <summary>
-        /// Converts a string to an unsigned long using SHA1
-        /// </summary>
-        /// <param name="password">the string to convert</param>
-        /// <returns>SHA1 password</returns>
-        private ulong HashPassword(string password)
-        {
-            using (var sha1 = SHA1.Create())
-            {
-                byte[] pwd = Encoding.UTF8.GetBytes(password);
-                return BitConverter.ToUInt64(sha1.ComputeHash(pwd), 0);
-            }
-        }
+        
     }
 }

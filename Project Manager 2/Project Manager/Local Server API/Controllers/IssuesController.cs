@@ -12,17 +12,16 @@ using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
+    [AuthorizaAttr]
     public class IssuesController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        // GET: api/Issues
         public IQueryable<Issue> GetIssue()
         {
             return db.Issue;
         }
 
-        // GET: api/Issues/5
         [ResponseType(typeof(Issue))]
         public IHttpActionResult GetIssue(int id)
         {
@@ -35,7 +34,7 @@ namespace Local_Server_API.Controllers
             return Ok(issue);
         }
 
-        // PUT: api/Issues/5
+        [AuthorizaAttr(new string[] { Role.TeamLeader, Role.Member})]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutIssue(int id, Issue issue)
         {
@@ -69,8 +68,8 @@ namespace Local_Server_API.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
-        // POST: api/Issues
+        
+        [AuthorizaAttr(Role.Member)]
         [ResponseType(typeof(Issue))]
         public IHttpActionResult PostIssue(Issue issue)
         {
@@ -85,7 +84,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = issue.IssueID }, issue);
         }
 
-        // DELETE: api/Issues/5
+        [AuthorizaAttr(Role.TeamLeader)]
         [ResponseType(typeof(Issue))]
         public IHttpActionResult DeleteIssue(int id)
         {

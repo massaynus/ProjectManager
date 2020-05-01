@@ -16,61 +16,12 @@ namespace Local_Server_API.Controllers
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        // GET: api/TeamStacks
-        public IQueryable<TeamStack> GetTeamStack()
+        public IQueryable<TeamStack> GetTeamStack(int TeamId)
         {
-            return db.TeamStack;
+            return db.TeamStack.Where(TS => TS.Team == TeamId);
         }
 
-        // GET: api/TeamStacks/5
-        [ResponseType(typeof(TeamStack))]
-        public IHttpActionResult GetTeamStack(int id)
-        {
-            TeamStack teamStack = db.TeamStack.Find(id);
-            if (teamStack == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(teamStack);
-        }
-
-        // PUT: api/TeamStacks/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutTeamStack(int id, TeamStack teamStack)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != teamStack.Num)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(teamStack).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TeamStackExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/TeamStacks
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(TeamStack))]
         public IHttpActionResult PostTeamStack(TeamStack teamStack)
         {
@@ -85,7 +36,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = teamStack.Num }, teamStack);
         }
 
-        // DELETE: api/TeamStacks/5
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(TeamStack))]
         public IHttpActionResult DeleteTeamStack(int id)
         {

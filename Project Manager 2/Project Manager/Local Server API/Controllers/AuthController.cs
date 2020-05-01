@@ -17,7 +17,7 @@ namespace Local_Server_API.Controllers
         /// </summary>
         /// <param name="password">the string to convert</param>
         /// <returns>SHA1 password</returns>
-        private ulong HashPassword(string password)
+        public static ulong HashPassword(string password)
         {
             using (var sha1 = SHA1.Create())
             {
@@ -41,33 +41,5 @@ namespace Local_Server_API.Controllers
                 return db.User.Where(U => U.UserName == username && U.Password == hash).FirstOrDefault()?.UserID ?? -1;
             }
         }
-        #region Default Code
-        //// GET api/<controller>
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET api/<controller>/5
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST api/<controller>
-        //public void Post([FromBody]string value)
-        //{
-        //}
-
-        //// PUT api/<controller>/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        //// DELETE api/<controller>/5
-        //public void Delete(int id)
-        //{
-        //} 
-        #endregion
     }
 }

@@ -1,0 +1,78 @@
+[
+    {
+        "Role1": {
+            "RoleName": "Manager",
+            "RoleID": 1
+        },
+        "LastName": "Elmassaoudi",
+        "BirthDtae": "2000-11-07T00:00:00",
+        "Password": "17967854017316172855",
+        "Team": null,
+        "UserID": 2,
+        "FirstName": "Yassine",
+        "GSM": "0674723786",
+        "UserName": "Massaynus",
+        "Email": "massaoudi.yassine@gmail.com",
+        "RIB": null,
+        "Address": [],
+        "Team1": null,
+        "Role": 1
+    },
+    {
+        "Role1": {
+            "RoleName": "TeamLeader",
+            "RoleID": 2
+        },
+        "LastName": "Karam",
+        "BirthDtae": "2000-11-07T00:00:00",
+        "Password": "17967854017316172855",
+        "Team": null,
+        "UserID": 3,
+        "FirstName": "Mounia",
+        "GSM": "0674723786",
+        "UserName": "Brbo9a",
+        "Email": "massaoudi.yassine@gmail.com",
+        "RIB": null,
+        "Address": [],
+        "Team1": null,
+        "Role": 2
+    },
+    {
+        "Role1": {
+            "RoleName": "Member",
+            "RoleID": 3
+        },
+        "LastName": "Member",
+        "BirthDtae": "2000-05-01T00:00:00",
+        "Password": "17967854017316172855",
+        "Team": null,
+        "UserID": 4,
+        "FirstName": "Anon",
+        "GSM": "00000000",
+        "UserName": "MemberSan",
+        "Email": "TempMail@mail.com",
+        "RIB": null,
+        "Address": [],
+        "Team1": null,
+        "Role": 3
+    },
+    {
+        "Role1": {
+            "RoleName": "Developper",
+            "RoleID": 5
+        },
+        "LastName": "",
+        "BirthDtae": "2000-11-07T00:00:00",
+        "Password": "17967854017316172855",
+        "Team": null,
+        "UserID": 5,
+        "FirstName": "Yassinoss",
+        "GSM": "",
+        "UserName": "DevYassine",
+        "Email": "",
+        "RIB": null,
+        "Address": [],
+        "Team1": null,
+        "Role": 5
+    }
+]

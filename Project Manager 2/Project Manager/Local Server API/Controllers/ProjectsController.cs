@@ -12,17 +12,18 @@ using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
+    [AuthorizaAttr]
     public class ProjectsController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        // GET: api/Projects
+        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
         public IQueryable<Project> GetProject()
         {
             return db.Project;
         }
 
-        // GET: api/Projects/5
+        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader, Role.Client })]
         [ResponseType(typeof(Project))]
         public IHttpActionResult GetProject(int id)
         {
@@ -35,7 +36,7 @@ namespace Local_Server_API.Controllers
             return Ok(project);
         }
 
-        // PUT: api/Projects/5
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProject(int id, Project project)
         {
@@ -70,7 +71,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Projects
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(Project))]
         public IHttpActionResult PostProject(Project project)
         {
@@ -85,7 +86,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = project.ProjectID }, project);
         }
 
-        // DELETE: api/Projects/5
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(Project))]
         public IHttpActionResult DeleteProject(int id)
         {

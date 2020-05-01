@@ -12,17 +12,18 @@ using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
+    [AuthorizaAttr]
     public class AddressesController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        // GET: api/Addresses
+        [AuthorizaAttr(Role.Manager)]
         public IQueryable<Address> GetAddress()
         {
             return db.Address;
         }
 
-        // GET: api/Addresses/5
+        //TODO: Add ownership
         [ResponseType(typeof(Address))]
         public IHttpActionResult GetAddress(int id)
         {
@@ -35,7 +36,6 @@ namespace Local_Server_API.Controllers
             return Ok(address);
         }
 
-        // PUT: api/Addresses/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAddress(int id, Address address)
         {
@@ -69,8 +69,8 @@ namespace Local_Server_API.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
-        // POST: api/Addresses
+        
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(Address))]
         public IHttpActionResult PostAddress(Address address)
         {
@@ -85,7 +85,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = address.AddressID }, address);
         }
 
-        // DELETE: api/Addresses/5
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(Address))]
         public IHttpActionResult DeleteAddress(int id)
         {

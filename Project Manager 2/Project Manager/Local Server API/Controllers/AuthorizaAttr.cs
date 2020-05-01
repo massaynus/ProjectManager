@@ -15,11 +15,19 @@ namespace Local_Server_API.Controllers
 {
     public class AuthorizaAttr : AuthorizationFilterAttribute
     {
-        private string Role;
+        //TODO: check for ownership
+        //TODO: add allowAll
+
+        private string[] Role;
 
         public AuthorizaAttr() : base() { }
 
         public AuthorizaAttr(string Role) : base()
+        {
+            this.Role = new string[] { Role };
+        }
+
+        public AuthorizaAttr(string[] Role) : base()
         {
             this.Role = Role;
         }
@@ -58,25 +66,16 @@ namespace Local_Server_API.Controllers
         {
             using (var db = new Models.Local_DB_Model())
             {
-                string hash = hashPassword(Password).ToString();
+                string hash = AuthController.HashPassword(Password).ToString();
                 var user = db.User.Where(U => U.UserName == UserName && U.Password == hash).FirstOrDefault();
                 if (user != null)
                 {
-                    if (!string.IsNullOrEmpty(Role))
-                        return user.Role1.RoleName == Role;
+                    if (Role.Length > 0)
+                        return Role.Contains(user.Role1.RoleName);
                     else
                         return true;
                 }
                 else return false;
-            }
-        }
-
-        private ulong hashPassword(string password)
-        {
-            using (var sha1 = SHA1.Create())
-            {
-                byte[] pwd = Encoding.UTF8.GetBytes(password);
-                return BitConverter.ToUInt64(sha1.ComputeHash(pwd), 0);
             }
         }
     }

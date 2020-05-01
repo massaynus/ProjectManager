@@ -12,17 +12,16 @@ using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
+    [AuthorizaAttr]
     public class StacksController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        // GET: api/Stacks
         public IQueryable<Stack> GetStack()
         {
             return db.Stack;
         }
 
-        // GET: api/Stacks/5
         [ResponseType(typeof(Stack))]
         public IHttpActionResult GetStack(int id)
         {
@@ -35,7 +34,7 @@ namespace Local_Server_API.Controllers
             return Ok(stack);
         }
 
-        // PUT: api/Stacks/5
+        [AuthorizaAttr(new string[] { "Manager", "TeamLeader" })]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutStack(int id, Stack stack)
         {
@@ -70,7 +69,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Stacks
+        [AuthorizaAttr(new string[] { "Manager", "TeamLeader" })]
         [ResponseType(typeof(Stack))]
         public IHttpActionResult PostStack(Stack stack)
         {
@@ -85,7 +84,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = stack.StackID }, stack);
         }
 
-        // DELETE: api/Stacks/5
+        [AuthorizaAttr("Manager")]
         [ResponseType(typeof(Stack))]
         public IHttpActionResult DeleteStack(int id)
         {
