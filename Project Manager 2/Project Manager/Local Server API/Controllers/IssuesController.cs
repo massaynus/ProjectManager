@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Local_Server_API.Models;
+using DataAccess.Models; using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
@@ -19,13 +19,13 @@ namespace Local_Server_API.Controllers
 
         public IQueryable<Issue> GetIssue()
         {
-            return db.Issue;
+            return db.Issues;
         }
 
         [ResponseType(typeof(Issue))]
         public IHttpActionResult GetIssue(int id)
         {
-            Issue issue = db.Issue.Find(id);
+            Issue issue = db.Issues.Find(id);
             if (issue == null)
             {
                 return NotFound();
@@ -78,7 +78,7 @@ namespace Local_Server_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Issue.Add(issue);
+            db.Issues.Add(issue);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = issue.IssueID }, issue);
@@ -88,13 +88,13 @@ namespace Local_Server_API.Controllers
         [ResponseType(typeof(Issue))]
         public IHttpActionResult DeleteIssue(int id)
         {
-            Issue issue = db.Issue.Find(id);
+            Issue issue = db.Issues.Find(id);
             if (issue == null)
             {
                 return NotFound();
             }
 
-            db.Issue.Remove(issue);
+            db.Issues.Remove(issue);
             db.SaveChanges();
 
             return Ok(issue);
@@ -111,7 +111,7 @@ namespace Local_Server_API.Controllers
 
         private bool IssueExists(int id)
         {
-            return db.Issue.Count(e => e.IssueID == id) > 0;
+            return db.Issues.Count(e => e.IssueID == id) > 0;
         }
     }
 }

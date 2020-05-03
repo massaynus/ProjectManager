@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Local_Server_API.Models;
+using DataAccess.Models; using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
@@ -20,14 +20,14 @@ namespace Local_Server_API.Controllers
         [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
         public IQueryable<Project> GetProject()
         {
-            return db.Project;
+            return db.Projects;
         }
 
         [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader, Role.Client })]
         [ResponseType(typeof(Project))]
         public IHttpActionResult GetProject(int id)
         {
-            Project project = db.Project.Find(id);
+            Project project = db.Projects.Find(id);
             if (project == null)
             {
                 return NotFound();
@@ -80,7 +80,7 @@ namespace Local_Server_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Project.Add(project);
+            db.Projects.Add(project);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = project.ProjectID }, project);
@@ -90,13 +90,13 @@ namespace Local_Server_API.Controllers
         [ResponseType(typeof(Project))]
         public IHttpActionResult DeleteProject(int id)
         {
-            Project project = db.Project.Find(id);
+            Project project = db.Projects.Find(id);
             if (project == null)
             {
                 return NotFound();
             }
 
-            db.Project.Remove(project);
+            db.Projects.Remove(project);
             db.SaveChanges();
 
             return Ok(project);
@@ -113,7 +113,7 @@ namespace Local_Server_API.Controllers
 
         private bool ProjectExists(int id)
         {
-            return db.Project.Count(e => e.ProjectID == id) > 0;
+            return db.Projects.Count(e => e.ProjectID == id) > 0;
         }
     }
 }

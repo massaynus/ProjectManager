@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Local_Server_API.Models;
+using DataAccess.Models; using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
@@ -20,14 +20,14 @@ namespace Local_Server_API.Controllers
         [AuthorizaAttr(Role.Manager)]
         public IQueryable<Address> GetAddress()
         {
-            return db.Address;
+            return db.Addresses;
         }
 
         //TODO: Add ownership
         [ResponseType(typeof(Address))]
         public IHttpActionResult GetAddress(int id)
         {
-            Address address = db.Address.Find(id);
+            Address address = db.Addresses.Find(id);
             if (address == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace Local_Server_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Address.Add(address);
+            db.Addresses.Add(address);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = address.AddressID }, address);
@@ -89,13 +89,13 @@ namespace Local_Server_API.Controllers
         [ResponseType(typeof(Address))]
         public IHttpActionResult DeleteAddress(int id)
         {
-            Address address = db.Address.Find(id);
+            Address address = db.Addresses.Find(id);
             if (address == null)
             {
                 return NotFound();
             }
 
-            db.Address.Remove(address);
+            db.Addresses.Remove(address);
             db.SaveChanges();
 
             return Ok(address);
@@ -112,7 +112,7 @@ namespace Local_Server_API.Controllers
 
         private bool AddressExists(int id)
         {
-            return db.Address.Count(e => e.AddressID == id) > 0;
+            return db.Addresses.Count(e => e.AddressID == id) > 0;
         }
     }
 }

@@ -1,6 +1,6 @@
+use master
 if not Exists(select name from master.dbo.sysdatabases where name ='ProjectManagerDB')
 BEGIN
-    use master
         CREATE DATABASE ProjectManagerDB
         ON  PRIMARY (
             NAME = N'ProjectManagerDB', 
@@ -48,7 +48,7 @@ BEGIN Tran
 
             create table [User] (
                 UserID int PRIMARY KEY IDENTITY,
-                UserName VARCHAR(35),
+                UserName VARCHAR(35) UNIQUE,
                 Password VARCHAR(160),
                 FirstName VARCHAR(35),
                 LastName VARCHAR(35),
@@ -100,6 +100,7 @@ BEGIN Tran
                 DeadLine date,
                 Stack int FOREIGN key REFERENCES Stack,
                 isComplete BIT,
+                isBooked BIT,
                 DoneBy int FOREIGN key REFERENCES [USER] DEFAULT(null)
             )
 

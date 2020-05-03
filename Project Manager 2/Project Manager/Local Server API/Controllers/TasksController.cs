@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Local_Server_API.Models;
+using DataAccess.Models; using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
@@ -19,13 +19,13 @@ namespace Local_Server_API.Controllers
 
         public IQueryable<Task> GetTask()
         {
-            return db.Task;
+            return db.Tasks;
         }
 
         [ResponseType(typeof(Task))]
         public IHttpActionResult GetTask(int id)
         {
-            Task task = db.Task.Find(id);
+            Task task = db.Tasks.Find(id);
             if (task == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace Local_Server_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Task.Add(task);
+            db.Tasks.Add(task);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = task.TaskID }, task);
@@ -89,13 +89,13 @@ namespace Local_Server_API.Controllers
         [ResponseType(typeof(Task))]
         public IHttpActionResult DeleteTask(int id)
         {
-            Task task = db.Task.Find(id);
+            Task task = db.Tasks.Find(id);
             if (task == null)
             {
                 return NotFound();
             }
 
-            db.Task.Remove(task);
+            db.Tasks.Remove(task);
             db.SaveChanges();
 
             return Ok(task);
@@ -112,7 +112,7 @@ namespace Local_Server_API.Controllers
 
         private bool TaskExists(int id)
         {
-            return db.Task.Count(e => e.TaskID == id) > 0;
+            return db.Tasks.Count(e => e.TaskID == id) > 0;
         }
     }
 }

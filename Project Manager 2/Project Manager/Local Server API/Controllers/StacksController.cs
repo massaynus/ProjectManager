@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Local_Server_API.Models;
+using DataAccess.Models; using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
@@ -19,13 +19,13 @@ namespace Local_Server_API.Controllers
 
         public IQueryable<Stack> GetStack()
         {
-            return db.Stack;
+            return db.Stacks;
         }
 
         [ResponseType(typeof(Stack))]
         public IHttpActionResult GetStack(int id)
         {
-            Stack stack = db.Stack.Find(id);
+            Stack stack = db.Stacks.Find(id);
             if (stack == null)
             {
                 return NotFound();
@@ -78,7 +78,7 @@ namespace Local_Server_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Stack.Add(stack);
+            db.Stacks.Add(stack);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = stack.StackID }, stack);
@@ -88,13 +88,13 @@ namespace Local_Server_API.Controllers
         [ResponseType(typeof(Stack))]
         public IHttpActionResult DeleteStack(int id)
         {
-            Stack stack = db.Stack.Find(id);
+            Stack stack = db.Stacks.Find(id);
             if (stack == null)
             {
                 return NotFound();
             }
 
-            db.Stack.Remove(stack);
+            db.Stacks.Remove(stack);
             db.SaveChanges();
 
             return Ok(stack);
@@ -111,7 +111,7 @@ namespace Local_Server_API.Controllers
 
         private bool StackExists(int id)
         {
-            return db.Stack.Count(e => e.StackID == id) > 0;
+            return db.Stacks.Count(e => e.StackID == id) > 0;
         }
     }
 }

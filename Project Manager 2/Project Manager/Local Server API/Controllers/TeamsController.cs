@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Local_Server_API.Models;
+using DataAccess.Models; using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
@@ -19,13 +19,13 @@ namespace Local_Server_API.Controllers
 
         public IQueryable<Team> GetTeam()
         {
-            return db.Team;
+            return db.Teams;
         }
 
         [ResponseType(typeof(Team))]
         public IHttpActionResult GetTeam(int id)
         {
-            Team team = db.Team.Find(id);
+            Team team = db.Teams.Find(id);
             if (team == null)
             {
                 return NotFound();
@@ -78,7 +78,7 @@ namespace Local_Server_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Team.Add(team);
+            db.Teams.Add(team);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = team.TeamID }, team);
@@ -88,13 +88,13 @@ namespace Local_Server_API.Controllers
         [ResponseType(typeof(Team))]
         public IHttpActionResult DeleteTeam(int id)
         {
-            Team team = db.Team.Find(id);
+            Team team = db.Teams.Find(id);
             if (team == null)
             {
                 return NotFound();
             }
 
-            db.Team.Remove(team);
+            db.Teams.Remove(team);
             db.SaveChanges();
 
             return Ok(team);
@@ -111,7 +111,7 @@ namespace Local_Server_API.Controllers
 
         private bool TeamExists(int id)
         {
-            return db.Team.Count(e => e.TeamID == id) > 0;
+            return db.Teams.Count(e => e.TeamID == id) > 0;
         }
     }
 }

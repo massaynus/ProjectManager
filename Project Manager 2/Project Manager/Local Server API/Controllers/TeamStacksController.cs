@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Local_Server_API.Models;
+using DataAccess.Models; using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
@@ -18,7 +18,7 @@ namespace Local_Server_API.Controllers
 
         public IQueryable<TeamStack> GetTeamStack(int TeamId)
         {
-            return db.TeamStack.Where(TS => TS.Team == TeamId);
+            return db.TeamStacks.Where(TS => TS.Team == TeamId);
         }
 
         [AuthorizaAttr(Role.Manager)]
@@ -30,7 +30,7 @@ namespace Local_Server_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.TeamStack.Add(teamStack);
+            db.TeamStacks.Add(teamStack);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = teamStack.Num }, teamStack);
@@ -40,13 +40,13 @@ namespace Local_Server_API.Controllers
         [ResponseType(typeof(TeamStack))]
         public IHttpActionResult DeleteTeamStack(int id)
         {
-            TeamStack teamStack = db.TeamStack.Find(id);
+            TeamStack teamStack = db.TeamStacks.Find(id);
             if (teamStack == null)
             {
                 return NotFound();
             }
 
-            db.TeamStack.Remove(teamStack);
+            db.TeamStacks.Remove(teamStack);
             db.SaveChanges();
 
             return Ok(teamStack);
@@ -63,7 +63,7 @@ namespace Local_Server_API.Controllers
 
         private bool TeamStackExists(int id)
         {
-            return db.TeamStack.Count(e => e.Num == id) > 0;
+            return db.TeamStacks.Count(e => e.Num == id) > 0;
         }
     }
 }

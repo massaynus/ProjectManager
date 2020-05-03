@@ -8,49 +8,49 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Local_Server_API.Models;
+using DataAccess.Models; using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
     [AuthorizaAttr]
-    public class PaimentsController : ApiController
+    public class PaimentController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
 
         [AuthorizaAttr(new string[] { Role.Manager, Role.Client})]
-        public IQueryable<Paiments> GetPaiments()
+        public IQueryable<Paiment> GetPaiment()
         {
             return db.Paiments;
         }
 
         [AuthorizaAttr(new string[] { Role.Manager, Role.Client})]
-        [ResponseType(typeof(Paiments))]
-        public IHttpActionResult GetPaiments(int id)
+        [ResponseType(typeof(Paiment))]
+        public IHttpActionResult GetPaiment(int id)
         {
-            Paiments paiments = db.Paiments.Find(id);
-            if (paiments == null)
+            Paiment Paiment = db.Paiments.Find(id);
+            if (Paiment == null)
             {
                 return NotFound();
             }
 
-            return Ok(paiments);
+            return Ok(Paiment);
         }
 
         [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPaiments(int id, Paiments paiments)
+        public IHttpActionResult PutPaiment(int id, Paiment Paiment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != paiments.PaymentID)
+            if (id != Paiment.PaymentID)
             {
                 return BadRequest();
             }
 
-            db.Entry(paiments).State = EntityState.Modified;
+            db.Entry(Paiment).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace Local_Server_API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PaimentsExists(id))
+                if (!PaimentExists(id))
                 {
                     return NotFound();
                 }
@@ -72,34 +72,34 @@ namespace Local_Server_API.Controllers
         }
 
         [AuthorizaAttr(Role.Manager)]
-        [ResponseType(typeof(Paiments))]
-        public IHttpActionResult PostPaiments(Paiments paiments)
+        [ResponseType(typeof(Paiment))]
+        public IHttpActionResult PostPaiment(Paiment Paiment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Paiments.Add(paiments);
+            db.Paiments.Add(Paiment);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = paiments.PaymentID }, paiments);
+            return CreatedAtRoute("DefaultApi", new { id = Paiment.PaymentID }, Paiment);
         }
 
         [AuthorizaAttr(Role.Manager)]
-        [ResponseType(typeof(Paiments))]
-        public IHttpActionResult DeletePaiments(int id)
+        [ResponseType(typeof(Paiment))]
+        public IHttpActionResult DeletePaiment(int id)
         {
-            Paiments paiments = db.Paiments.Find(id);
-            if (paiments == null)
+            Paiment Paiment = db.Paiments.Find(id);
+            if (Paiment == null)
             {
                 return NotFound();
             }
 
-            db.Paiments.Remove(paiments);
+            db.Paiments.Remove(Paiment);
             db.SaveChanges();
 
-            return Ok(paiments);
+            return Ok(Paiment);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,7 +111,7 @@ namespace Local_Server_API.Controllers
             base.Dispose(disposing);
         }
 
-        private bool PaimentsExists(int id)
+        private bool PaimentExists(int id)
         {
             return db.Paiments.Count(e => e.PaymentID == id) > 0;
         }

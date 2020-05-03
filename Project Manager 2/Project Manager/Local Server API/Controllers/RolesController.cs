@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Local_Server_API.Models;
+using DataAccess.Models; using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
@@ -19,13 +19,13 @@ namespace Local_Server_API.Controllers
 
         public IQueryable<Role> GetRole()
         {
-            return db.Role;
+            return db.Roles;
         }
 
         [ResponseType(typeof(Role))]
         public async Task<IHttpActionResult> GetRole(int id)
         {
-            Role role = await db.Role.FindAsync(id);
+            Role role = await db.Roles.FindAsync(id);
             if (role == null)
             {
                 return NotFound();

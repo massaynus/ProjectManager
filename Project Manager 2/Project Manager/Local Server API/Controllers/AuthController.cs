@@ -35,10 +35,10 @@ namespace Local_Server_API.Controllers
         [HttpPost]
         public int PostAuth(string username, string password)
         {
-            using (var db = new Models.Local_DB_Model())
+            using (var db = new DataAccess.Models.Local_DB_Model())
             {
                 string hash = HashPassword(password).ToString();
-                return db.User.Where(U => U.UserName == username && U.Password == hash).FirstOrDefault()?.UserID ?? -1;
+                return db.Users.Where(U => U.UserName == username && U.Password == hash).FirstOrDefault()?.UserID ?? -1;
             }
         }
     }

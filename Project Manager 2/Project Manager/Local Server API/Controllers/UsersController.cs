@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Local_Server_API.Models;
+using DataAccess.Models; using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
@@ -22,14 +22,14 @@ namespace Local_Server_API.Controllers
         [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
         public IEnumerable<User> GetUser()
         {
-            var res = db.User.ToList();
+            var res = db.Users.ToList();
             return res;
         }
 
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
-            User user = db.User.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
@@ -84,7 +84,7 @@ namespace Local_Server_API.Controllers
 
             user.Password = AuthController.HashPassword(user.Password).ToString();
 
-            db.User.Add(user);
+            db.Users.Add(user);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = user.UserID }, user);
@@ -94,13 +94,13 @@ namespace Local_Server_API.Controllers
         [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(int id)
         {
-            User user = db.User.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            db.User.Remove(user);
+            db.Users.Remove(user);
             db.SaveChanges();
 
             return Ok(user);
@@ -117,7 +117,7 @@ namespace Local_Server_API.Controllers
 
         private bool UserExists(int id)
         {
-            return db.User.Count(e => e.UserID == id) > 0;
+            return db.Users.Count(e => e.UserID == id) > 0;
         }
         
     }
