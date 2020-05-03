@@ -1,0 +1,13 @@
+5/3/2020 10:28:15 PM	This log contains information about the import operation of the script 'DB 2.0.sql' into project 'Project Manager DB' on computer 'DESKTOP-6FILVV2' by user'Yassine.
+5/3/2020 10:28:15 PM	Started importing file: C:\Users\Yassine\Documents\PFF\4_Source Code\DB 2.0.sql 
+5/3/2020 10:28:15 PM	File name C:\Users\Yassine\Documents\PFF\4_Source Code\DB 2.0.sql (size: 4530)
+5/3/2020 10:28:15 PM	Parsing import script
+5/3/2020 10:28:16 PM	Total number of batches in script: 3
+5/3/2020 10:28:16 PM	Total number of statements in script: 1
+5/3/2020 10:28:16 PM	The script was successfully imported into the project.
+5/3/2020 10:28:16 PM	Analyzing schema objects...
+5/3/2020 10:28:16 PM	Scanning project for duplicate elements
+5/3/2020 10:28:16 PM	Finished duplicate element processing
+5/3/2020 10:28:16 PM	In the script that you provided to the import operation, one or more statements were not fully understood. These statements were moved to the ScriptsIgnoredOnImport.sql file. Review the file contents for additional information.
+5/3/2020 10:28:16 PM	A summary of the import was saved to the following location: C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Project Manager DB\Import Script Logs\DB 2_0_sql_20200503102815.log
+5/3/2020 10:28:16 PM	Click Finish to continue...

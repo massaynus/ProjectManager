@@ -12,6 +12,7 @@
     [Team]      INT           NULL,
     PRIMARY KEY CLUSTERED ([UserID] ASC),
     FOREIGN KEY ([Role]) REFERENCES [dbo].[Role] ([RoleID]),
-    FOREIGN KEY ([Team]) REFERENCES [dbo].[Team] ([TeamID])
+    FOREIGN KEY ([Team]) REFERENCES [dbo].[Team] ([TeamID]),
+    UNIQUE NONCLUSTERED ([UserName] ASC)
 );
 

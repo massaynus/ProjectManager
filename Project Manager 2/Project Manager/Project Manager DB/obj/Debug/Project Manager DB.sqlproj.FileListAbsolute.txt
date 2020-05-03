@@ -7,3 +7,4 @@ C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\P
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Project Manager DB\obj\Debug\refactor.xml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Project Manager DB\obj\Debug\postdeploy.sql
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Project Manager DB\obj\Debug\predeploy.sql
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Project Manager DB\obj\Debug\Project Manager DB.sqlprojAssemblyReference.cache
