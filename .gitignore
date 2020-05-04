@@ -2,11 +2,8 @@ Project Manager 2/Project Manager/.vs/*
 
 Projects Manager/*
 
-*/bin/*
-*/obj/*
-
-Project Manager 2/Project Manager/Packages/*
-Project Manager 2/Project Manager/Local Server API/bin/*
-Project Manager 2/Project Manager/Local Server API/obj/*
+**/bin/
+**/obj/
+**/packages/
 
 OLD_CODE.exe/*
