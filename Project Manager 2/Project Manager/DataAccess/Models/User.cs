@@ -24,6 +24,7 @@ namespace DataAccess.Models
         [StringLength(35)]
         public string UserName { get; set; }
 
+        [JsonIgnore]
         [StringLength(160)]
         public string Password { get; set; }
 

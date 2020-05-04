@@ -8,10 +8,20 @@ using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 
+using DataAccess.Models;
+
 namespace Local_Server_API.Controllers
 {
     public class AuthController : ApiController
     {
+        Local_DB_Model db = new Local_DB_Model();
+        public class Creds
+        {
+            public string username { get; set; }
+            public string password { get; set; }
+
+            public override string ToString() => username + password;
+        }
         /// <summary>
         /// Converts a string to an unsigned long using SHA1
         /// </summary>
@@ -32,14 +42,19 @@ namespace Local_Server_API.Controllers
         /// <param name="username">The UserName</param>
         /// <param name="password">The Password</param>
         /// <returns>The User ID</returns>
+
+        [ResponseType(typeof(User))]
         [HttpPost]
-        public int PostAuth(string username, string password)
+        public IHttpActionResult PostAuth([FromBody] Creds creds)
         {
-            using (var db = new DataAccess.Models.Local_DB_Model())
-            {
-                string hash = HashPassword(password).ToString();
-                return db.Users.Where(U => U.UserName == username && U.Password == hash).FirstOrDefault()?.UserID ?? -1;
-            }
+            if (string.IsNullOrEmpty(creds.ToString())) return StatusCode(HttpStatusCode.BadRequest);
+            string hash = HashPassword(creds.password).ToString();
+
+            User user = db.Users.Where(U => U.UserName == creds.username && U.Password == hash).FirstOrDefault();
+            
+            if (user is null) return NotFound();
+            
+            return Ok(user);
         }
     }
 }
