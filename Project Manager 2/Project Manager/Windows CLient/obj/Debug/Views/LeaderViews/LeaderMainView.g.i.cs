@@ -52,7 +52,7 @@ namespace Windows_CLient.Views.LeaderViews {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Windows CLient;component/views/leaderviews/leadermainview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Project Manager;component/views/leaderviews/leadermainview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\LeaderViews\LeaderMainView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

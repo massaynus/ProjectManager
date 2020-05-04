@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:Windows_CLient"
              StartupUri="Views/Login.xaml">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>

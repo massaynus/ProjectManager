@@ -1,0 +1,54 @@
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Local Server API.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.Optimization.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.Mvc.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.Http.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\DataAccess.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\EntityFramework.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\WebGrease.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.WebPages.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.Razor.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Antlr3.Runtime.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Local Server API.pdb
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Local Server API.dll.config
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.Optimization.xml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.Mvc.xml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.Http.xml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\DataAccess.pdb
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\DataAccess.dll.config
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\EntityFramework.xml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.WebPages.xml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.Razor.xml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Antlr3.Runtime.pdb
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows CLient.csprojAssemblyReference.cache
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\LeaderViews\LeaderMainView.g.cs
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\Login.g.cs
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\ManagerViews\ManagerMainView.g.cs
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\TasksView.g.cs
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\App.g.cs
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\LeaderViews\LeaderMainView.baml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\Login.baml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\ManagerViews\ManagerMainView.baml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\TasksView.baml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows_CLient.Properties.Resources.resources
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows CLient.csproj.GenerateResource.cache
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows CLient.csproj.CoreCompileInputs.cache
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows CLient.csproj.CopyComplete
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Project Manager.exe.config
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Project Manager.exe
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Project Manager.pdb
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager_MarkupCompile.cache
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager_MarkupCompile.lref
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.g.resources
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.exe
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.pdb
