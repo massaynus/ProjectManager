@@ -22,6 +22,14 @@ namespace Windows_CLient.ViewModels
         public LoginViewModel()
         {
             Auth = new RelayCommand(AuthHelper);
+
+            if (DateTime.Now.Hour < 11 && DateTime.Now.Hour > 8)
+                StatusMessage = "Good Morning";
+            else if (DateTime.Now.Hour < 18)
+                StatusMessage = "Good Evening";
+            else
+                StatusMessage = "Good Night";
+
         }
         public LoginViewModel(Window window) : this() { this.window = window; }
 
@@ -55,7 +63,7 @@ namespace Windows_CLient.ViewModels
                     OnPropertyChanged(nameof(APIClient.User));
 
                     window.Hide();
-
+                    if (child != null) child.Close();
 
                     switch (APIClient.User.Role1.RoleName)
                     {

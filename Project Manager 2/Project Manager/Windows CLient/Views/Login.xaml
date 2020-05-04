@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Windows_CLient.Views"
+        xmlns:local="clr-namespace:Windows_CLient"
         mc:Ignorable="d"
         x:Name="LoginWindow"
         Title="Login"
@@ -11,10 +11,15 @@
         WindowStyle="None"
         WindowState="Maximized"
         AllowsTransparency="True"
+        FontSize="20"
         >
     <Window.Background>
         <SolidColorBrush Color="White" Opacity="0"/>
     </Window.Background>
+
+    <Window.Resources>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
 
     <Grid>
         <Grid Width="{Binding ElementName=LoginWindow, Path=ActualWidth}"
@@ -35,24 +40,129 @@
             <StackPanel Orientation="Vertical"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
-                <TextBlock Text="Login"/>
-                <Grid>
-                    <TextBox x:Name="txtUserName"/>
-                    <StackPanel Orientation="Horizontal">
+
+                <StackPanel.Resources>
+                    <Style x:Key="MainGrid" TargetType="Grid">
+                        <Setter Property="Margin" Value="0 0 0 10"/>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0 0" EndPoint="1 0">
+                                    <GradientStop Color="#191D2A" Offset="0"/>
+                                    <GradientStop Color="#363A40" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="Width" Value="250" />
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="WhiteSmoke"/>
+                        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                        <Setter Property="Padding" Value="15 0 0 0"/>
+                    </Style>
+
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="WhiteSmoke"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+
+                    <Style TargetType="Image">
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                    </Style>
+
+                </StackPanel.Resources>
+
+                <Viewbox Margin="0 0 0 40"
+                           MaxWidth="300"
+                         MaxHeight="80">
+                    <TextBlock Text="{Binding StatusMessage}"
+                           FontSize="40"
+                           FontWeight="Bold"
+                           TextWrapping="Wrap">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Direction="-45"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </Viewbox>
+                <Grid Style="{StaticResource MainGrid}">
+                    <TextBox x:Name="txtUserName"
+                             Text="{Binding UserName}"/>
+                    <Grid  IsHitTestVisible="False"
+                        Visibility="{Binding ElementName=txtUserName,
+                        Path=Text, 
+                        Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Image Source="/Resources/Images/user.png"
                                Height="25" Width="25"/>
                         <TextBlock Text="User Name" VerticalAlignment="Center"/>
-                    </StackPanel>
+                    </Grid>
                 </Grid>
-                <Grid>
-                    <TextBox x:Name="txtPassword"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/user.png"
+                <Grid Style="{StaticResource MainGrid}">
+                    <TextBox x:Name="txtPassword"
+                             Text="{Binding UserPassword}"/>
+                    <Grid  IsHitTestVisible="False"
+                        Visibility="{Binding ElementName=txtPassword,
+                        Path=Text, 
+                        Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Image Source="/Resources/Images/lock.png"
                                Height="25" Width="25"/>
-                        <TextBlock Text="User Name" VerticalAlignment="Center"/>
-                    </StackPanel>
+                        <TextBlock Text="Password" VerticalAlignment="Center"/>
+                    </Grid>
                 </Grid>
-                <Button Content="Log In"/>
+                <Button Content="Log In" Command="{Binding Auth}"
+                        Width="150" Height="35"
+                        Foreground="WhiteSmoke">
+                    
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <ControlTemplate.Resources>
+                                <ResourceDictionary>
+                                    <LinearGradientBrush x:Key="BG1" StartPoint="0 0" EndPoint="1 0">
+
+                                        <GradientStop Color="#0DB0CF" Offset="1"/>
+                                        <GradientStop Color="#096FA3" Offset="0"/>
+
+                                    </LinearGradientBrush>
+                                    <LinearGradientBrush x:Key="BG2" StartPoint="0 0" EndPoint="1 0">
+
+                                        <GradientStop Color="#0DB0CF" Offset="0"/>
+                                        <GradientStop Color="#096FA3" Offset="1"/>
+
+                                    </LinearGradientBrush>
+                                </ResourceDictionary>
+                            </ControlTemplate.Resources>
+                            <Grid x:Name="btnCont" Background="{StaticResource BG1}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.3"
+                                                                 Storyboard.TargetProperty="Background.GradientStops[0].Offset"
+                                                                 Storyboard.TargetName="btnCont"
+                                                                 From="0"
+                                                                 To="1">
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Duration="0:0:0.3"
+                                                                 BeginTime="0:0:0.3"
+                                                                 Storyboard.TargetProperty="Background.GradientStops[1].Offset"
+                                                                 Storyboard.TargetName="btnCont"
+                                                                 From="1"
+                                                                 To="0"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Setter TargetName="btnCont" Property="Background" Value="{StaticResource BG2}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </StackPanel>
         </Grid>
     </Grid>
