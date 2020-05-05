@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,11 +21,20 @@ namespace Windows_CLient.Views
     /// </summary>
     public partial class Login : Window
     {
+
         public Login()
         {
             APIClient.initClient();
             InitializeComponent();
-            DataContext = new LoginViewModel(this);
+
+        }
+
+        private void LoginWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var context = new LoginViewModel(this);
+            DataContext = context;
+
+            txtPassword.PasswordChanged += delegate { context.OnPropertyChanged(nameof(context.PasswordVisibility)); };
         }
     }
 }

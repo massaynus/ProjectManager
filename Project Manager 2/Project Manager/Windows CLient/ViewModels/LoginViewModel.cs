@@ -14,6 +14,8 @@ using Windows_CLient.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq.Expressions;
+using System.Timers;
+using Windows_CLient.Views;
 
 namespace Windows_CLient.ViewModels
 {
@@ -22,6 +24,7 @@ namespace Windows_CLient.ViewModels
         public LoginViewModel()
         {
             Auth = new RelayCommand(AuthHelper);
+            Exit = new RelayCommand(() => window.Close());
 
             if (DateTime.Now.Hour < 11 && DateTime.Now.Hour > 8)
                 StatusMessage = "Good Morning";
@@ -29,26 +32,32 @@ namespace Windows_CLient.ViewModels
                 StatusMessage = "Good Evening";
             else
                 StatusMessage = "Good Night";
-
         }
-        public LoginViewModel(Window window) : this() { this.window = window; }
+        public LoginViewModel(Login window) : this() { this.window = window; }
 
-        private Window window;
+        private Login window;
         private Window child;
 
         public string StatusMessage { get; set; } // Welcome Message
         public string ErrorMessageMessage { get; set; }
         public string UserName { get; set; }
-        public string UserPassword { get; set; }
+        public string UserPassword { get => window.txtPassword.Password; }
+        public Visibility PasswordVisibility { 
+            get
+            {
+                if (UserPassword.Length > 0) return Visibility.Hidden;
+                else return Visibility.Visible;
+            } 
+        }
 
         public ICommand Auth { get; set; }
+        public ICommand Exit { get; set; }
 
         public async void AuthHelper()
         {
-            using (StringContent cords = new StringContent(JsonConvert.SerializeObject(new { username = UserName, password = UserPassword }),
-                                                    Encoding.UTF8, "application/json"))
+            using (StringContent cords = new StringContent(
+                JsonConvert.SerializeObject(new { username = UserName, password = UserPassword }), Encoding.UTF8, "application/json"))
             {
-
                 string url = APIClient.API_HOST + "Auth";
                 var response = await APIClient.client.PostAsync(url, cords);
 
@@ -93,7 +102,8 @@ namespace Windows_CLient.ViewModels
                                 MessageBoxImage.Question);
 
                             ErrorMessageMessage = "Please Try another account";
-                            UserName = UserPassword = string.Empty;
+                            UserName = string.Empty;
+                            window.txtPassword.Clear();
 
                             OnPropertyChanged(nameof(UserName));
                             OnPropertyChanged(nameof(UserPassword));
@@ -106,15 +116,17 @@ namespace Windows_CLient.ViewModels
                                 MessageBoxImage.Warning);
 
                             ErrorMessageMessage = "Please Try another account";
-                            UserName = UserPassword = string.Empty;
+                            UserName = string.Empty;
+                            window.txtPassword.Clear();
 
                             OnPropertyChanged(nameof(UserName));
                             OnPropertyChanged(nameof(UserPassword));
                             break;
                     }
 
-                    window.Close();
-
+                    UserName = string.Empty;
+                    window.txtPassword.Clear();
+                    window.Show();
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {

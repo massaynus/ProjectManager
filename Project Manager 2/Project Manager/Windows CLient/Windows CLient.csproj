@@ -159,5 +159,8 @@
     <Resource Include="Resources\Images\lock.png" />
     <Resource Include="Resources\Images\user.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\exit.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

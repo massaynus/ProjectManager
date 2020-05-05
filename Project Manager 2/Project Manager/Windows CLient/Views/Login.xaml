@@ -12,6 +12,7 @@
         WindowState="Maximized"
         AllowsTransparency="True"
         FontSize="20"
+        Loaded="LoginWindow_Loaded"
         >
     <Window.Background>
         <SolidColorBrush Color="White" Opacity="0"/>
@@ -21,9 +22,10 @@
         <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
 
-    <Grid>
+    <Grid >
         <Grid Width="{Binding ElementName=LoginWindow, Path=ActualWidth}"
-              Height="{Binding ElementName=LoginWindow, Path=ActualHeight}">
+              Height="{Binding ElementName=LoginWindow, Path=ActualHeight}"
+              IsHitTestVisible="False">
             <Image Source="/Resources/Images/Login Background.png"
                    Stretch="Fill" Opacity="0.5">
                 <Image.BitmapEffect>
@@ -36,13 +38,48 @@
               HorizontalAlignment="Center"
               Width="1173"
               Height="660">
+            
+            <!--Background Border & Close Button-->
             <Border BorderThickness=".1" Padding="2" BorderBrush="Red"
                     CornerRadius="10" x:Name="ImgBorder" SnapsToDevicePixels="True"
                     RenderOptions.BitmapScalingMode="HighQuality">
                 <Border.Background>
                     <ImageBrush ImageSource="/Resources/Images/Login Background.png" Stretch="Fill"/>
                 </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="30" ShadowDepth="0" Color="SkyBlue"/>
+                </Border.Effect>
+                <!--Exit Button-->
+                <Button Height="40" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                        Margin="10 0 0 10"
+                        BorderThickness="0"
+                        OverridesDefaultStyle="True"
+                        Command="{Binding Exit}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    Width="{TemplateBinding Width}"
+                                    Height="{TemplateBinding Height}"
+                                    CornerRadius="10"
+                                    Padding="5">
+                                <Image Source="/Resources/Images/exit.png" Height="32"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Crimson"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    
+                </Button>
             </Border>
+            
             <StackPanel Orientation="Vertical"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
@@ -111,12 +148,21 @@
 
                 <!--User Password Input-->
                 <Grid Style="{StaticResource MainGrid}">
-                    <TextBox x:Name="txtPassword"
-                             Text="{Binding UserPassword}"/>
+                    <PasswordBox x:Name="txtPassword">
+                        <PasswordBox.Style>
+                            <Style TargetType="PasswordBox">
+                                <Setter Property="Margin" Value="5"/>
+                                <Setter Property="Width" Value="250" />
+                                <Setter Property="Height" Value="30"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="WhiteSmoke"/>
+                                <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                                <Setter Property="Padding" Value="15 0 0 0"/>
+                            </Style>
+                        </PasswordBox.Style>
+                    </PasswordBox>
                     <Grid  IsHitTestVisible="False"
-                        Visibility="{Binding ElementName=txtPassword,
-                        Path=Text, 
-                        Converter={StaticResource BooleanToVisibilityConverter}}">
+                        Visibility="{Binding PasswordVisibility}">
                         <Image Source="/Resources/Images/lock.png"
                                Height="25" Width="25"/>
                         <TextBlock Text="Password" VerticalAlignment="Center"/>
