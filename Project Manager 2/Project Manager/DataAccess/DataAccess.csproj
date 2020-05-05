@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ActionLog.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Issue.cs" />
     <Compile Include="Models\Local_DB_Model.cs" />
@@ -71,5 +71,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

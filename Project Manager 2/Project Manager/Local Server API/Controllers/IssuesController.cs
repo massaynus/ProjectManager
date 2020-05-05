@@ -8,20 +8,22 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using DataAccess.Models; using Local_Server_API.Models;
+using DataAccess.Models;
+using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
-    [AuthorizaAttr]
     public class IssuesController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
 
+        [AuthorizaAttr]
         public IQueryable<Issue> GetIssue()
         {
             return db.Issues;
         }
 
+        [AuthorizaAttr]
         [ResponseType(typeof(Issue))]
         public IHttpActionResult GetIssue(int id)
         {
@@ -34,7 +36,7 @@ namespace Local_Server_API.Controllers
             return Ok(issue);
         }
 
-        [AuthorizaAttr(new string[] { Role.TeamLeader, Role.Member})]
+        [AuthorizaAttr(new string[] { Role.TeamLeader, Role.Member })]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutIssue(int id, Issue issue)
         {
@@ -68,7 +70,7 @@ namespace Local_Server_API.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-        
+
         [AuthorizaAttr(Role.Member)]
         [ResponseType(typeof(Issue))]
         public IHttpActionResult PostIssue(Issue issue)

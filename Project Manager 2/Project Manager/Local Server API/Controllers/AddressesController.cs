@@ -12,7 +12,6 @@ using DataAccess.Models; using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
-    [AuthorizaAttr]
     public class AddressesController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
@@ -24,6 +23,7 @@ namespace Local_Server_API.Controllers
         }
 
         //TODO: Add ownership
+        [AuthorizaAttr]
         [ResponseType(typeof(Address))]
         public IHttpActionResult GetAddress(int id)
         {

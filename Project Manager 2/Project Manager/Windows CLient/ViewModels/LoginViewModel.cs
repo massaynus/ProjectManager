@@ -36,7 +36,8 @@ namespace Windows_CLient.ViewModels
         private Window window;
         private Window child;
 
-        public string StatusMessage { get; set; }
+        public string StatusMessage { get; set; } // Welcome Message
+        public string ErrorMessageMessage { get; set; }
         public string UserName { get; set; }
         public string UserPassword { get; set; }
 
@@ -91,22 +92,22 @@ namespace Windows_CLient.ViewModels
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Question);
 
-                            StatusMessage = "Please Try another account";
+                            ErrorMessageMessage = "Please Try another account";
                             UserName = UserPassword = string.Empty;
 
                             OnPropertyChanged(nameof(UserName));
                             OnPropertyChanged(nameof(UserPassword));
                             break;
 
-                        default: 
+                        default:
                             MessageBox.Show("This User has an unsopported role, please call the developer ASAP!",
                                 "Warning",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
 
-                            StatusMessage = "Please Try another account";
+                            ErrorMessageMessage = "Please Try another account";
                             UserName = UserPassword = string.Empty;
-                            
+
                             OnPropertyChanged(nameof(UserName));
                             OnPropertyChanged(nameof(UserPassword));
                             break;
@@ -117,7 +118,7 @@ namespace Windows_CLient.ViewModels
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    StatusMessage = "Your User name or password is incorrect";
+                    ErrorMessageMessage = "Your User name or password is incorrect";
                 }
                 else
                 {
@@ -126,6 +127,7 @@ namespace Windows_CLient.ViewModels
             }
 
             OnPropertyChanged(nameof(StatusMessage));
+            OnPropertyChanged(nameof(ErrorMessageMessage));
         }
     }
 }

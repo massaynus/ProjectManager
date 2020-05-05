@@ -1,6 +1,5 @@
 namespace DataAccess.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -19,17 +18,16 @@ namespace DataAccess.Models
 
         public int StackID { get; set; }
 
+        [Required]
         [StringLength(40)]
         public string Name { get; set; }
 
         [Column(TypeName = "text")]
         public string Tools { get; set; }
 
-        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Task> Tasks { get; set; }
 
-        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TeamStack> TeamStacks { get; set; }
     }

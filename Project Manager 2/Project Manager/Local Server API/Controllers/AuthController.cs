@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -7,7 +9,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
-
 using DataAccess.Models;
 
 namespace Local_Server_API.Controllers
@@ -15,6 +16,7 @@ namespace Local_Server_API.Controllers
     public class AuthController : ApiController
     {
         Local_DB_Model db = new Local_DB_Model();
+        
         public class Creds
         {
             public string username { get; set; }
@@ -22,18 +24,22 @@ namespace Local_Server_API.Controllers
 
             public override string ToString() => username + password;
         }
+
+        [NonAction]
         /// <summary>
         /// Converts a string to an unsigned long using SHA1
         /// </summary>
         /// <param name="password">the string to convert</param>
         /// <returns>SHA1 password</returns>
-        public static ulong HashPassword(string password)
+        public static string HashPassword(string password)
         {
+            ulong Hash;
             using (var sha1 = SHA1.Create())
             {
                 byte[] pwd = Encoding.UTF8.GetBytes(password);
-                return BitConverter.ToUInt64(sha1.ComputeHash(pwd), 0);
+                Hash = BitConverter.ToUInt64(sha1.ComputeHash(pwd), 0);
             }
+            return Convert.ToBase64String(BitConverter.GetBytes(Hash));
         }
 
         /// <summary>
@@ -48,12 +54,12 @@ namespace Local_Server_API.Controllers
         public IHttpActionResult PostAuth([FromBody] Creds creds)
         {
             if (string.IsNullOrEmpty(creds.ToString())) return StatusCode(HttpStatusCode.BadRequest);
-            string hash = HashPassword(creds.password).ToString();
+            string hash = HashPassword(creds.password);
 
             User user = db.Users.Where(U => U.UserName == creds.username && U.Password == hash).FirstOrDefault();
-            
-            if (user is null) return NotFound();
-            
+
+            if (user is null || user.UserName != creds.username) return NotFound();
+
             return Ok(user);
         }
     }

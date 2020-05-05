@@ -10,6 +10,10 @@ namespace Local_Server_API
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            var JsonConf = GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings;
+
+            JsonConf.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+            JsonConf.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
             // Web API routes
             config.MapHttpAttributeRoutes();

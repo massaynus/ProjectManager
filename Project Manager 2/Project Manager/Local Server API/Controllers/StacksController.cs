@@ -8,20 +8,22 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using DataAccess.Models; using Local_Server_API.Models;
+using DataAccess.Models;
+using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
-    [AuthorizaAttr]
     public class StacksController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
 
+        [AuthorizaAttr]
         public IQueryable<Stack> GetStack()
         {
             return db.Stacks;
         }
 
+        [AuthorizaAttr]
         [ResponseType(typeof(Stack))]
         public IHttpActionResult GetStack(int id)
         {

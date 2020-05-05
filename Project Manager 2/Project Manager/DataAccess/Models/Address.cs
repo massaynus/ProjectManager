@@ -1,6 +1,5 @@
 namespace DataAccess.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -12,7 +11,7 @@ namespace DataAccess.Models
     {
         public int AddressID { get; set; }
 
-        public int? UserID { get; set; }
+        public int UserID { get; set; }
 
         [StringLength(120)]
         public string street { get; set; }
@@ -29,7 +28,6 @@ namespace DataAccess.Models
         [StringLength(20)]
         public string Country { get; set; }
 
-        [JsonIgnore]
         public virtual User User { get; set; }
     }
 }

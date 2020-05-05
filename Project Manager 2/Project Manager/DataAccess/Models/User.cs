@@ -1,11 +1,11 @@
 namespace DataAccess.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using Newtonsoft.Json;
 
     [Table("User")]
     public partial class User
@@ -21,34 +21,46 @@ namespace DataAccess.Models
 
         public int UserID { get; set; }
 
+        [Required]
         [StringLength(35)]
         public string UserName { get; set; }
 
-        [JsonIgnore]
+        [Required]
         [StringLength(160)]
         public string Password { get; set; }
 
+        [Required]
         [StringLength(35)]
         public string FirstName { get; set; }
 
+        [Required]
         [StringLength(35)]
         public string LastName { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? BirthDtae { get; set; }
+        public DateTime BirthDtae { get; set; }
 
+        [Required]
+        [StringLength(1)]
+        public string Sexe { get; set; }
+
+        [Required]
         [StringLength(15)]
         public string GSM { get; set; }
 
+        [Required]
         [StringLength(200)]
         public string Email { get; set; }
 
+        [Required]
         [StringLength(23)]
         public string RIB { get; set; }
 
-        public int? Role { get; set; }
+        public int Role { get; set; }
 
         public int? Team { get; set; }
+
+        public bool isAccountActive { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Address> Addresses { get; set; }
@@ -56,7 +68,6 @@ namespace DataAccess.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Issue> Issues { get; set; }
 
-        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects { get; set; }
 

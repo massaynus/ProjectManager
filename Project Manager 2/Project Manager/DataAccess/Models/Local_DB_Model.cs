@@ -22,6 +22,7 @@ namespace DataAccess.Models
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<TeamStack> TeamStacks { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<ActionLog> ActionLogs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -55,6 +56,14 @@ namespace DataAccess.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Paiment>()
+                .Property(e => e.SenderFullName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Paiment>()
+                .Property(e => e.RecieverFullName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Paiment>()
                 .Property(e => e.Amount)
                 .HasPrecision(9, 2);
 
@@ -71,14 +80,10 @@ namespace DataAccess.Models
                 .HasPrecision(9, 2);
 
             modelBuilder.Entity<Project>()
-                .HasMany(e => e.Paiments)
-                .WithOptional(e => e.Project1)
-                .HasForeignKey(e => e.Project);
-
-            modelBuilder.Entity<Project>()
                 .HasMany(e => e.Tasks)
-                .WithOptional(e => e.Project1)
-                .HasForeignKey(e => e.Project);
+                .WithRequired(e => e.Project1)
+                .HasForeignKey(e => e.Project)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Role>()
                 .Property(e => e.RoleName)
@@ -86,8 +91,9 @@ namespace DataAccess.Models
 
             modelBuilder.Entity<Role>()
                 .HasMany(e => e.Users)
-                .WithOptional(e => e.Role1)
-                .HasForeignKey(e => e.Role);
+                .WithRequired(e => e.Role1)
+                .HasForeignKey(e => e.Role)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Stack>()
                 .Property(e => e.Name)
@@ -104,8 +110,9 @@ namespace DataAccess.Models
 
             modelBuilder.Entity<Stack>()
                 .HasMany(e => e.TeamStacks)
-                .WithOptional(e => e.Stack1)
-                .HasForeignKey(e => e.Stack);
+                .WithRequired(e => e.Stack1)
+                .HasForeignKey(e => e.Stack)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Task>()
                 .Property(e => e.Name)
@@ -117,8 +124,9 @@ namespace DataAccess.Models
 
             modelBuilder.Entity<Task>()
                 .HasMany(e => e.Issues)
-                .WithOptional(e => e.Task1)
-                .HasForeignKey(e => e.Task);
+                .WithRequired(e => e.Task1)
+                .HasForeignKey(e => e.Task)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Team>()
                 .Property(e => e.Name)
@@ -131,13 +139,15 @@ namespace DataAccess.Models
 
             modelBuilder.Entity<Team>()
                 .HasMany(e => e.TeamStacks)
-                .WithOptional(e => e.Team1)
-                .HasForeignKey(e => e.Team);
+                .WithRequired(e => e.Team1)
+                .HasForeignKey(e => e.Team)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Team>()
                 .HasMany(e => e.Users)
-                .WithOptional(e => e.Team1)
-                .HasForeignKey(e => e.Team);
+                .WithRequired(e => e.Team1)
+                .HasForeignKey(e => e.Team)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.UserName)
@@ -156,6 +166,11 @@ namespace DataAccess.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
+                .Property(e => e.Sexe)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
                 .Property(e => e.GSM)
                 .IsUnicode(false);
 
@@ -168,19 +183,38 @@ namespace DataAccess.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
+                .HasMany(e => e.Addresses)
+                .WithRequired(e => e.User)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
                 .HasMany(e => e.Issues)
-                .WithOptional(e => e.User)
-                .HasForeignKey(e => e.Issuer);
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.Issuer)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Projects)
-                .WithOptional(e => e.User)
-                .HasForeignKey(e => e.Owner);
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.Owner)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Tasks)
                 .WithOptional(e => e.User)
                 .HasForeignKey(e => e.DoneBy);
+
+            modelBuilder.Entity<ActionLog>()
+                .Property(e => e.UserName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ActionLog>()
+                .Property(e => e.UserFullName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ActionLog>()
+                .Property(e => e.ActionName)
+                .IsUnicode(false);
         }
     }
 }

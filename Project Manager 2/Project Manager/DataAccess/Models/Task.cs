@@ -1,6 +1,5 @@
 namespace DataAccess.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -18,30 +17,31 @@ namespace DataAccess.Models
 
         public int TaskID { get; set; }
 
-        public int? Project { get; set; }
+        public int Project { get; set; }
 
+        [Required]
         [StringLength(30)]
         public string Name { get; set; }
 
         [Column(TypeName = "text")]
+        [Required]
         public string Description { get; set; }
 
-        public int? Priority { get; set; }
+        public int Priority { get; set; }
 
-        public int? Difficulty { get; set; }
+        public int Difficulty { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? DeadLine { get; set; }
+        public DateTime DeadLine { get; set; }
 
         public int? Stack { get; set; }
 
-        public bool? isBooked { get; set; }
-
         public bool? isComplete { get; set; }
+
+        public bool? isBooked { get; set; }
 
         public int? DoneBy { get; set; }
 
-        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Issue> Issues { get; set; }
 
@@ -49,7 +49,6 @@ namespace DataAccess.Models
 
         public virtual Stack Stack1 { get; set; }
 
-        [JsonIgnore]
         public virtual User User { get; set; }
     }
 }

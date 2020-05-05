@@ -11,13 +11,25 @@ namespace DataAccess.Models
         [Key]
         public int PaymentID { get; set; }
 
-        public int? Project { get; set; }
+        [Required]
+        [StringLength(70)]
+        public string SenderFullName { get; set; }
 
-        public decimal? Amount { get; set; }
+        [Required]
+        [StringLength(70)]
+        public string RecieverFullName { get; set; }
+
+        public decimal Amount { get; set; }
+
+        public bool? isSalary { get; set; }
+
+        public bool? isProjectPaiement { get; set; }
+
+        public int? ProjectID { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
 
-        public virtual Project Project1 { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

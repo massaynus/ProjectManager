@@ -10,11 +10,11 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
-using DataAccess.Models; using Local_Server_API.Models;
+using DataAccess.Models;
+using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
-    [AuthorizaAttr]
     public class UsersController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
@@ -22,14 +22,15 @@ namespace Local_Server_API.Controllers
         [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
         public IEnumerable<User> GetUser()
         {
-            var res = db.Users.ToList();
+            var res = db.Users.Where(u => u.isAccountActive).ToList();
             return res;
         }
 
+        [AuthorizaAttr]
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
-            User user = db.Users.Find(id);
+            User user = db.Users.Where(U => U.isAccountActive && U.UserID == id).FirstOrDefault();
             if (user == null)
             {
                 return NotFound();
@@ -82,6 +83,17 @@ namespace Local_Server_API.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (user is null)
+            {
+                return BadRequest("No data was supplied");
+            }
+
+            if (db.Users.Where(U => U.UserName == user.UserName).FirstOrDefault() != null)
+            {
+                return BadRequest("-1");
+            }
+
+            user.isAccountActive = true;
             user.Password = AuthController.HashPassword(user.Password).ToString();
 
             db.Users.Add(user);
@@ -119,6 +131,6 @@ namespace Local_Server_API.Controllers
         {
             return db.Users.Count(e => e.UserID == id) > 0;
         }
-        
+
     }
 }

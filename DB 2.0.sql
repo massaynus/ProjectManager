@@ -26,44 +26,46 @@ BEGIN Tran
         BEGIN TRY
             create table Team (
                 TeamID int primary key IDENTITY,
-                Name VARCHAR(35)
+                Name VARCHAR(35) NOT NULL
             )
 
             create table Stack (
                 StackID int PRIMARY key IDENTITY,
-                Name VARCHAR(40),
+                Name VARCHAR(40) NOT NULL,
                 Tools text
             )
 
             create table TeamStack (
                 Num int PRIMARY KEY IDENTITY,
-                Team int FOREIGN key REFERENCES Team,
-                Stack int FOREIGN key REFERENCES Stack
+                Team int FOREIGN key REFERENCES Team  NOT NULL,
+                Stack int FOREIGN key REFERENCES Stack  NOT NULL
             )
 
             create table [Role](
                 RoleID int PRIMARY key IDENTITY,
-                RoleName VARCHAR(25)
+                RoleName VARCHAR(25)  NOT NULL
             )
 
             create table [User] (
                 UserID int PRIMARY KEY IDENTITY,
-                UserName VARCHAR(35) UNIQUE,
-                Password VARCHAR(160),
-                FirstName VARCHAR(35),
-                LastName VARCHAR(35),
-                BirthDtae DATE,
-                GSM VARCHAR(15),
-                Email VARCHAR(200),
-                RIB VARCHAR(23),
-                [Role] INT FOREIGN KEY REFERENCES [Role],
-                Team INT FOREIGN key REFERENCES Team
+                UserName VARCHAR(35) UNIQUE  NOT NULL,
+                Password VARCHAR(160)  NOT NULL,
+                FirstName VARCHAR(35)  NOT NULL,
+                LastName VARCHAR(35)  NOT NULL,
+                BirthDtae DATE  NOT NULL,
+                Sexe CHAR  NOT NULL,
+                GSM VARCHAR(15)  NOT NULL,
+                Email VARCHAR(200)  NOT NULL,
+                RIB VARCHAR(23)  NOT NULL,
+                [Role] INT FOREIGN KEY REFERENCES [Role]  NOT NULL,
+                Team INT FOREIGN key REFERENCES Team,
+                isAccountActive BIT DEFAULT(1) NOT NULL
             )
 
             CREATE TABLE [Address] (
                 AddressID int PRIMARY key IDENTITY,
-                UserID int FOREIGN key REFERENCES [User],
-                street VARCHAR(120),
+                UserID int FOREIGN key REFERENCES [User]  NOT NULL,
+                street VARCHAR(120) ,
                 ZipCode CHAR(8),
                 City VARCHAR(20),
                 State VARCHAR(20),
@@ -72,53 +74,67 @@ BEGIN Tran
 
             create table Project (
                 ProjectID int primary key IDENTITY,
-                Name VARCHAR(30),
-                Description text,
-                Owner int FOREIGN key REFERENCES [User],
+                Name VARCHAR(30)  NOT NULL,
+                Description text  NOT NULL,
+                Owner int FOREIGN key REFERENCES [User]  NOT NULL,
                 Team int FOREIGN key REFERENCES Team,
                 Budget DECIMAL(9,2),
-                Priority int,
-                Complexity int,
+                Priority int  NOT NULL,
+                Complexity int  NOT NULL,
                 StartinDate date,
                 DueDate date
             )
 
             CREATE TABLE Paiments (
                 PaymentID int PRIMARY key IDENTITY,
-                Project int FOREIGN KEY REFERENCES Project,
-                Amount DECIMAL(9,2),
-                Date date
+                SenderFullName VARCHAR(70)  NOT NULL,
+                RecieverFullName VARCHAR(70)  NOT NULL,
+                Amount DECIMAL(9,2)  NOT NULL,
+                isSalary BIT DEFAULT(0),
+                isProjectPaiement BIT DEFAULT(0),
+                ProjectID int FOREIGN KEY REFERENCES Project,
+                Date date  NOT NULL
             )
 
             create table Task (
                 TaskID int PRIMARY key IDENTITY,
-                Project int FOREIGN key REFERENCES Project,
-                Name VARCHAR(30),
-                Description text,
-                Priority int,
-                Difficulty int,
-                DeadLine date,
+                Project int FOREIGN key REFERENCES Project  NOT NULL,
+                Name VARCHAR(30)  NOT NULL,
+                Description text  NOT NULL,
+                Priority int  NOT NULL,
+                Difficulty int  NOT NULL,
+                DeadLine date  NOT NULL,
                 Stack int FOREIGN key REFERENCES Stack,
-                isComplete BIT,
-                isBooked BIT,
+                isComplete BIT DEFAULT(0),
+                isBooked BIT DEFAULT (0),
                 DoneBy int FOREIGN key REFERENCES [USER] DEFAULT(null)
             )
 
             Create table Issue (
                 IssueID int PRIMARY key IDENTITY,
-                Task int FOREIGN key REFERENCES Task,
-                Issuer int FOREIGN KEY REFERENCES [User],
-                Title VARCHAR(30),
-                Description text,
+                Task int FOREIGN key REFERENCES Task  NOT NULL,
+                Issuer int FOREIGN KEY REFERENCES [User]  NOT NULL,
+                Title VARCHAR(30)  NOT NULL,
+                Description text  NOT NULL,
                 isSolved BIT DEFAULT(0)
+            )
+
+            Create TABLE ActionLog (
+                UserName VARCHAR(35) NOT NULL,
+                UserFullName VARCHAR(60) NOT NULL,
+                ActionName VARCHAR(35) NOT NULL,
+                RequestDate DATETIME DEFAULT(GETDATE())
             )
             
             COMMIT Tran
 	    Print 'DB and Tables Created Successfully, Creating Default Roles...'
 	    insert into [Role](RoleName) values ('Manager'), ('TeamLeader'), ('Member'), ('Client')
 
+        PRINT 'Fixing DB Collation'
+        ALTER DATABASE ProjectManagerDB
+        COLLATE Latin1_General_CS_AS        
 
-            Print 'DB Completed Successfully'
+        Print 'DB Completed Successfully'
         END TRY
         Begin catch 
             THROW
@@ -132,4 +148,19 @@ BEGIN Tran
             ROLLBACK
         End Catch
 
+    END
+
+    PRINT 'Creating Trigger on User Deletion'
+    GO
+    
+    IF EXISTS (SELECT * FROM sys.objects WHERE type = 'TR' AND name = 'DisableAccount') 
+    DROP TRIGGER DisableAccount
+    GO
+
+    CREATE TRIGGER DisableAccount
+    ON [User]
+    INSTEAD OF DELETE
+    AS
+    BEGIN
+        UPDATE [User] SET isAccountActive = 0 WHERE UserID in (SELECT UserID from Deleted)
     END

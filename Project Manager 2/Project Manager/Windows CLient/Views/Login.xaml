@@ -31,12 +31,18 @@
                 </Image.BitmapEffect>
             </Image>
         </Grid>
+
         <Grid VerticalAlignment="Center"
               HorizontalAlignment="Center"
               Width="1173"
               Height="660">
-            <Image Source="/Resources/Images/Login Background.png"
-                   Stretch="Fill"/>
+            <Border BorderThickness=".1" Padding="2" BorderBrush="Red"
+                    CornerRadius="10" x:Name="ImgBorder" SnapsToDevicePixels="True"
+                    RenderOptions.BitmapScalingMode="HighQuality">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Resources/Images/Login Background.png" Stretch="Fill"/>
+                </Border.Background>
+            </Border>
             <StackPanel Orientation="Vertical"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
@@ -75,6 +81,7 @@
 
                 </StackPanel.Resources>
 
+                <!--Welcome Message Message-->
                 <Viewbox Margin="0 0 0 40"
                            MaxWidth="300"
                          MaxHeight="80">
@@ -87,6 +94,8 @@
                         </TextBlock.Effect>
                     </TextBlock>
                 </Viewbox>
+
+                <!--User Name Input-->
                 <Grid Style="{StaticResource MainGrid}">
                     <TextBox x:Name="txtUserName"
                              Text="{Binding UserName}"/>
@@ -99,6 +108,8 @@
                         <TextBlock Text="User Name" VerticalAlignment="Center"/>
                     </Grid>
                 </Grid>
+
+                <!--User Password Input-->
                 <Grid Style="{StaticResource MainGrid}">
                     <TextBox x:Name="txtPassword"
                              Text="{Binding UserPassword}"/>
@@ -111,10 +122,12 @@
                         <TextBlock Text="Password" VerticalAlignment="Center"/>
                     </Grid>
                 </Grid>
+
+                <!--Login Button-->
                 <Button Content="Log In" Command="{Binding Auth}"
                         Width="150" Height="35"
                         Foreground="WhiteSmoke">
-                    
+
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <ControlTemplate.Resources>
@@ -163,6 +176,22 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
+
+                <!--Error Message Message-->
+                <Viewbox Margin="0 0 0 40"
+                           MaxWidth="300"
+                         MaxHeight="80">
+                    <TextBlock Text="{Binding ErrorMessageMessage}"
+                           FontSize="40"
+                           FontWeight="DemiBold"
+                           Foreground="Red"
+                           TextWrapping="Wrap">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Direction="-45"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </Viewbox>
+
             </StackPanel>
         </Grid>
     </Grid>

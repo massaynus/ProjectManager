@@ -8,10 +8,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using DataAccess.Models; using Local_Server_API.Models;
+using DataAccess.Models;
+using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
+    [AuthorizaAttr(Role.Manager)]
     public class TeamStacksController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
@@ -21,7 +23,6 @@ namespace Local_Server_API.Controllers
             return db.TeamStacks.Where(TS => TS.Team == TeamId);
         }
 
-        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(TeamStack))]
         public IHttpActionResult PostTeamStack(TeamStack teamStack)
         {
@@ -36,7 +37,6 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = teamStack.Num }, teamStack);
         }
 
-        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(TeamStack))]
         public IHttpActionResult DeleteTeamStack(int id)
         {
