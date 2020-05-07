@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DataAccess.Models;
@@ -36,7 +37,7 @@ namespace Local_Server_API.Controllers
             return Ok(stack);
         }
 
-        [AuthorizaAttr(new string[] { "Manager", "TeamLeader" })]
+        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutStack(int id, Stack stack)
         {
@@ -71,7 +72,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [AuthorizaAttr(new string[] { "Manager", "TeamLeader" })]
+        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
         [ResponseType(typeof(Stack))]
         public IHttpActionResult PostStack(Stack stack)
         {
@@ -86,7 +87,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = stack.StackID }, stack);
         }
 
-        [AuthorizaAttr("Manager")]
+        [AuthorizaAttr(Role.Manager)]
         [ResponseType(typeof(Stack))]
         public IHttpActionResult DeleteStack(int id)
         {
@@ -114,6 +115,18 @@ namespace Local_Server_API.Controllers
         private bool StackExists(int id)
         {
             return db.Stacks.Count(e => e.StackID == id) > 0;
+        }
+
+        [NonAction]
+        /// <summary>
+        /// Gets the user based on the Auth header parameter
+        /// </summary>
+        /// <param name="AuthParameter"><code>ActionContext.Request.Headers.Authorization.Parameter</code></param>
+        /// <returns></returns>
+        public User GetUserFromAuthHeader(string AuthParameter)
+        {
+            string RequestingUID = Encoding.UTF8.GetString(Convert.FromBase64String(AuthParameter)).Split(':')[0];
+            return db.Users.Where(U => U.UserName == RequestingUID).FirstOrDefault();
         }
     }
 }

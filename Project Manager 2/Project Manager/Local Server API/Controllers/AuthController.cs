@@ -16,7 +16,7 @@ namespace Local_Server_API.Controllers
     public class AuthController : ApiController
     {
         Local_DB_Model db = new Local_DB_Model();
-        
+
         public class Creds
         {
             public string username { get; set; }
@@ -40,6 +40,16 @@ namespace Local_Server_API.Controllers
                 Hash = BitConverter.ToUInt64(sha1.ComputeHash(pwd), 0);
             }
             return Convert.ToBase64String(BitConverter.GetBytes(Hash));
+        }
+
+        [NonAction]
+        /// <summary>
+        /// Returns a user from a UID and Pwd
+        /// </summary>
+        public static User GetUser(string UserName, string Password)
+        {
+            string hash = HashPassword(Password);
+            return new Local_DB_Model().Users.Where(U => U.UserName == UserName && U.Password == hash).FirstOrDefault();
         }
 
         /// <summary>

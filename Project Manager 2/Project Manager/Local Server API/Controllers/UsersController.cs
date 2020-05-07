@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -12,6 +13,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using DataAccess.Models;
 using Local_Server_API.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace Local_Server_API.Controllers
 {
@@ -19,10 +21,30 @@ namespace Local_Server_API.Controllers
     {
         private Local_DB_Model db = new Local_DB_Model();
 
+        /// <summary>
+        /// Get All the users
+        /// </summary>
+        /// <returns>
+        /// Everything if you're a manager
+        /// Team Members if you are a TeamLeader
+        /// </returns>
         [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
         public IEnumerable<User> GetUser()
         {
-            var res = db.Users.Where(u => u.isAccountActive).ToList();
+            var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
+            string RequestingRole = RequestingUser?.Role1.RoleName;
+
+            List<User> res = new List<User>();
+            if (RequestingRole == Role.TeamLeader)
+            {
+                res = RequestingUser?.Team1?.Users.ToList();
+            }
+
+            else if (RequestingRole == Role.Manager)
+            {
+                res = db.Users.Where(u => u.isAccountActive)?.ToList();
+            }
+
             return res;
         }
 
@@ -30,7 +52,9 @@ namespace Local_Server_API.Controllers
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
-            User user = db.Users.Where(U => U.isAccountActive && U.UserID == id).FirstOrDefault();
+            var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
+            User user = db.Users.Where(U => U.isAccountActive && U.UserID == id && U.Team == RequestingUser.Team).FirstOrDefault();
+
             if (user == null)
             {
                 return NotFound();
@@ -43,6 +67,8 @@ namespace Local_Server_API.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
+            var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -51,6 +77,14 @@ namespace Local_Server_API.Controllers
             if (id != user.UserID)
             {
                 return BadRequest();
+            }
+
+            if (RequestingUser.Role1.RoleName == Role.TeamLeader)
+            {
+                if (RequestingUser.UserID != id && RequestingUser.Team1?.Users?.Where(U => U.UserID == id).FirstOrDefault() is null)
+                {
+                    return Unauthorized();
+                }
             }
 
             db.Entry(user).State = EntityState.Modified;
@@ -130,6 +164,18 @@ namespace Local_Server_API.Controllers
         private bool UserExists(int id)
         {
             return db.Users.Count(e => e.UserID == id) > 0;
+        }
+
+        [NonAction]
+        /// <summary>
+        /// Gets the user based on the Auth header parameter
+        /// </summary>
+        /// <param name="AuthParameter"><code>ActionContext.Request.Headers.Authorization.Parameter</code></param>
+        /// <returns></returns>
+        public User GetUserFromAuthHeader(string AuthParameter)
+        {
+            string RequestingUID = Encoding.UTF8.GetString(Convert.FromBase64String(AuthParameter)).Split(':')[0];
+            return db.Users.Where(U => U.UserName == RequestingUID).FirstOrDefault();
         }
 
     }

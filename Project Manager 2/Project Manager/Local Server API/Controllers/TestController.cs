@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataAccess.Models;
+using Local_Server_API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,9 +11,17 @@ namespace Local_Server_API.Controllers
 {
     public class TestController : ApiController
     {
+        User user = new User();
+        bool CtorCalled = false;
+        
+        public TestController()
+        {
+            CtorCalled = true;
+        }
+
         public Object GetValue()
         {
-            return Request.Headers.Authorization;
+            return new { Data = CtorCalled };
         }
     }
 }

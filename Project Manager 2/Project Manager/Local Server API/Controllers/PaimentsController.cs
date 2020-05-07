@@ -6,9 +6,11 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
-using DataAccess.Models; using Local_Server_API.Models;
+using DataAccess.Models;
+using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
@@ -16,17 +18,24 @@ namespace Local_Server_API.Controllers
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        [AuthorizaAttr(new string[] { Role.Manager, Role.Client})]
+        [AuthorizaAttr(new string[] { Role.Manager, Role.Client })]
         public IQueryable<Paiment> GetPaiment()
         {
-            return db.Paiments;
+            var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
+
+            return db.Paiments.Where(P => P.SenderID == RequestingUser.UserID || P.RecieverID == RequestingUser.UserID);
         }
 
-        [AuthorizaAttr(new string[] { Role.Manager, Role.Client})]
+        [AuthorizaAttr(new string[] { Role.Manager, Role.Client })]
         [ResponseType(typeof(Paiment))]
         public IHttpActionResult GetPaiment(int id)
         {
-            Paiment Paiment = db.Paiments.Find(id);
+            var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
+            var payments = db.Paiments.Where(P => P.SenderID == RequestingUser.UserID || P.RecieverID == RequestingUser.UserID);
+
+
+            Paiment Paiment = payments.Where(P => P.PaymentID == id).FirstOrDefault();
+
             if (Paiment == null)
             {
                 return NotFound();
@@ -35,48 +44,20 @@ namespace Local_Server_API.Controllers
             return Ok(Paiment);
         }
 
-        [AuthorizaAttr(Role.Manager)]
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutPaiment(int id, Paiment Paiment)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != Paiment.PaymentID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(Paiment).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PaimentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        [AuthorizaAttr(Role.Manager)]
+        [AuthorizaAttr(new string[] { Role.Manager, Role.Client })]
         [ResponseType(typeof(Paiment))]
         public IHttpActionResult PostPaiment(Paiment Paiment)
         {
+            var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            if (Paiment.SenderID != RequestingUser.UserID && Paiment.SenderFullName != (RequestingUser.LastName + " " + RequestingUser.FirstName))
+            {
+                return Unauthorized();
             }
 
             db.Paiments.Add(Paiment);
@@ -85,21 +66,6 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = Paiment.PaymentID }, Paiment);
         }
 
-        [AuthorizaAttr(Role.Manager)]
-        [ResponseType(typeof(Paiment))]
-        public IHttpActionResult DeletePaiment(int id)
-        {
-            Paiment Paiment = db.Paiments.Find(id);
-            if (Paiment == null)
-            {
-                return NotFound();
-            }
-
-            db.Paiments.Remove(Paiment);
-            db.SaveChanges();
-
-            return Ok(Paiment);
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -113,6 +79,18 @@ namespace Local_Server_API.Controllers
         private bool PaimentExists(int id)
         {
             return db.Paiments.Count(e => e.PaymentID == id) > 0;
+        }
+
+        [NonAction]
+        /// <summary>
+        /// Gets the user based on the Auth header parameter
+        /// </summary>
+        /// <param name="AuthParameter"><code>ActionContext.Request.Headers.Authorization.Parameter</code></param>
+        /// <returns></returns>
+        public User GetUserFromAuthHeader(string AuthParameter)
+        {
+            string RequestingUID = Encoding.UTF8.GetString(Convert.FromBase64String(AuthParameter)).Split(':')[0];
+            return db.Users.Where(U => U.UserName == RequestingUID).FirstOrDefault();
         }
     }
 }
