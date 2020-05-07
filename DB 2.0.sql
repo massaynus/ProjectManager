@@ -59,7 +59,9 @@ BEGIN Tran
                 RIB VARCHAR(23)  NOT NULL,
                 [Role] INT FOREIGN KEY REFERENCES [Role]  NOT NULL,
                 Team INT FOREIGN key REFERENCES Team,
-                isAccountActive BIT DEFAULT(1) NOT NULL
+                isAccountActive BIT DEFAULT(1) NOT NULL,
+				Leader int FOREIGN KEY References [User],
+				Manager int FOREIGN KEY References [User]
             )
 
             CREATE TABLE [Address] (
@@ -87,8 +89,11 @@ BEGIN Tran
 
             CREATE TABLE Paiments (
                 PaymentID int PRIMARY key IDENTITY,
+				PaymentDescription text,
                 SenderFullName VARCHAR(70)  NOT NULL,
+				SenderID int Foreign key references [User],
                 RecieverFullName VARCHAR(70)  NOT NULL,
+				RecieverID int Foreign key references [User],
                 Amount DECIMAL(9,2)  NOT NULL,
                 isSalary BIT DEFAULT(0),
                 isProjectPaiement BIT DEFAULT(0),
