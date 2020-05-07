@@ -26,7 +26,7 @@ Then it will Open one of three main views depending on his role :
 
 1. ManagersMainView 		(Manager)
 2. TeamLeadersMainView 		(Team Leader)
-3. TasksMainView		(Member)
+3. TasksMainView		    (Member)
 
 The client Role isn't supported in this client
 
