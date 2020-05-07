@@ -56,6 +56,10 @@ namespace DataAccess.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Paiment>()
+                .Property(e => e.PaymentDescription)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Paiment>()
                 .Property(e => e.SenderFullName)
                 .IsUnicode(false);
 
@@ -145,9 +149,8 @@ namespace DataAccess.Models
 
             modelBuilder.Entity<Team>()
                 .HasMany(e => e.Users)
-                .WithRequired(e => e.Team1)
-                .HasForeignKey(e => e.Team)
-                .WillCascadeOnDelete(false);
+                .WithOptional(e => e.Team1)
+                .HasForeignKey(e => e.Team);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.UserName)
@@ -194,6 +197,16 @@ namespace DataAccess.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
+                .HasMany(e => e.Paiments)
+                .WithOptional(e => e.User)
+                .HasForeignKey(e => e.RecieverID);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Paiments1)
+                .WithOptional(e => e.User1)
+                .HasForeignKey(e => e.SenderID);
+
+            modelBuilder.Entity<User>()
                 .HasMany(e => e.Projects)
                 .WithRequired(e => e.User)
                 .HasForeignKey(e => e.Owner)
@@ -203,6 +216,16 @@ namespace DataAccess.Models
                 .HasMany(e => e.Tasks)
                 .WithOptional(e => e.User)
                 .HasForeignKey(e => e.DoneBy);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.User1)
+                .WithOptional(e => e.User2)
+                .HasForeignKey(e => e.Leader);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.User11)
+                .WithOptional(e => e.User3)
+                .HasForeignKey(e => e.Manager);
 
             modelBuilder.Entity<ActionLog>()
                 .Property(e => e.UserName)

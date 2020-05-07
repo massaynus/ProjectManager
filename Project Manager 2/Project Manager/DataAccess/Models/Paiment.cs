@@ -11,13 +11,20 @@ namespace DataAccess.Models
         [Key]
         public int PaymentID { get; set; }
 
+        [Column(TypeName = "text")]
+        public string PaymentDescription { get; set; }
+
         [Required]
         [StringLength(70)]
         public string SenderFullName { get; set; }
 
+        public int? SenderID { get; set; }
+
         [Required]
         [StringLength(70)]
         public string RecieverFullName { get; set; }
+
+        public int? RecieverID { get; set; }
 
         public decimal Amount { get; set; }
 
@@ -31,5 +38,9 @@ namespace DataAccess.Models
         public DateTime Date { get; set; }
 
         public virtual Project Project { get; set; }
+
+        public virtual User User { get; set; }
+
+        public virtual User User1 { get; set; }
     }
 }

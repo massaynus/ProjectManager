@@ -5,7 +5,6 @@ namespace DataAccess.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using Newtonsoft.Json;
 
     [Table("User")]
     public partial class User
@@ -15,8 +14,12 @@ namespace DataAccess.Models
         {
             Addresses = new HashSet<Address>();
             Issues = new HashSet<Issue>();
+            Paiments = new HashSet<Paiment>();
+            Paiments1 = new HashSet<Paiment>();
             Projects = new HashSet<Project>();
             Tasks = new HashSet<Task>();
+            User1 = new HashSet<User>();
+            User11 = new HashSet<User>();
         }
 
         public int UserID { get; set; }
@@ -62,11 +65,21 @@ namespace DataAccess.Models
 
         public bool isAccountActive { get; set; }
 
+        public int? Leader { get; set; }
+
+        public int? Manager { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Address> Addresses { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Issue> Issues { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Paiment> Paiments { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Paiment> Paiments1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects { get; set; }
@@ -77,5 +90,15 @@ namespace DataAccess.Models
         public virtual ICollection<Task> Tasks { get; set; }
 
         public virtual Team Team1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> User1 { get; set; }
+
+        public virtual User User2 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> User11 { get; set; }
+
+        public virtual User User3 { get; set; }
     }
 }
