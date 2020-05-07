@@ -24,9 +24,9 @@ It uses JSON to talk to the Local Server API to get/send and display the data
 The windows client will attempt to call the **AuthController** to verify the identity of the user and his role
 Then it will Open one of three main views depending on his role :
 
-1. ManagersMainView
-2. TeamLeadersMainView
-3. TasksMainView
+1. ManagersMainView 		(Manager)
+2. TeamLeadersMainView 		(Team Leader)
+3. TasksMainView		(Member)
 
 The client Role isn't supported in this client
 
