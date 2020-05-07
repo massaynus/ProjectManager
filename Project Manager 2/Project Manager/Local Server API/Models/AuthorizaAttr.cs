@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Local_Server_API.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -16,9 +17,9 @@ namespace Local_Server_API.Models
     public class AuthorizaAttr : AuthorizationFilterAttribute
     {
         //TODO: check for ownership
-        //TODO: add allowAll
 
         private string[] Role = new string[] { };
+        private string principaleRole = string.Empty;
         private bool AllowAll;
 
         public AuthorizaAttr(bool AllowAll = false) : base() { this.AllowAll = AllowAll; }
@@ -48,7 +49,7 @@ namespace Local_Server_API.Models
                 if (IsAuthorizedUser(arrUserNameandPassword[0], arrUserNameandPassword[1]))
                 {
                     Thread.CurrentPrincipal = new GenericPrincipal(
-                    new GenericIdentity(arrUserNameandPassword[0]), null);
+                    new GenericIdentity(arrUserNameandPassword[0]), new string[] { principaleRole });
                 }
                 else
                 {
@@ -69,14 +70,22 @@ namespace Local_Server_API.Models
 
             using (var db = new DataAccess.Models.Local_DB_Model())
             {
-                string hash = Controllers.AuthController.HashPassword(Password).ToString();
-                var user = db.Users.Where(U => U.UserName == UserName && U.Password == hash).FirstOrDefault();
+                var user = AuthController.GetUser(UserName, Password);
+
                 if (user != null)
                 {
-                    return Role.Length > 0 ? Role.Contains(user.Role1.RoleName) : true;
+                    if (Role.Length > 0)
+                    {
+                        if (Role.Contains(user.Role1.RoleName))
+                        {
+                            principaleRole = user.Role1.RoleName;
+                            return true;
+                        }
+                    }
+                    else return true;
                 }
             }
-            
+
             return false;
         }
     }
