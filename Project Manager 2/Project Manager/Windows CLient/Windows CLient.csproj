@@ -131,6 +131,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\Styles\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LeaderViews\LeaderMainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +165,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\chart.png" />
+    <Resource Include="Resources\Images\employee.png" />
+    <Resource Include="Resources\Images\team.png" />
+    <Resource Include="Resources\Images\dashboard.png" />
+    <Resource Include="Resources\Images\project.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
