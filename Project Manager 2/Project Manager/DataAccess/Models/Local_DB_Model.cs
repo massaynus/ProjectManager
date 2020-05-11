@@ -228,8 +228,8 @@ namespace DataAccess.Models
                 .HasForeignKey(e => e.Manager);
 
             modelBuilder.Entity<ActionLog>()
-                .Property(e => e.UserName)
-                .IsUnicode(false);
+                 .Property(e => e.UserName)
+                 .IsUnicode(false);
 
             modelBuilder.Entity<ActionLog>()
                 .Property(e => e.UserFullName)
@@ -237,6 +237,10 @@ namespace DataAccess.Models
 
             modelBuilder.Entity<ActionLog>()
                 .Property(e => e.ActionName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ActionLog>()
+                .Property(e => e.ActionDATA)
                 .IsUnicode(false);
         }
     }
