@@ -128,7 +128,8 @@ BEGIN Tran
                 UserName VARCHAR(35) NOT NULL,
                 UserFullName VARCHAR(60) NOT NULL,
                 ActionName VARCHAR(35) NOT NULL,
-                RequestDate DATETIME DEFAULT(GETDATE())
+                ActionDATA TEXT NOT NULL,
+                RequestDate DATETIME DEFAULT(GETDATE()) NOT NULL
             )
             
             COMMIT Tran
