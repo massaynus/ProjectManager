@@ -1,5 +1,6 @@
 namespace DataAccess.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -16,8 +17,10 @@ namespace DataAccess.Models
 
         public int Stack { get; set; }
 
+        [JsonIgnore]
         public virtual Stack Stack1 { get; set; }
 
+        [JsonIgnore]
         public virtual Team Team1 { get; set; }
     }
 }

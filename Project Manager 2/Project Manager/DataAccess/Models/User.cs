@@ -1,5 +1,6 @@
 namespace DataAccess.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -14,14 +15,15 @@ namespace DataAccess.Models
         {
             Addresses = new HashSet<Address>();
             Issues = new HashSet<Issue>();
-            Paiments = new HashSet<Paiment>();
-            Paiments1 = new HashSet<Paiment>();
+            ReceivedPaiments = new HashSet<Paiment>();
+            SentPaiments = new HashSet<Paiment>();
             Projects = new HashSet<Project>();
             Tasks = new HashSet<Task>();
-            User1 = new HashSet<User>();
-            User11 = new HashSet<User>();
+            LeadUsers = new HashSet<User>();
+            ManagedUsers = new HashSet<User>();
         }
 
+        #region User Properties
         public int UserID { get; set; }
 
         [Required]
@@ -68,37 +70,57 @@ namespace DataAccess.Models
         public int? Leader { get; set; }
 
         public int? Manager { get; set; }
+        #endregion
 
+
+        #region User External Entities
+
+        #region User Data (Adresses / Role / Team)
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Address> Addresses { get; set; }
 
+        public virtual Role Role1 { get; set; }
+
+        public virtual Team Team1 { get; set; }
+        #endregion
+
+        #region User Work (Tasks / Issues)
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Issue> Issues { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Paiment> Paiments { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
+        #endregion
+
+        #region Payments & Projects
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Paiment> Paiments1 { get; set; }
+        public virtual ICollection<Paiment> ReceivedPaiments { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Paiment> SentPaiments { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> Projects { get; set; }
+        #endregion
 
-        public virtual Role Role1 { get; set; }
+        #region Hierarchy stuff
+        [JsonIgnore]
+        public virtual User UserManager { get; set; }
 
+        [JsonIgnore]
+        public virtual User UserLeader { get; set; }
+
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<User> LeadUsers { get; set; }
 
-        public virtual Team Team1 { get; set; }
-
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> User1 { get; set; }
+        public virtual ICollection<User> ManagedUsers { get; set; }
+        #endregion
 
-        public virtual User User2 { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> User11 { get; set; }
-
-        public virtual User User3 { get; set; }
+        #endregion
     }
 }

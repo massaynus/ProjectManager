@@ -1,5 +1,6 @@
 namespace DataAccess.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -37,10 +38,13 @@ namespace DataAccess.Models
         [Column(TypeName = "date")]
         public DateTime Date { get; set; }
 
+        [JsonIgnore]
         public virtual Project Project { get; set; }
 
-        public virtual User User { get; set; }
+        [JsonIgnore]
+        public virtual User RecieverUser { get; set; }
 
-        public virtual User User1 { get; set; }
+        [JsonIgnore]
+        public virtual User SenderUser { get; set; }
     }
 }

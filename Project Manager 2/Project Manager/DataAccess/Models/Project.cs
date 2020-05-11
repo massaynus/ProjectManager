@@ -1,5 +1,6 @@
 namespace DataAccess.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -45,8 +46,10 @@ namespace DataAccess.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Paiment> Paiments { get; set; }
 
-        public virtual User User { get; set; }
+        [JsonIgnore]
+        public virtual User ProjectOwner { get; set; }
 
+        [JsonIgnore]
         public virtual Team Team1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

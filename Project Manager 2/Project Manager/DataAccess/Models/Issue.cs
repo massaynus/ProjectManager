@@ -1,5 +1,6 @@
 namespace DataAccess.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -25,8 +26,10 @@ namespace DataAccess.Models
 
         public bool? isSolved { get; set; }
 
+        [JsonIgnore]
         public virtual User User { get; set; }
 
+        [JsonIgnore]
         public virtual Task Task1 { get; set; }
     }
 }

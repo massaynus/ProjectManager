@@ -1,5 +1,6 @@
 namespace DataAccess.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -28,6 +29,7 @@ namespace DataAccess.Models
         [StringLength(20)]
         public string Country { get; set; }
 
+        [JsonIgnore]
         public virtual User User { get; set; }
     }
 }

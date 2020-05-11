@@ -197,34 +197,34 @@ namespace DataAccess.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.Paiments)
-                .WithOptional(e => e.User)
+                .HasMany(e => e.ReceivedPaiments)
+                .WithOptional(e => e.RecieverUser)
                 .HasForeignKey(e => e.RecieverID);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.Paiments1)
-                .WithOptional(e => e.User1)
+                .HasMany(e => e.SentPaiments)
+                .WithOptional(e => e.SenderUser)
                 .HasForeignKey(e => e.SenderID);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Projects)
-                .WithRequired(e => e.User)
+                .WithRequired(e => e.ProjectOwner)
                 .HasForeignKey(e => e.Owner)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Tasks)
-                .WithOptional(e => e.User)
+                .WithOptional(e => e.DoneByUser)
                 .HasForeignKey(e => e.DoneBy);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.User1)
-                .WithOptional(e => e.User2)
+                .HasMany(e => e.LeadUsers)
+                .WithOptional(e => e.UserLeader)
                 .HasForeignKey(e => e.Leader);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.User11)
-                .WithOptional(e => e.User3)
+                .HasMany(e => e.ManagedUsers)
+                .WithOptional(e => e.UserManager)
                 .HasForeignKey(e => e.Manager);
 
             modelBuilder.Entity<ActionLog>()
