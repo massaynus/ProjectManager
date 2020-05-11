@@ -13,7 +13,7 @@
     </RootPath>
     <RootNamespace>Project_Manager_DB</RootNamespace>
     <AssemblyName>Project_Manager_DB</AssemblyName>
-    <ModelCollation>1036,CI</ModelCollation>
+    <ModelCollation>1033,CS</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -22,7 +22,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DefaultCollation>French_CI_AS</DefaultCollation>
+    <DefaultCollation>Latin1_General_CS_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -72,5 +72,6 @@
     <Build Include="dbo\Tables\Paiments.sql" />
     <Build Include="dbo\Tables\Task.sql" />
     <Build Include="dbo\Tables\Issue.sql" />
+    <Build Include="dbo\Tables\ActionLog.sql" />
   </ItemGroup>
 </Project>

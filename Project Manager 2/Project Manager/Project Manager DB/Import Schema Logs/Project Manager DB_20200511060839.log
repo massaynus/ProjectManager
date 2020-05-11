@@ -1,0 +1,85 @@
+5/11/2020 6:08:39 AM	This log contains information about the import schema operation into project 'Project Manager DB' on computer 'DESKTOP-6FILVV2' by user 'Yassine'.
+5/11/2020 6:08:39 AM	Import of database schema has started.
+5/11/2020 6:08:46 AM	Gathering database credentials
+5/11/2020 6:08:46 AM	Gathering database options
+5/11/2020 6:08:46 AM	Gathering generic database scoped configuration option
+5/11/2020 6:08:46 AM	Gathering users
+5/11/2020 6:08:46 AM	Gathering roles
+5/11/2020 6:08:46 AM	Gathering application roles
+5/11/2020 6:08:46 AM	Gathering role memberships
+5/11/2020 6:08:46 AM	Gathering filegroups
+5/11/2020 6:08:46 AM	Gathering full-text catalogs
+5/11/2020 6:08:46 AM	Gathering assemblies
+5/11/2020 6:08:46 AM	Gathering certificates
+5/11/2020 6:08:46 AM	Gathering asymmetric keys
+5/11/2020 6:08:46 AM	Gathering symmetric keys
+5/11/2020 6:08:46 AM	Gathering encrypted symmetric keys
+5/11/2020 6:08:46 AM	Gathering schemas
+5/11/2020 6:08:46 AM	Gathering XML schema collections
+5/11/2020 6:08:46 AM	Gathering user-defined data types
+5/11/2020 6:08:46 AM	Gathering user-defined types
+5/11/2020 6:08:46 AM	Gathering table types
+5/11/2020 6:08:46 AM	Gathering unique keys for table types
+5/11/2020 6:08:46 AM	Gathering primary keys for table types
+5/11/2020 6:08:46 AM	Gathering indexes for table types
+5/11/2020 6:08:46 AM	Gathering check constraints for table types
+5/11/2020 6:08:46 AM	Gathering default constraints for table types
+5/11/2020 6:08:46 AM	Gathering partition functions
+5/11/2020 6:08:46 AM	Gathering partition schemes
+5/11/2020 6:08:46 AM	Gathering functions
+5/11/2020 6:08:46 AM	Gathering encrypted functions
+5/11/2020 6:08:46 AM	Gathering aggregates
+5/11/2020 6:08:46 AM	Gathering procedures
+5/11/2020 6:08:46 AM	Gathering encrypted procedures
+5/11/2020 6:08:46 AM	Gathering tables
+5/11/2020 6:08:46 AM	Gathering primary keys
+5/11/2020 6:08:46 AM	Gathering unique constraints
+5/11/2020 6:08:46 AM	Gathering foreign keys
+5/11/2020 6:08:46 AM	Gathering default constraints
+5/11/2020 6:08:46 AM	Gathering check constraints
+5/11/2020 6:08:46 AM	Gathering views
+5/11/2020 6:08:46 AM	Gathering encrypted views
+5/11/2020 6:08:46 AM	Gathering indexes
+5/11/2020 6:08:46 AM	Gathering statistics
+5/11/2020 6:08:46 AM	Gathering full-text index stoplists
+5/11/2020 6:08:46 AM	Gathering search property lists
+5/11/2020 6:08:47 AM	Gathering search properties
+5/11/2020 6:08:47 AM	Gathering full-text indexes
+5/11/2020 6:08:47 AM	Gathering column store indexes
+5/11/2020 6:08:47 AM	Gathering spatial indexes
+5/11/2020 6:08:47 AM	Gathering XML indexes
+5/11/2020 6:08:47 AM	Gathering Selective XML indexes
+5/11/2020 6:08:47 AM	Gathering encrypted triggers
+5/11/2020 6:08:47 AM	Gathering triggers
+5/11/2020 6:08:47 AM	Gathering encrypted and clr ddl triggers
+5/11/2020 6:08:47 AM	Gathering ddl triggers
+5/11/2020 6:08:47 AM	Gathering synonyms
+5/11/2020 6:08:47 AM	Gathering defaults
+5/11/2020 6:08:47 AM	Gathering data constraint uddt bindings
+5/11/2020 6:08:47 AM	Gathering rules
+5/11/2020 6:08:47 AM	Gathering data constraint uddt bindings
+5/11/2020 6:08:47 AM	Gathering message types
+5/11/2020 6:08:47 AM	Gathering queues
+5/11/2020 6:08:47 AM	Gathering contracts
+5/11/2020 6:08:47 AM	Gathering services
+5/11/2020 6:08:47 AM	Gathering event notifications
+5/11/2020 6:08:47 AM	Gathering remote service bindings
+5/11/2020 6:08:47 AM	Gathering broker priorities
+5/11/2020 6:08:47 AM	Gathering signatures
+5/11/2020 6:08:47 AM	Gathering data compression options
+5/11/2020 6:08:47 AM	Gathering sequence types
+5/11/2020 6:08:47 AM	Gathering security policies
+5/11/2020 6:08:47 AM	Gather column encryption keys
+5/11/2020 6:08:47 AM	Gathering column master keys
+5/11/2020 6:08:47 AM	Gathering external data sources
+5/11/2020 6:08:47 AM	Gathering external file formats
+5/11/2020 6:08:47 AM	Gathering external tables
+5/11/2020 6:08:47 AM	Gathering extended properties
+5/11/2020 6:08:47 AM	Gathering credentials
+5/11/2020 6:08:47 AM	Gathering logins
+5/11/2020 6:08:47 AM	Gathering server audits
+5/11/2020 6:08:48 AM	Scanning project for duplicate elements
+5/11/2020 6:08:48 AM	Finished duplicate element processing
+5/11/2020 6:08:49 AM	Finished importing database.
+5/11/2020 6:08:49 AM	A summary of the import was saved to the following location: C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Project Manager DB\Import Schema Logs\Project Manager DB_20200511060839.log
+5/11/2020 6:08:49 AM	Click Finish to continue...
