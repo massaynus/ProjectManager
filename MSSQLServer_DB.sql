@@ -125,10 +125,11 @@ BEGIN Tran
             )
 
             Create TABLE ActionLog (
-                ActionID int IDENTITY NOT NULL,
+                ActionID int PRIMARY KEY IDENTITY NOT NULL,
                 UserName VARCHAR(35) NOT NULL,
                 UserFullName VARCHAR(60) NOT NULL,
                 ActionName VARCHAR(35) NOT NULL,
+                ActionMethod CHAR(8) NOT NULL,
                 ActionDATA TEXT NOT NULL,
                 RequestDate DATETIME DEFAULT(GETDATE()) NOT NULL
             )
