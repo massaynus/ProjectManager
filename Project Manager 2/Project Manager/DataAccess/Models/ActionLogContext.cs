@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    class ActionLogContext : DbContext
+    public partial class ActionLogContext : DbContext
     {
         public ActionLogContext()
             : base("name=Local_DB_Model")
@@ -30,6 +30,11 @@
 
             modelBuilder.Entity<ActionLog>()
                 .Property(e => e.ActionDATA)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ActionLog>()
+                .Property(e => e.ActionMethod)
+                .IsFixedLength()
                 .IsUnicode(false);
         }
     }

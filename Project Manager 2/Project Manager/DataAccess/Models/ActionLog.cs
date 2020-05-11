@@ -10,28 +10,27 @@ namespace DataAccess.Models
     public partial class ActionLog
     {
         [Key]
-        [Column(Order = 0)]
         public int ActionID { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+        [Required]
         [StringLength(35)]
         public string UserName { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+        [Required]
         [StringLength(60)]
         public string UserFullName { get; set; }
 
-        [Key]
-        [Column(Order = 3)]
+        [Required]
         [StringLength(35)]
         public string ActionName { get; set; }
 
-        [Key]
-        [Column(Order = 4, TypeName = "text")]
+        [Column(TypeName = "text")]
+        [Required]
         public string ActionDATA { get; set; }
 
         public DateTime? RequestDate { get; set; }
+
+        [StringLength(8)]
+        public string ActionMethod { get; set; }
     }
 }
