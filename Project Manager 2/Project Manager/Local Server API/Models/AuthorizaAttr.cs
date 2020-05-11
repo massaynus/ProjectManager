@@ -16,8 +16,6 @@ namespace Local_Server_API.Models
 {
     public class AuthorizaAttr : AuthorizationFilterAttribute
     {
-        //TODO: check for ownership
-
         private string[] Role = new string[] { };
         private string principaleRole = string.Empty;
         private bool AllowAll;
