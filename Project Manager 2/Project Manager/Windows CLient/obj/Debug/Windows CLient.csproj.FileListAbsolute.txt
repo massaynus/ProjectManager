@@ -1,3 +1,6 @@
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Project Manager.exe.config
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Project Manager.exe
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Project Manager.pdb
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Local Server API.dll
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Net.Http.Formatting.dll
@@ -36,22 +39,19 @@ C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\W
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\ManagerViews\ManagerMainView.g.cs
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\TasksView.g.cs
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\App.g.cs
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager_MarkupCompile.cache
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager_MarkupCompile.lref
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\App.baml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Resources\Styles\Colors.baml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\LeaderViews\LeaderMainView.baml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\Login.baml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\ManagerViews\ManagerMainView.baml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\TasksView.baml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.g.resources
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows_CLient.Properties.Resources.resources
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows CLient.csproj.GenerateResource.cache
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows CLient.csproj.CoreCompileInputs.cache
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows CLient.csproj.CopyComplete
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Project Manager.exe.config
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Project Manager.exe
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Project Manager.pdb
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager_MarkupCompile.cache
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager_MarkupCompile.lref
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.g.resources
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.exe
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.pdb
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\App.baml
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Resources\Styles\Colors.baml

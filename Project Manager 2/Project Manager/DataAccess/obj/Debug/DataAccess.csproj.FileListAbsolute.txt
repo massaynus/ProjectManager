@@ -7,8 +7,8 @@ C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\D
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\DataAccess\bin\Debug\EntityFramework.xml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\DataAccess\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\DataAccess\obj\Debug\DataAccess.csprojAssemblyReference.cache
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\DataAccess\obj\Debug\DataAccess.dll
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\DataAccess\obj\Debug\DataAccess.pdb
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\DataAccess\obj\Debug\DataAccess.csprojAssemblyReference.cache
