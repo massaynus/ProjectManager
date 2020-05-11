@@ -1,4 +1,5 @@
-﻿using Local_Server_API.Controllers;
+﻿using DataAccess.Models;
+using Local_Server_API.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,10 @@ namespace Local_Server_API.Models
         private string principaleRole = string.Empty;
         private bool AllowAll;
 
-        public AuthorizaAttr(bool AllowAll = false) : base() { this.AllowAll = AllowAll; }
+        public AuthorizaAttr(bool AllowAll = false) : base()
+        {
+            this.AllowAll = AllowAll;
+        }
 
         public AuthorizaAttr(string Role, bool AllowAll = false) : this(AllowAll)
         {
@@ -66,22 +70,19 @@ namespace Local_Server_API.Models
         {
             if (AllowAll) return true;
 
-            using (var db = new DataAccess.Models.Local_DB_Model())
-            {
-                var user = AuthController.GetUser(UserName, Password);
+            var user = AuthController.GetUser(UserName, Password);
 
-                if (user != null)
+            if (user != null)
+            {
+                if (Role.Length > 0)
                 {
-                    if (Role.Length > 0)
+                    if (Role.Contains(user.Role1.RoleName))
                     {
-                        if (Role.Contains(user.Role1.RoleName))
-                        {
-                            principaleRole = user.Role1.RoleName;
-                            return true;
-                        }
+                        principaleRole = user.Role1.RoleName;
+                        return true;
                     }
-                    else return true;
                 }
+                else return true;
             }
 
             return false;
