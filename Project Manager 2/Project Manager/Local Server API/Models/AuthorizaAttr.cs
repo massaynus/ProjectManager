@@ -48,7 +48,7 @@ namespace Local_Server_API.Models
 
                 var arrUserNameandPassword = decodeauthToken.Split(':');
 
-                if (IsAuthorizedUser(arrUserNameandPassword[0], arrUserNameandPassword[1]))
+                if (IsAuthorizedUser(arrUserNameandPassword[0], arrUserNameandPassword[1], actionContext))
                 {
                     Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(arrUserNameandPassword[0]), new string[] { principaleRole });
@@ -66,7 +66,7 @@ namespace Local_Server_API.Models
             }
         }
 
-        private bool IsAuthorizedUser(string UserName, string Password)
+        private bool IsAuthorizedUser(string UserName, string Password, HttpActionContext actionContext)
         {
             if (AllowAll) return true;
 
@@ -74,6 +74,8 @@ namespace Local_Server_API.Models
 
             if (user != null)
             {
+                LogAction(user, actionContext);
+
                 if (Role.Length > 0)
                 {
                     if (Role.Contains(user.Role1.RoleName))
@@ -86,6 +88,43 @@ namespace Local_Server_API.Models
             }
 
             return false;
+        }
+
+        private void LogAction(User user, HttpActionContext context)
+        {
+            using (ActionLogContext db = new ActionLogContext())
+            {
+                ActionLog actionLog = new ActionLog();
+
+                actionLog.UserName = user.UserName;
+                actionLog.UserFullName = $"{user.LastName} {user.FirstName}";
+                actionLog.ActionName = $"{context.ActionDescriptor.ControllerDescriptor.ControllerName}/{context.ActionDescriptor.ActionName}";
+                actionLog.ActionMethod = context.Request.Method.Method;
+                actionLog.RequestDate = DateTime.Now;
+
+                actionLog.ActionDATA += "FromBody:\n\t";
+                string BodyData = context.Request.Content.ReadAsStringAsync().Result;
+
+                actionLog.ActionDATA += BodyData.Contains("Password") ? "Contained sensitive data!" : BodyData;
+
+                actionLog.ActionDATA += "\n\nFromURI:\n";
+                var URIParams = HttpUtility.ParseQueryString(context.Request.RequestUri.Query);
+                URIParams.AllKeys
+                    .ToList()
+                    .ForEach(Key => actionLog.ActionDATA += $"\n\t{Key}:\t{URIParams[Key]}");
+
+                var RouteParamsArr = context.Request.RequestUri.AbsolutePath.Split('/');
+                if (RouteParamsArr.Length == 4)
+                    actionLog.ActionDATA += "\n\nFromRoute:\t" + RouteParamsArr[3];
+
+                if (string.IsNullOrEmpty(actionLog.ActionDATA))
+                    actionLog.ActionDATA = "NO DATA";
+
+
+                db.ActionLogs.Add(actionLog);
+
+                db.SaveChanges();
+            }
         }
     }
 }
