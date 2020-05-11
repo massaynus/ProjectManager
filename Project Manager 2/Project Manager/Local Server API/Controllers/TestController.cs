@@ -19,13 +19,11 @@ namespace Local_Server_API.Controllers
             CtorCalled = true;
         }
 
-        [TestLog]
         public Object GetValue()
         {
             return new { Data = CtorCalled };
         }
 
-        [TestLog]
         public Object PostValue(int id, [FromBody]object value)
         {
             return new { Data = value, Added = true };
