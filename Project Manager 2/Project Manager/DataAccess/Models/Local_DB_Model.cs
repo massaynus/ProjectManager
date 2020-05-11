@@ -226,22 +226,6 @@ namespace DataAccess.Models
                 .HasMany(e => e.ManagedUsers)
                 .WithOptional(e => e.UserManager)
                 .HasForeignKey(e => e.Manager);
-
-            modelBuilder.Entity<ActionLog>()
-                 .Property(e => e.UserName)
-                 .IsUnicode(false);
-
-            modelBuilder.Entity<ActionLog>()
-                .Property(e => e.UserFullName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ActionLog>()
-                .Property(e => e.ActionName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ActionLog>()
-                .Property(e => e.ActionDATA)
-                .IsUnicode(false);
         }
     }
 }
