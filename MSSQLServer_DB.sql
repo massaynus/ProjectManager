@@ -125,6 +125,7 @@ BEGIN Tran
             )
 
             Create TABLE ActionLog (
+                ActionID int IDENTITY NOT NULL,
                 UserName VARCHAR(35) NOT NULL,
                 UserFullName VARCHAR(60) NOT NULL,
                 ActionName VARCHAR(35) NOT NULL,
