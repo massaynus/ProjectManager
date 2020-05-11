@@ -13,7 +13,7 @@ using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
-    [AuthorizaAttr(Role.Manager)]
+    [AuthAttr(Role.Manager)]
     public class TeamStacksController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();

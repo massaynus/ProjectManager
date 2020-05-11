@@ -18,7 +18,7 @@ namespace Local_Server_API.Controllers
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        [AuthorizaAttr(new string[] { Role.Manager, Role.Client })]
+        [AuthAttr(new string[] { Role.Manager, Role.Client })]
         public IQueryable<Paiment> GetPaiment()
         {
             var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
@@ -26,7 +26,7 @@ namespace Local_Server_API.Controllers
             return db.Paiments.Where(P => P.SenderID == RequestingUser.UserID || P.RecieverID == RequestingUser.UserID);
         }
 
-        [AuthorizaAttr(new string[] { Role.Manager, Role.Client })]
+        [AuthAttr(new string[] { Role.Manager, Role.Client })]
         [ResponseType(typeof(Paiment))]
         public IHttpActionResult GetPaiment(int id)
         {
@@ -44,7 +44,7 @@ namespace Local_Server_API.Controllers
             return Ok(Paiment);
         }
 
-        [AuthorizaAttr(new string[] { Role.Manager, Role.Client })]
+        [AuthAttr(new string[] { Role.Manager, Role.Client })]
         [ResponseType(typeof(Paiment))]
         public IHttpActionResult PostPaiment(Paiment Paiment)
         {

@@ -19,13 +19,13 @@ namespace Local_Server_API.Controllers
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        [AuthorizaAttr]
+        [AuthAttr]
         public ICollection<Issue> GetIssue()
         {
             return GetTeamIssues(ActionContext.Request.Headers.Authorization.Parameter);
         }
 
-        [AuthorizaAttr]
+        [AuthAttr]
         [ResponseType(typeof(Issue))]
         public IHttpActionResult GetIssue(int id)
         {
@@ -38,7 +38,7 @@ namespace Local_Server_API.Controllers
             return Ok(issue);
         }
 
-        [AuthorizaAttr(new string[] { Role.TeamLeader, Role.Member })]
+        [AuthAttr(new string[] { Role.TeamLeader, Role.Member })]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutIssue(int id, Issue issue)
         {
@@ -78,7 +78,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [AuthorizaAttr(Role.Member)]
+        [AuthAttr(Role.Member)]
         [ResponseType(typeof(Issue))]
         public IHttpActionResult PostIssue(Issue issue)
         {
@@ -98,7 +98,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = issue.IssueID }, issue);
         }
 
-        [AuthorizaAttr(Role.TeamLeader)]
+        [AuthAttr(Role.TeamLeader)]
         [ResponseType(typeof(Issue))]
         public IHttpActionResult DeleteIssue(int id)
         {

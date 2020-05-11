@@ -19,13 +19,13 @@ namespace Local_Server_API.Controllers
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        [AuthorizaAttr]
+        [AuthAttr]
         public IQueryable<Team> GetTeam()
         {
             return db.Teams;
         }
 
-        [AuthorizaAttr]
+        [AuthAttr]
         [ResponseType(typeof(Team))]
         public IHttpActionResult GetTeam(int id)
         {
@@ -38,7 +38,7 @@ namespace Local_Server_API.Controllers
             return Ok(team);
         }
 
-        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
+        [AuthAttr(new string[] { Role.Manager, Role.TeamLeader })]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTeam(int id, Team team)
         {
@@ -83,7 +83,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [AuthorizaAttr(Role.Manager)]
+        [AuthAttr(Role.Manager)]
         [ResponseType(typeof(Team))]
         public IHttpActionResult PostTeam(Team team)
         {
@@ -98,7 +98,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = team.TeamID }, team);
         }
 
-        [AuthorizaAttr(Role.Manager)]
+        [AuthAttr(Role.Manager)]
         [ResponseType(typeof(Team))]
         public IHttpActionResult DeleteTeam(int id)
         {

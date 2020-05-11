@@ -17,14 +17,14 @@ namespace Local_Server_API.Controllers
     public class AddressesController : ApiController
     {
         private Local_DB_Model db = new Local_DB_Model();
-        [AuthorizaAttr(Role.Manager)]
+        [AuthAttr(Role.Manager)]
         public ICollection<Address> GetAddress()
         {
             var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
             return RequestingUser.Addresses;
         }
 
-        [AuthorizaAttr]
+        [AuthAttr]
         [ResponseType(typeof(Address))]
         public IHttpActionResult GetAddress(int id)
         {
@@ -79,7 +79,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
         
-        [AuthorizaAttr(Role.Manager)]
+        [AuthAttr(Role.Manager)]
         [ResponseType(typeof(Address))]
         public IHttpActionResult PostAddress(Address address)
         {
@@ -98,7 +98,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = address.AddressID }, address);
         }
 
-        [AuthorizaAttr(Role.Manager)]
+        [AuthAttr(Role.Manager)]
         [ResponseType(typeof(Address))]
         public IHttpActionResult DeleteAddress(int id)
         {

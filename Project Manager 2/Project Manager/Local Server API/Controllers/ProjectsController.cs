@@ -17,7 +17,7 @@ namespace Local_Server_API.Controllers
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader, Role.Client })]
+        [AuthAttr(new string[] { Role.Manager, Role.TeamLeader, Role.Client })]
         public ICollection<Project> GetProject()
         {
             var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
@@ -39,7 +39,7 @@ namespace Local_Server_API.Controllers
             return Projects;
         }
 
-        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader, Role.Client })]
+        [AuthAttr(new string[] { Role.Manager, Role.TeamLeader, Role.Client })]
         [ResponseType(typeof(Project))]
         public IHttpActionResult GetProject(int id)
         {
@@ -71,7 +71,7 @@ namespace Local_Server_API.Controllers
             return Ok(project);
         }
 
-        [AuthorizaAttr(Role.Manager)]
+        [AuthAttr(Role.Manager)]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProject(int id, Project project)
         {
@@ -106,7 +106,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [AuthorizaAttr(Role.Manager)]
+        [AuthAttr(Role.Manager)]
         [ResponseType(typeof(Project))]
         public IHttpActionResult PostProject(Project project)
         {
@@ -121,7 +121,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = project.ProjectID }, project);
         }
 
-        [AuthorizaAttr(Role.Manager)]
+        [AuthAttr(Role.Manager)]
         [ResponseType(typeof(Project))]
         public IHttpActionResult DeleteProject(int id)
         {

@@ -18,7 +18,7 @@ namespace Local_Server_API.Controllers
     {
         private Local_DB_Model db = new Local_DB_Model();
 
-        [AuthorizaAttr]
+        [AuthAttr]
         public ICollection<Task> GetTask()
         {
             var user = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
@@ -50,7 +50,7 @@ namespace Local_Server_API.Controllers
             return Tasks;
         }
 
-        [AuthorizaAttr]
+        [AuthAttr]
         [ResponseType(typeof(Task))]
         public IHttpActionResult GetTask(int id)
         {
@@ -87,7 +87,7 @@ namespace Local_Server_API.Controllers
             return Ok(task);
         }
 
-        [AuthorizaAttr(Role.TeamLeader)]
+        [AuthAttr(Role.TeamLeader)]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTask(int id, Task task)
         {
@@ -136,7 +136,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [AuthorizaAttr(Role.TeamLeader)]
+        [AuthAttr(Role.TeamLeader)]
         [ResponseType(typeof(Task))]
         public IHttpActionResult PostTask(Task task)
         {
@@ -158,7 +158,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = task.TaskID }, task);
         }
 
-        [AuthorizaAttr(Role.TeamLeader)]
+        [AuthAttr(Role.TeamLeader)]
         [ResponseType(typeof(Task))]
         public IHttpActionResult DeleteTask(int id)
         {

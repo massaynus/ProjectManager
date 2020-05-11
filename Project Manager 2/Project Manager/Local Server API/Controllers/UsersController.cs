@@ -28,7 +28,7 @@ namespace Local_Server_API.Controllers
         /// Everything if you're a manager
         /// Team Members if you are a TeamLeader
         /// </returns>
-        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
+        [AuthAttr(new string[] { Role.Manager, Role.TeamLeader })]
         public IEnumerable<User> GetUser()
         {
             var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
@@ -48,7 +48,7 @@ namespace Local_Server_API.Controllers
             return res;
         }
 
-        [AuthorizaAttr]
+        [AuthAttr]
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
@@ -63,7 +63,7 @@ namespace Local_Server_API.Controllers
             return Ok(user);
         }
 
-        [AuthorizaAttr(new string[] { Role.Manager, Role.TeamLeader })]
+        [AuthAttr(new string[] { Role.Manager, Role.TeamLeader })]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
@@ -108,7 +108,7 @@ namespace Local_Server_API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [AuthorizaAttr(Role.Manager)]
+        [AuthAttr(Role.Manager)]
         [ResponseType(typeof(User))]
         public IHttpActionResult PostUser(User user)
         {
@@ -136,7 +136,7 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = user.UserID }, user);
         }
 
-        [AuthorizaAttr(Role.Manager)]
+        [AuthAttr(Role.Manager)]
         [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(int id)
         {

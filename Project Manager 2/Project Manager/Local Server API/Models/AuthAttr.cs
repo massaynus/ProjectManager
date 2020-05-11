@@ -15,23 +15,23 @@ using System.Web.Http.Filters;
 
 namespace Local_Server_API.Models
 {
-    public class AuthorizaAttr : AuthorizationFilterAttribute
+    public class AuthAttr : AuthorizationFilterAttribute
     {
         private string[] Role = new string[] { };
         private string principaleRole = string.Empty;
         private bool AllowAll;
 
-        public AuthorizaAttr(bool AllowAll = false) : base()
+        public AuthAttr(bool AllowAll = false) : base()
         {
             this.AllowAll = AllowAll;
         }
 
-        public AuthorizaAttr(string Role, bool AllowAll = false) : this(AllowAll)
+        public AuthAttr(string Role, bool AllowAll = false) : this(AllowAll)
         {
             this.Role = new string[] { Role };
         }
 
-        public AuthorizaAttr(string[] Role, bool AllowAll = false) : this(AllowAll)
+        public AuthAttr(string[] Role, bool AllowAll = false) : this(AllowAll)
         {
             this.Role = Role;
         }

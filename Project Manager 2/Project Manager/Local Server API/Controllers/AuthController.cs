@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
+﻿using DataAccess.Models;
+using Local_Server_API.Models;
+using System;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
-using DataAccess.Models;
-using Local_Server_API.Models;
 
 namespace Local_Server_API.Controllers
 {
@@ -54,7 +50,7 @@ namespace Local_Server_API.Controllers
         public IHttpActionResult PostAuth([FromBody] Creds creds)
         {
             if (string.IsNullOrEmpty(creds.ToString())) return StatusCode(HttpStatusCode.BadRequest);
-            
+
             User user = GetUser(creds.username, creds.password);
 
             if (user is null || user.UserName != creds.username) return NotFound();
