@@ -1,7 +1,9 @@
 ﻿using DataAccess.Models;
 using Local_Server_API.Controllers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -102,20 +104,18 @@ namespace Local_Server_API.Models
                 actionLog.ActionMethod = context.Request.Method.Method;
                 actionLog.RequestDate = DateTime.Now;
 
-                actionLog.ActionDATA += "FromBody:\n\t";
-                string BodyData = context.Request.Content.ReadAsStringAsync().Result;
+                ActionData data = new ActionData();
+                
+                data.FromBody = context.Request.Content.ReadAsStringAsync().Result;
 
-                actionLog.ActionDATA += BodyData.Contains("Password") ? "Contained sensitive data!" : BodyData;
-
-                actionLog.ActionDATA += "\n\nFromURI:\n";
                 var URIParams = HttpUtility.ParseQueryString(context.Request.RequestUri.Query);
-                URIParams.AllKeys
-                    .ToList()
-                    .ForEach(Key => actionLog.ActionDATA += $"\n\t{Key}:\t{URIParams[Key]}");
+                data.FromURI = URIParams.AllKeys.Select(Key => new string[] { Key, URIParams[Key] }).ToList();
 
                 var RouteParamsArr = context.Request.RequestUri.AbsolutePath.Split('/');
                 if (RouteParamsArr.Length == 4)
-                    actionLog.ActionDATA += "\n\nFromRoute:\t" + RouteParamsArr[3];
+                    data.FromRoute = RouteParamsArr[3];
+
+                actionLog.ActionDATA = JsonConvert.SerializeObject(data);
 
                 if (string.IsNullOrEmpty(actionLog.ActionDATA))
                     actionLog.ActionDATA = "NO DATA";
