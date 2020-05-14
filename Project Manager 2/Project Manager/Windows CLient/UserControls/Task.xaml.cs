@@ -10,18 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Windows_CLient.Views
+namespace Windows_CLient.UserControls
 {
     /// <summary>
-    /// Interaction logic for TasksView.xaml
+    /// Interaction logic for Task.xaml
     /// </summary>
-    public partial class TasksView : Window
+    public partial class Task : UserControl
     {
-        //TODO: make it use user control
-
-        public TasksView()
+        //TODO: complete
+        public Task()
         {
             InitializeComponent();
         }

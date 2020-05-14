@@ -2,7 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Windows_CLient"
-             StartupUri="Views/ManagerViews/ManagerMainView.xaml">
+             StartupUri="Views/Login.xaml"
+             >
+             <!--StartupUri="Views/ManagerViews/ManagerMainView.xaml"-->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

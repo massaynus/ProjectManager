@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
@@ -24,5 +25,30 @@ namespace Windows_CLient
          
             client.BaseAddress = new Uri(API_HOST);
         }
+
+        public enum Controller
+        {
+            Addresses,
+            Auth,
+            Home,
+            Issues,
+            Paiments,
+            Projects,
+            Roles,
+            Stacks,
+            Tasks,
+            Teams,
+            TeamStacks,
+            Test,
+            Users
+        };
+
+        public enum Action
+        {
+            GET,
+            POST,
+            PUT,
+            DELETE
+        };
     }
 }
