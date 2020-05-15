@@ -32,14 +32,18 @@ namespace Local_Server_API.Controllers
                     break;
 
                 case Role.TeamLeader:
-                case Role.Member:
                     user.Team1.Projects.ToList()
                         .ForEach(P => Tasks.AddRange(P.Tasks));
 
                     break;
 
-                case Role.Client:
+                case Role.Member:
+                    user.Team1.Projects.ToList()
+                        .ForEach(P => Tasks.AddRange(P.Tasks.Where(T => T.isComplete == false)));
 
+                    break;
+
+                case Role.Client:
                     db.Projects.Where(P => P.Owner == user.UserID).ToList()
                         .ForEach(P => Tasks.AddRange(P.Tasks));
 
@@ -147,8 +151,38 @@ namespace Local_Server_API.Controllers
             
             if (task != null)
             {
+                if (task.isBooked == true) return BadRequest("This task is already booked");
+
                 task.isBooked = true;
                 task.DoneBy = Booker.UserID;
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (EntityException ex)
+                {
+                    InternalServerError(ex);
+                }
+                return Ok();
+            }
+
+            return BadRequest("Task not found");
+        }
+
+        [AuthAttr]
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult CompleteTask(int id = -1)
+        {
+            var Booker = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
+            var task = db.Tasks.Where(T => T.TaskID == id).FirstOrDefault();
+
+            if (task != null)
+            {
+                if (task.DoneBy != Booker.UserID) BadRequest("You can only complete tasks you have booked");
+                
+                task.isComplete = true;
 
                 try
                 {
