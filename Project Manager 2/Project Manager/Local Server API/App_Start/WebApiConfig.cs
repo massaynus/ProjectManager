@@ -10,6 +10,7 @@ namespace Local_Server_API
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            // added to solve the reference loop problem
             var JsonConf = GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings;
 
             JsonConf.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
@@ -23,6 +24,12 @@ namespace Local_Server_API
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Added route for multiple actions in one controller support
+            config.Routes.MapHttpRoute(
+                "DefaultApiWithAction",
+                "Api/{controller}/{action}/{id}",
+                new { id = RouteParameter.Optional });
         }
     }
 }
