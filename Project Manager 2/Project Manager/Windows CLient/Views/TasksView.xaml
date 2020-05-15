@@ -5,22 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Windows_CLient.Views"
         xmlns:VM="clr-namespace:Windows_CLient.ViewModels"
+        xmlns:UC="clr-namespace:Windows_CLient.UserControls"
         mc:Ignorable="d"
-        Title="TasksView" Height="450" Width="800">
+        Title="TasksView" Height="700" Width="400">
+    <Window.Resources>
+        <UC:Task x:Key="UCTask"/>
+    </Window.Resources>
     <Window.DataContext>
         <VM:TasksViewModel/>
     </Window.DataContext>
     <Grid>
-        <ListView ItemsSource="{Binding Tasks}">
+        
+        <ListView ItemsSource="{Binding Tasks}"
+                  SelectedItem="{Binding SelectedTask}"
+                  BorderThickness="0">
+            
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <ContentPresenter/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            
             <ListView.ItemTemplate>
                 <DataTemplate>
 
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Name}"
-                       FontSize="25"/>
-                        <TextBlock Text="{Binding Description}"
-                       FontSize="12"/>
-                    </StackPanel>
+                    <UC:Task/>
 
                 </DataTemplate>
             </ListView.ItemTemplate>
