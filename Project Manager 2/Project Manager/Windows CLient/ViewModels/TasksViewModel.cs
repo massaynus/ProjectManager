@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WCM = Windows_CLient.Models;
 
@@ -49,16 +50,41 @@ namespace Windows_CLient.ViewModels
             OnPropertyChanged(nameof(Tasks));
         }
 
-        public void bookTask()
+        /// <summary>
+        /// Marks the selected task as booked for the current user
+        /// </summary>
+        public async void bookTask()
         {
-            //TODO : Add async keyword
-            //TODO : Complete the booking function
+            var response = await APIClient.client.PutAsync(APIClient.API_HOST + $"BookTask/{SelectedTask.TaskID}", null);
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("The task was booked successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information);
+                
+                GetTasks.Execute(null);
+                OnPropertyChanged(nameof(tasks));
+            }
+            else
+            {
+                MessageBox.Show(await response.Content.ReadAsStringAsync(), "update", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
-
-        public void completeTask()
+        /// <summary>
+        /// Marks the selected task as completed
+        /// </summary>
+        public async void completeTask()
         {
-            //TODO : Add async keyword
-            // TODO : Complete the completion function
+            var response = await APIClient.client.PutAsync(APIClient.API_HOST + $"CompleteTask/{SelectedTask.TaskID}", null);
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("The task was marked as complete successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                GetTasks.Execute(null);
+                OnPropertyChanged(nameof(tasks));
+            }
+            else
+            {
+                MessageBox.Show(await response.Content.ReadAsStringAsync(), "update", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }
