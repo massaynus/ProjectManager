@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
@@ -134,6 +135,33 @@ namespace Local_Server_API.Controllers
             }
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [AuthAttr]
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult BookTask(int id = -1)
+        {
+            var Booker = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
+            var task = db.Tasks.Where(T => T.TaskID == id).FirstOrDefault();
+            
+            if (task != null)
+            {
+                task.isBooked = true;
+                task.DoneBy = Booker.UserID;
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (EntityException ex)
+                {
+                    InternalServerError(ex);
+                }
+                return Ok();
+            }
+
+            return BadRequest("Task not found");
         }
 
         [AuthAttr(Role.TeamLeader)]
