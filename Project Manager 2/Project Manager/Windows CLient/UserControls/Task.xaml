@@ -6,14 +6,38 @@
              xmlns:local="clr-namespace:Windows_CLient.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="500">
-    <Grid>
-        <StackPanel Orientation="Vertical" Margin="25">
-            <TextBlock Text="Title"
-                       FontSize="25"/>
-            <TextBlock Text="Description"
-                       FontSize="12"/>
-            <ToggleButton Content="Booked"
-                          FontSize="12"/>
-        </StackPanel>
-    </Grid>
+
+    <Border BorderBrush="{StaticResource HighlightedBackgroundBrush}"
+            Background="{StaticResource MainForegroundBrush}"
+            BorderThickness="2"
+            CornerRadius="10"
+            Width="auto"
+            SnapsToDevicePixels="True">
+        <Border.Effect>
+            <DropShadowEffect Color="{StaticResource HighlightedBackground}"
+                              ShadowDepth="0.1"
+                              BlurRadius="10"
+                              Direction="-45"
+                              RenderingBias="Quality"
+                              Opacity="0.7"/>
+        </Border.Effect>
+
+        <Grid>
+            
+            <StackPanel Orientation="Vertical" Margin="20 10">
+                <TextBlock Text="{Binding Name}"
+                       FontWeight="DemiBold"
+                       FontSize="20"/>
+                <TextBlock Text="{Binding Description}"
+                       Margin="0 10 0 0"
+                       FontSize="12" TextWrapping="NoWrap"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Vertical" >
+                
+            </StackPanel>
+            
+        </Grid>
+    </Border>
+    
 </UserControl>

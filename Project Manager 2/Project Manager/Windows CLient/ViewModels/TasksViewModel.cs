@@ -22,7 +22,7 @@ namespace Windows_CLient.ViewModels
             CompleteTask = new RelayCommand(completeTask);
         }
 
-        public ObservableCollection<WCM.Task> Tasks 
+        public ObservableCollection<WCM.Task> Tasks
         {
             get
             {
@@ -32,7 +32,7 @@ namespace Windows_CLient.ViewModels
             set => tasks = value;
         }
         public WCM.Task SelectedTask { get; set; }
-        
+
         public ICommand GetTasks { get; set; }
         public ICommand BookTask { get; set; }
         public ICommand CompleteTask { get; set; }
@@ -49,14 +49,16 @@ namespace Windows_CLient.ViewModels
             OnPropertyChanged(nameof(Tasks));
         }
 
-        public async void bookTask()
+        public void bookTask()
         {
-            
+            //TODO : Add async keyword
+            //TODO : Complete the booking function
         }
 
-        public async void completeTask()
+        public void completeTask()
         {
-
+            //TODO : Add async keyword
+            // TODO : Complete the completion function
         }
     }
 }
