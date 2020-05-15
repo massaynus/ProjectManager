@@ -38,6 +38,9 @@ namespace Windows_CLient.ViewModels
         public ICommand BookTask { get; set; }
         public ICommand CompleteTask { get; set; }
 
+        public bool CanComplete { get => (SelectedTask.isBooked ?? false) && SelectedTask.DoneBy == APIClient.User.UserID; }
+        public bool CanBook { get => SelectedTask.isBooked != true; }
+
 
         public async void getTasks()
         {
