@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Margin="15 25">
 
-    <StackPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:TaskDetails}, Path=Task}"
+    <StackPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:TaskDetails}, Path=DataContext}"
                 Orientation="Vertical">
         
         <StackPanel.Resources>
@@ -24,14 +24,14 @@
                    FontSize="20"
                    FontWeight="DemiBold"/>
         
-        <TextBlock Text="{Binding StackObject.Tools}"
+        <TextBlock Text="{Binding Stack1.Tools}"
                    Foreground="Gray"
                    FontSize="12"/>
 
         <!--&#x09; is \t-->
         <TextBlock Text="Description:"/>
         <TextBlock Text="{Binding Description}"
-                   HorizontalAlignment="Right"/>
+                   Margin="30 0 0 10"/>
         <TextBlock Text="{Binding Priority, StringFormat=Priority:&#x09;&#x09;{0}}"/>
         <TextBlock Text="{Binding Difficulty, StringFormat=Difficulty:&#x09;{0}}"/>
         <TextBlock Text="{Binding DeadLine, StringFormat=Dead line:&#x09;{0: dd/MM/yyyy}}"/>
