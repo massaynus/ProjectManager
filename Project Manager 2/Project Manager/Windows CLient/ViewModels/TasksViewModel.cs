@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 using WCM = Windows_CLient.Models;
@@ -14,35 +16,56 @@ namespace Windows_CLient.ViewModels
 {
     public class TasksViewModel : BaseViewModel
     {
+        private Timer refreshingTimer;
         private WCM.Task selectedTask;
         private ObservableCollection<WCM.Task> tasks;
+        private bool? NoTasksExist;
         public TasksViewModel()
         {
-            SelectedTask = new WCM.Task();
-            Tasks = new ObservableCollection<WCM.Task>();
             GetTasks = new RelayCommand(getTasks);
             BookTask = new RelayCommand(bookTask);
             CompleteTask = new RelayCommand(completeTask);
+
+            GetTasks.Execute(null);
+
+            Tasks = new ObservableCollection<WCM.Task>();
+            SelectedTask = Tasks.Count > 0 ? Tasks[0] : new WCM.Task();
+
+            refreshingTimer = new Timer(double.Parse(ConfigurationManager.AppSettings["RefreshingRate"]));
+            refreshingTimer.Elapsed += delegate 
+            { 
+                GetTasks.Execute(null); 
+                
+            };
+            refreshingTimer.Start();
         }
 
+        public string LastRefresh { get; set; }
         public ObservableCollection<WCM.Task> Tasks
         {
-            get
+            get => tasks;
+            set
             {
-                if (tasks.Count == 0) GetTasks.Execute(null);
-                return tasks;
+                tasks = value;
+                if (tasks.Count > 0) SelectedTask = tasks[0];
             }
-            set => tasks = value;
         }
         public WCM.Task SelectedTask
         {
-            get => selectedTask;
+            get
+            {
+                return selectedTask;
+            }
             set
             {
-                if (selectedTask != value)
+                if (selectedTask != value && value != null)
                 {
                     selectedTask = value;
+                    
                     OnPropertyChanged(nameof(SelectedTask));
+                    
+                    OnPropertyChanged(nameof(CanBook));
+                    OnPropertyChanged(nameof(CanComplete));
                 }
             }
         }
@@ -62,6 +85,10 @@ namespace Windows_CLient.ViewModels
             {
                 string RsJson = await response.Content.ReadAsStringAsync();
                 Tasks = new ObservableCollection<WCM.Task>(JsonConvert.DeserializeObject<List<WCM.Task>>(RsJson));
+                NoTasksExist = Tasks.Count == 0;
+
+                LastRefresh = DateTime.Now.ToShortTimeString();
+                OnPropertyChanged(nameof(LastRefresh));
             }
             OnPropertyChanged(nameof(Tasks));
         }
@@ -71,7 +98,7 @@ namespace Windows_CLient.ViewModels
         /// </summary>
         public async void bookTask()
         {
-            var response = await APIClient.client.PutAsync(APIClient.API_HOST + $"BookTask/{SelectedTask.TaskID}", null);
+            var response = await APIClient.client.PutAsync(APIClient.API_HOST + $"Tasks/BookTask/{SelectedTask.TaskID}", null);
             if (response.IsSuccessStatusCode)
             {
                 MessageBox.Show("The task was booked successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -84,12 +111,13 @@ namespace Windows_CLient.ViewModels
                 MessageBox.Show(await response.Content.ReadAsStringAsync(), "update", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+      
         /// <summary>
         /// Marks the selected task as completed
         /// </summary>
         public async void completeTask()
         {
-            var response = await APIClient.client.PutAsync(APIClient.API_HOST + $"CompleteTask/{SelectedTask.TaskID}", null);
+            var response = await APIClient.client.PutAsync(APIClient.API_HOST + $"Tasks/CompleteTask/{SelectedTask.TaskID}", null);
             if (response.IsSuccessStatusCode)
             {
                 MessageBox.Show("The task was marked as complete successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information);

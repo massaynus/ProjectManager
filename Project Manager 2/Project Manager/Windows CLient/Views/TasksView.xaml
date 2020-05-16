@@ -63,6 +63,10 @@
             </Button.Style>
 
         </Button>
+        <TextBlock Text="{Binding LastRefresh, StringFormat=Last refresh: {0}}"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Foreground="{StaticResource MainForegroundBrush}"/>
 
         <Grid Grid.Row="1">
 
@@ -71,8 +75,72 @@
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
 
-            <UC:TaskDetails Grid.Column="0"
-                            Task="{Binding SelectedTask}"/>
+            <Grid>
+                <UC:TaskDetails Grid.Column="0"
+                            DataContext="{Binding SelectedTask}"/>
+
+                <StackPanel Grid.Column="0" 
+                            Orientation="Horizontal"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border BorderBrush="{StaticResource MainForegroundBrush}"
+                                                Background="{TemplateBinding Background}"
+                                                Name="BtnBorder"
+                                                BorderThickness="1.5"
+                                                CornerRadius="10"
+                                                Width="120"
+                                                Height="40"
+                                                Padding="0"
+                                                Margin="25">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                              />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" Value="{StaticResource MainForegroundBrush}"/>
+
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Duration="0:0:0.3"
+                                                                From="Transparent"
+                                                                To="Green"
+                                                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="Green" Opacity="0.5"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" Value="Crimson"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Resources>
+                    
+                    <Button Content="Book"
+                            Command="{Binding BookTask}"
+                            IsEnabled="{Binding CanBook}"/>
+                    
+                    <Button Content="Complete"
+                            Command="{Binding CompleteTask}"
+                            IsEnabled="{Binding CanComplete}"/>
+                    
+                </StackPanel>
+            </Grid>
 
             <ListView Grid.Column="1"
                   ItemsSource="{Binding Tasks}"
