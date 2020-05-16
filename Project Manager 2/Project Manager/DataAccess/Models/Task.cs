@@ -49,7 +49,6 @@ namespace DataAccess.Models
         [JsonIgnore]
         public virtual Project Project1 { get; set; }
 
-        [JsonIgnore]
         public virtual Stack Stack1 { get; set; }
 
         [JsonIgnore]
