@@ -14,9 +14,11 @@ namespace Windows_CLient.ViewModels
 {
     public class TasksViewModel : BaseViewModel
     {
+        private WCM.Task selectedTask;
         private ObservableCollection<WCM.Task> tasks;
         public TasksViewModel()
         {
+            SelectedTask = new WCM.Task();
             Tasks = new ObservableCollection<WCM.Task>();
             GetTasks = new RelayCommand(getTasks);
             BookTask = new RelayCommand(bookTask);
@@ -32,7 +34,18 @@ namespace Windows_CLient.ViewModels
             }
             set => tasks = value;
         }
-        public WCM.Task SelectedTask { get; set; }
+        public WCM.Task SelectedTask
+        {
+            get => selectedTask;
+            set
+            {
+                if (selectedTask != value)
+                {
+                    selectedTask = value;
+                    OnPropertyChanged(nameof(SelectedTask));
+                }
+            }
+        }
 
         public ICommand GetTasks { get; set; }
         public ICommand BookTask { get; set; }
@@ -62,7 +75,7 @@ namespace Windows_CLient.ViewModels
             if (response.IsSuccessStatusCode)
             {
                 MessageBox.Show("The task was booked successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information);
-                
+
                 GetTasks.Execute(null);
                 OnPropertyChanged(nameof(tasks));
             }
