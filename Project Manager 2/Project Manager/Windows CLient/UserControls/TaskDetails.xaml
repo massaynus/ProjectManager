@@ -29,7 +29,9 @@
                    FontSize="12"/>
 
         <!--&#x09; is \t-->
-        <TextBlock Text="{Binding Description, StringFormat=Description:&#x09;{0}}"/>
+        <TextBlock Text="Description:"/>
+        <TextBlock Text="{Binding Description}"
+                   HorizontalAlignment="Right"/>
         <TextBlock Text="{Binding Priority, StringFormat=Priority:&#x09;&#x09;{0}}"/>
         <TextBlock Text="{Binding Difficulty, StringFormat=Difficulty:&#x09;{0}}"/>
         <TextBlock Text="{Binding DeadLine, StringFormat=Dead line:&#x09;{0: dd/MM/yyyy}}"/>
