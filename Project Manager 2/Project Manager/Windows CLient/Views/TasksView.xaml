@@ -7,40 +7,102 @@
         xmlns:VM="clr-namespace:Windows_CLient.ViewModels"
         xmlns:UC="clr-namespace:Windows_CLient.UserControls"
         mc:Ignorable="d"
-        Title="TasksView" Height="700" Width="400">
+        Title="TasksView" Height="550" Width="1000"
+        Background="{StaticResource MainBackgroundBrush}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Name="TaskViewWindow">
+    
     <Window.Resources>
         <UC:Task x:Key="UCTask"/>
+        <UC:TaskDetails x:Key="UCTaskDetails"/>
     </Window.Resources>
+    
     <Window.DataContext>
         <VM:TasksViewModel/>
     </Window.DataContext>
     <Grid>
-        
-        <ListView ItemsSource="{Binding Tasks}"
-                  SelectedItem="{Binding SelectedTask}"
-                  BorderThickness="0">
-            
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ListViewItem">
-                                <ContentPresenter/>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="Margin" Value="5"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Title}" 
+                   Grid.Row="0"
+                   FontSize="35"
+                   FontWeight="DemiBold"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="{StaticResource MainForegroundBrush}"
+                   />
+        <Button Height="40" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                        Margin="10 0 0 10"
+                        BorderThickness="0"
+                        OverridesDefaultStyle="True"
+                        Click="Button_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                                    Width="{TemplateBinding Width}"
+                                    Height="{TemplateBinding Height}"
+                                    CornerRadius="10"
+                                    Padding="5">
+                        <Image Source="/Resources/Images/exit.png" Height="32"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Crimson"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
-            </ListView.ItemContainerStyle>
-            
-            <ListView.ItemTemplate>
-                <DataTemplate>
+            </Button.Style>
 
-                    <UC:Task/>
+        </Button>
 
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <Grid Grid.Row="1">
 
-        </ListView>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <UC:TaskDetails Grid.Column="0"
+                            Task="{Binding SelectedTask}"/>
+
+            <ListView Grid.Column="1"
+                  ItemsSource="{Binding Tasks}"
+                  SelectedItem="{Binding SelectedTask, NotifyOnTargetUpdated=True}"
+                  BorderThickness="0"
+                  Background="{StaticResource MainBackgroundBrush}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <UC:Task/>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </Grid>
     </Grid>
 </Window>

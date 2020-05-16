@@ -19,11 +19,14 @@ namespace Windows_CLient.Views
     /// </summary>
     public partial class TasksView : Window
     {
-        //TODO: make it use user control
-
         public TasksView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
