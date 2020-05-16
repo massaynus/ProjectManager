@@ -34,6 +34,8 @@ C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\W
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\Antlr3.Runtime.pdb
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows CLient.csprojAssemblyReference.cache
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\Task.g.cs
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\TaskDetails.g.cs
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\LeaderViews\LeaderMainView.g.cs
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\Login.g.cs
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\ManagerViews\ManagerMainView.g.cs
@@ -44,6 +46,8 @@ C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\W
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager_MarkupCompile.lref
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\App.baml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Resources\Styles\Colors.baml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\Task.baml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\TaskDetails.baml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\LeaderViews\LeaderMainView.baml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\Login.baml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\ManagerViews\ManagerMainView.baml
@@ -55,7 +59,3 @@ C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\W
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows CLient.csproj.CopyComplete
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.exe
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.pdb
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\Task.g.cs
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\Task.baml
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\TaskDetails.g.cs
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\TaskDetails.baml
