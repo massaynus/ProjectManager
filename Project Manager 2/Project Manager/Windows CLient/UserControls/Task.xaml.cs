@@ -24,16 +24,5 @@ namespace Windows_CLient.UserControls
         {
             InitializeComponent();
         }
-
-        public Visibility visibility
-        {
-            get { return (Visibility)GetValue(visibilityProperty); }
-            set { SetValue(visibilityProperty, value); }
-        }
-
-        public static readonly DependencyProperty visibilityProperty =
-            DependencyProperty.Register("visibility", typeof(Visibility), typeof(Task), new PropertyMetadata(Visibility.Hidden));
-
-        //TODO : Complete the collapse / show feature
     }
 }
