@@ -57,3 +57,5 @@ C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\W
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.pdb
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\Task.g.cs
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\Task.baml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\TaskDetails.g.cs
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\UserControls\TaskDetails.baml
