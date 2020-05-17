@@ -1,0 +1,122 @@
+﻿<Window x:Class="Windows_CLient.Views.FlagTask"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Windows_CLient.Views"
+        mc:Ignorable="d"
+        Title="FalgTask" Height="450" Width="800"
+        Background="{StaticResource MainBackgroundBrush}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Name="TaskViewWindow">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{StaticResource MainForegroundBrush}"
+                                                Background="{TemplateBinding Background}"
+                                                Name="BtnBorder"
+                                                BorderThickness="1.5"
+                                                CornerRadius="10"
+                                                Width="120"
+                                                Height="40"
+                                                Padding="0"
+                                                Margin="25">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                              />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="{StaticResource MainForegroundBrush}"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Duration="0:0:0.3"
+                                                                From="Transparent"
+                                                                To="Green"
+                                                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Green" Opacity="0.5"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="Crimson"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Grid.Column" Value="0"/>
+            <Setter Property="Foreground" Value="{StaticResource MainForegroundBrush}"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="IsEnabled" Value="{Binding FlagMode}"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="{StaticResource MainForegroundBrush}"/>
+            <Setter Property="CaretBrush" Value="{StaticResource MainForegroundBrush}"/>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:FlagTask}, Path=DataContext}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Title:"/>
+            <TextBox Text="{Binding Title}" TabIndex="0"
+                     FontSize="25"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Description:"/>
+            <TextBox Text="{Binding Description}" TabIndex="1"
+                     AcceptsReturn="True"
+                     AcceptsTab="True"
+                     MaxHeight="250"
+                     VerticalScrollBarVisibility="Auto"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Content="Submit" Command="{Binding FlagTask}" 
+                        Grid.ColumnSpan="3" TabIndex="2"
+                        IsEnabled="{Binding FlagMode}"/>
+                <Button Content="Cancel" Command="{Binding Close}" 
+                        Grid.ColumnSpan="3" TabIndex="2"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>
