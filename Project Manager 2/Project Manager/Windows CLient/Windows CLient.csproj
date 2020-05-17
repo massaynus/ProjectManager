@@ -89,8 +89,12 @@
       <DependentUpon>TaskDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\FlagTasksViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\TasksViewModel.cs" />
+    <Compile Include="Views\MemberViews\FlagTask.xaml.cs">
+      <DependentUpon>FlagTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LeaderViews\LeaderMainView.xaml.cs">
       <DependentUpon>LeaderMainView.xaml</DependentUpon>
     </Compile>
@@ -100,7 +104,7 @@
     <Compile Include="Views\ManagerViews\ManagerMainView.xaml.cs">
       <DependentUpon>ManagerMainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TasksView.xaml.cs">
+    <Compile Include="Views\MemberViews\TasksView.xaml.cs">
       <DependentUpon>TasksView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -142,11 +146,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Styles\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Task.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\TaskDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MemberViews\FlagTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,7 +174,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TasksView.xaml">
+    <Page Include="Views\MemberViews\TasksView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,6 +199,9 @@
     <Resource Include="Resources\Images\team.png" />
     <Resource Include="Resources\Images\dashboard.png" />
     <Resource Include="Resources\Images\project.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\flag.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

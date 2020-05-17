@@ -39,7 +39,6 @@ C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\W
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\LeaderViews\LeaderMainView.g.cs
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\Login.g.cs
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\ManagerViews\ManagerMainView.g.cs
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\TasksView.g.cs
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\App.g.cs
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager_MarkupCompile.cache
@@ -51,7 +50,6 @@ C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\W
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\LeaderViews\LeaderMainView.baml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\Login.baml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\ManagerViews\ManagerMainView.baml
-C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\TasksView.baml
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.g.resources
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows_CLient.Properties.Resources.resources
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows CLient.csproj.GenerateResource.cache
@@ -59,3 +57,8 @@ C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\W
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Windows CLient.csproj.CopyComplete
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.exe
 C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Project Manager.pdb
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\MemberViews\FlagTask.g.cs
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\MemberViews\TasksView.g.cs
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\MemberViews\FlagTask.baml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Views\MemberViews\TasksView.baml
+C:\Users\Yassine\Documents\PFF\4_Source Code\Project Manager 2\Project Manager\Windows CLient\obj\Debug\Resources\Styles\Styles.baml
