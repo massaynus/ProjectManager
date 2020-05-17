@@ -53,7 +53,7 @@ namespace Local_Server_API.Controllers
 
             User user = GetUser(creds.username, creds.password);
 
-            if (user is null || user.UserName != creds.username) return NotFound();
+            if (user is null) return NotFound();
 
             return Ok(user);
         }
