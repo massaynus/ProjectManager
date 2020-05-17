@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
@@ -16,6 +17,8 @@ namespace Windows_CLient
         public static readonly string API_HOST = ConfigurationManager.AppSettings["API_HOST"] ?? string.Empty;
         public static HttpClient client;
         public static User User { get; set; }
+
+        public static StringContent GetStringContent(object obj) => new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
 
         public static void initClient()
         {
