@@ -48,7 +48,7 @@ BEGIN Tran
 
             create table [User] (
                 UserID int PRIMARY KEY IDENTITY,
-                UserName VARCHAR(35) UNIQUE  NOT NULL,
+                UserName VARCHAR(35) COLLATE Latin1_General_CS_AS UNIQUE  NOT NULL,
                 Password VARCHAR(160)  NOT NULL,
                 FirstName VARCHAR(35)  NOT NULL,
                 LastName VARCHAR(35)  NOT NULL,
