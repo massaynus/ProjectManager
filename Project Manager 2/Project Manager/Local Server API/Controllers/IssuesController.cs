@@ -87,15 +87,26 @@ namespace Local_Server_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (issue.Task1.Project1.Team1.TeamID != GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter).Team)
+            var requestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
+            if (issue.Issuer != requestingUser.UserID)
             {
-                return Unauthorized();
+                return BadRequest("Don't flag shit in someone else's name -_-");
             }
 
-            db.Issues.Add(issue);
-            db.SaveChanges();
+            var Task = db.Tasks.Where(T => T.TaskID == issue.Task).FirstOrDefault();
+            if (Task != null)
+            {
+                if (Task.Project1.Team1.TeamID != requestingUser.Team)
+                {
+                    return Unauthorized();
+                }
+                db.Issues.Add(issue);
+                db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = issue.IssueID }, issue);
+                return CreatedAtRoute("DefaultApi", new { id = issue.IssueID }, issue);
+            }
+
+            return BadRequest("Task doesn't exist");
         }
 
         [AuthAttr(Role.TeamLeader)]
