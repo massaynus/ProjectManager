@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Windows_CLient.Models;
+using Windows_CLient.ViewModels;
+using Windows_CLient.Views;
 using WCM = Windows_CLient.Models;
 
 namespace Windows_CLient.UserControls
@@ -36,5 +39,23 @@ namespace Windows_CLient.UserControls
         public static readonly DependencyProperty TaskProperty =
             DependencyProperty.Register("Task", typeof(WCM.Task), typeof(TaskDetails), new PropertyMetadata(new WCM.Task()));
 
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            object issueObject = ((ListView)sender).SelectedItem;
+            if (issueObject is null) return;
+
+            var issue = (Issue)issueObject;
+
+            Views.FlagTask flag = new FlagTask();
+            var context = new FlagTasksViewModel();
+            
+            context.Issue = issue;
+            context.Self = flag;
+            context.FlagMode = false;
+            
+            flag.DataContext = context;
+            flag.ShowDialog();
+        }
     }
 }

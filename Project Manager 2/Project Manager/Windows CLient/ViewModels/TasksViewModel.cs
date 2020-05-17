@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
+using Windows_CLient.Views;
 using WCM = Windows_CLient.Models;
 
 namespace Windows_CLient.ViewModels
@@ -22,6 +23,7 @@ namespace Windows_CLient.ViewModels
         private bool? NoTasksExist;
         public TasksViewModel()
         {
+            FlagTask = new RelayCommand(flagTask);
             GetTasks = new RelayCommand(getTasks);
             BookTask = new RelayCommand(bookTask);
             CompleteTask = new RelayCommand(completeTask);
@@ -73,6 +75,7 @@ namespace Windows_CLient.ViewModels
         public ICommand GetTasks { get; set; }
         public ICommand BookTask { get; set; }
         public ICommand CompleteTask { get; set; }
+        public ICommand FlagTask { get; set; }
 
         public bool CanComplete { get => (SelectedTask.isBooked ?? false) && SelectedTask.DoneBy == APIClient.User.UserID; }
         public bool CanBook { get => SelectedTask.isBooked != true; }
@@ -130,5 +133,27 @@ namespace Windows_CLient.ViewModels
                 MessageBox.Show(await response.Content.ReadAsStringAsync(), "update", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        /// <summary>
+        /// Open a window that lets you flag a task
+        /// </summary>
+        public void flagTask()
+        {
+            refreshingTimer.Stop();
+
+            Views.FlagTask flag = new FlagTask();
+            var context = new FlagTasksViewModel();
+
+            context.Issue.isSolved = false;
+            context.Issue.Issuer = APIClient.User.UserID;
+            context.Issue.Task = SelectedTask.TaskID;
+            context.Self = flag;
+
+            flag.DataContext = context;
+            flag.ShowDialog();
+
+            refreshingTimer.Start();
+        }
+        
     }
 }

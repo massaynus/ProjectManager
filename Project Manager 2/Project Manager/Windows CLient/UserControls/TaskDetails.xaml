@@ -36,5 +36,41 @@
         <TextBlock Text="{Binding Difficulty, StringFormat=Difficulty:&#x09;{0}}"/>
         <TextBlock Text="{Binding DeadLine, StringFormat=Dead line:&#x09;{0: dd/MM/yyyy}}"/>
 
+        <TextBlock Text="Issues:"/>
+        <ListView ItemsSource="{Binding Issues}"
+                  Background="{x:Null}"
+                  BorderThickness="0"
+                  Margin="25 0 0 0"
+                  SelectionChanged="ListView_SelectionChanged">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Left"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="{StaticResource HighlightedBackgroundBrush}"
+                            Padding="16 8"
+                            BorderThickness="1"
+                            CornerRadius="5"
+                            Name="Border"
+                            Margin="2">
+                        <TextBlock Text="{Binding Title}"
+                                   Foreground="{StaticResource MainForegroundBrush}"/>
+                    </Border>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="Border">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="AntiqueWhite" Opacity="0.2"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </StackPanel>
 </UserControl>
