@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
+using TT = System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Windows_CLient.Models;
@@ -21,11 +21,14 @@ namespace Windows_CLient.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        private Login window;
+        private Window child;
+
         public LoginViewModel()
         {
             UserName = string.Empty;
 
-            Auth = new RelayCommand(AuthHelper);
+            Auth = new AsyncRelayCommand(AuthHelper);
             Exit = new RelayCommand(() => window.Close());
 
             if (DateTime.Now.Hour < 11 && DateTime.Now.Hour > 8)
@@ -36,9 +39,6 @@ namespace Windows_CLient.ViewModels
                 StatusMessage = "Good Night";
         }
         public LoginViewModel(Login window) : this() { this.window = window; }
-
-        private Login window;
-        private Window child;
 
         public string StatusMessage { get; set; } // Welcome Message
         public string ErrorMessage { get; set; }
@@ -54,8 +54,20 @@ namespace Windows_CLient.ViewModels
 
         public ICommand Auth { get; set; }
         public ICommand Exit { get; set; }
+        public Window Child 
+        { 
+            get => child;
+            set
+            {
+                child = value;
+                if (value != null)
+                {
+                    child.Closed += delegate { window.Show(); };
+                }
+            }
+        }
 
-        public async void AuthHelper()
+        public async TT.Task AuthHelper()
         {
             if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(UserPassword))
             {
@@ -64,8 +76,7 @@ namespace Windows_CLient.ViewModels
             }
             else
             {
-                using (StringContent cords = new StringContent(
-                    JsonConvert.SerializeObject(new { username = UserName, password = UserPassword }), Encoding.UTF8, "application/json"))
+                using (StringContent cords = APIClient.GetStringContent(new { username = UserName, password = UserPassword }))
                 {
                     string url = APIClient.API_HOST + "Auth";
                     var response = await APIClient.client.PostAsync(url, cords);
@@ -81,27 +92,26 @@ namespace Windows_CLient.ViewModels
                         StatusMessage = "Hi Mr." + APIClient.User.LastName;
                         OnPropertyChanged(nameof(APIClient.User));
 
-                        window.Hide();
-                        if (child != null) child.Close();
+                        if (Child != null) Child.Close();
 
                         switch (APIClient.User.Role1.RoleName)
                         {
                             case "Manager":
-                                child = new Views.ManagerViews.ManagerMainView();
-                                child.Title = $"Managers Area - Mr.{APIClient.User.LastName} {APIClient.User.FirstName}";
-                                child.ShowDialog();
+                                Child = new Views.ManagerViews.ManagerMainView();
+                                Child.Title = $"Managers Area - Mr.{APIClient.User.LastName} {APIClient.User.FirstName}";
+                                Child.Show();
                                 break;
 
                             case "TeamLeader":
-                                child = new Views.LeaderViews.LeaderMainView();
-                                child.Title = $"Team Leaders Area - Mr.{APIClient.User.LastName} {APIClient.User.FirstName}";
-                                child.ShowDialog();
+                                Child = new Views.LeaderViews.LeaderMainView();
+                                Child.Title = $"Team Leaders Area - Mr.{APIClient.User.LastName} {APIClient.User.FirstName}";
+                                Child.Show();
                                 break;
 
                             case "Member":
-                                child = new Views.TasksView();
-                                child.Title = $"Team Members Area - Mr.{APIClient.User.LastName} {APIClient.User.FirstName}";
-                                child.ShowDialog();
+                                Child = new Views.TasksView();
+                                Child.Title = $"Team Members Area - Mr.{APIClient.User.LastName} {APIClient.User.FirstName}";
+                                Child.Show();
                                 break;
 
                             case "Client":
@@ -133,9 +143,11 @@ namespace Windows_CLient.ViewModels
                                 break;
                         }
 
-                        UserName = string.Empty;
+                        window.Hide();
+                        UserName = ErrorMessage = string.Empty;
+                        OnPropertyChanged(nameof(UserName));
+                        OnPropertyChanged(nameof(ErrorMessage));
                         window.txtPassword.Clear();
-                        window.Show();
                     }
                     else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
