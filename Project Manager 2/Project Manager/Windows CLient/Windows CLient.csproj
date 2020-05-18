@@ -81,7 +81,8 @@
     <Compile Include="Models\DataModels\Team.cs" />
     <Compile Include="Models\DataModels\TeamStack.cs" />
     <Compile Include="Models\DataModels\User.cs" />
-    <Compile Include="Models\RelaCommand\RelayCommand.cs" />
+    <Compile Include="Models\RelayCommand\AsyncRelayCommand.cs" />
+    <Compile Include="Models\RelayCommand\RelayCommand.cs" />
     <Compile Include="UserControls\Task.xaml.cs">
       <DependentUpon>Task.xaml</DependentUpon>
     </Compile>
