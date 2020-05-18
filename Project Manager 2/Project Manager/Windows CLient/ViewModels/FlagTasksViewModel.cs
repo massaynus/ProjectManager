@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
+using TT = System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Windows_CLient.Models;
@@ -17,7 +17,7 @@ namespace Windows_CLient.ViewModels
         {
             Issue = new Issue();
             Close = new RelayCommand(() => Self.Close());
-            FlagTask = new RelayCommand(flagTask);
+            FlagTask = new AsyncRelayCommand(flagTask);
             FlagMode = true;
         }
         public bool FlagMode { get; set; }
@@ -29,7 +29,7 @@ namespace Windows_CLient.ViewModels
         public ICommand FlagTask { get; set; }
         public ICommand Close { get; set; }
 
-        private async void flagTask()
+        private async TT.Task flagTask()
         {
             using (StringContent content = APIClient.GetStringContent(Issue))
             {

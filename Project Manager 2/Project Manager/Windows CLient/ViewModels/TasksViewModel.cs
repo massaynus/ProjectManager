@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using TT = System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
@@ -23,10 +23,10 @@ namespace Windows_CLient.ViewModels
         private bool? NoTasksExist;
         public TasksViewModel()
         {
-            FlagTask = new RelayCommand(flagTask);
-            GetTasks = new RelayCommand(getTasks);
-            BookTask = new RelayCommand(bookTask);
-            CompleteTask = new RelayCommand(completeTask);
+            FlagTask = new AsyncRelayCommand(flagTask);
+            GetTasks = new AsyncRelayCommand(getTasks);
+            BookTask = new AsyncRelayCommand(bookTask);
+            CompleteTask = new AsyncRelayCommand(completeTask);
 
             GetTasks.Execute(null);
 
@@ -81,7 +81,7 @@ namespace Windows_CLient.ViewModels
         public bool CanBook { get => SelectedTask.isBooked != true; }
 
 
-        public async void getTasks()
+        public async TT.Task getTasks()
         {
             var response = await APIClient.client.GetAsync(APIClient.API_HOST + "Tasks", System.Net.Http.HttpCompletionOption.ResponseContentRead);
             if (response.IsSuccessStatusCode)
@@ -99,7 +99,7 @@ namespace Windows_CLient.ViewModels
         /// <summary>
         /// Marks the selected task as booked for the current user
         /// </summary>
-        public async void bookTask()
+        public async TT.Task bookTask()
         {
             var response = await APIClient.client.PutAsync(APIClient.API_HOST + $"Tasks/BookTask/{SelectedTask.TaskID}", null);
             if (response.IsSuccessStatusCode)
@@ -118,7 +118,7 @@ namespace Windows_CLient.ViewModels
         /// <summary>
         /// Marks the selected task as completed
         /// </summary>
-        public async void completeTask()
+        public async TT.Task completeTask()
         {
             var response = await APIClient.client.PutAsync(APIClient.API_HOST + $"Tasks/CompleteTask/{SelectedTask.TaskID}", null);
             if (response.IsSuccessStatusCode)
