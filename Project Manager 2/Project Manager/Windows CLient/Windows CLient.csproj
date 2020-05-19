@@ -91,7 +91,17 @@
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\FlagTasksViewModel.cs" />
+    <Compile Include="ViewModels\LeaderViewModels\IssueTreatingViewModel.cs" />
+    <Compile Include="ViewModels\LeaderViewModels\LeaderMainViewModel.cs" />
+    <Compile Include="ViewModels\LeaderViewModels\MembersViewModel.cs" />
+    <Compile Include="ViewModels\LeaderViewModels\SchedulingViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ManagerMainViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\PaiementsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\ProjectsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\StatisticsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\TeamsViewModel.cs" />
+    <Compile Include="ViewModels\ManagerViewModels\WorkersViewModel.cs" />
     <Compile Include="ViewModels\TasksViewModel.cs" />
     <Compile Include="Views\MemberViews\FlagTask.xaml.cs">
       <DependentUpon>FlagTask.xaml</DependentUpon>
@@ -204,5 +214,6 @@
   <ItemGroup>
     <Resource Include="Resources\Images\flag.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

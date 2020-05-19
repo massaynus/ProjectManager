@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Windows_CLient.ViewModels
 {
-    public class SchedulingViewModel : BaseViewModel
+    public class ProjectsViewModel : BaseViewModel
     {
-        //TODO : Complete the SchedulingViewModel 
+        //TODO: complete the ProjectsViewModel
     }
 }
