@@ -23,10 +23,10 @@ namespace Windows_CLient.ViewModels
         private bool? NoTasksExist;
         public TasksViewModel()
         {
-            FlagTask = new AsyncRelayCommand(flagTask);
-            GetTasks = new AsyncRelayCommand(getTasks);
-            BookTask = new AsyncRelayCommand(bookTask);
-            CompleteTask = new AsyncRelayCommand(completeTask);
+            FlagTask = new RelayCommand(flagTask);
+            GetTasks = new RelayCommandAsync(getTasks);
+            BookTask = new RelayCommandAsync(bookTask);
+            CompleteTask = new RelayCommandAsync(completeTask);
 
             GetTasks.Execute(null);
 

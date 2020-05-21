@@ -28,7 +28,7 @@ namespace Windows_CLient.ViewModels
         {
             UserName = string.Empty;
 
-            Auth = new AsyncRelayCommand(AuthHelper);
+            Auth = new RelayCommandAsync(AuthHelper);
             Exit = new RelayCommand(() => window.Close());
 
             if (DateTime.Now.Hour < 11 && DateTime.Now.Hour > 8)
