@@ -1,6 +1,6 @@
-# ProjectManager
+# **ProjectManager**
 
-The project Manager currently has four projects
+# The project Manager currently has four projects
 
 ## 1. Data Access Library
 The data access library has all the models and the context for the DB connection
