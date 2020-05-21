@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Windows_CLient.Views.LeaderViews"
         mc:Ignorable="d"
-        Title="LeaderMainView" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        FontSize="20"
+        Title="LeaderMainView" Height="600" Width="1000"
+        Background="{StaticResource MainBackgroundBrush}"
+        >
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="10" CaptionHeight="10"/>
+    </WindowChrome.WindowChrome>
+
     <Grid>
-        
+
     </Grid>
 </Window>
