@@ -81,7 +81,7 @@
     <Compile Include="Models\DataModels\Team.cs" />
     <Compile Include="Models\DataModels\TeamStack.cs" />
     <Compile Include="Models\DataModels\User.cs" />
-    <Compile Include="Models\RelayCommand\AsyncRelayCommand.cs" />
+    <Compile Include="Models\RelayCommand\RelayCommandAsync.cs" />
     <Compile Include="Models\RelayCommand\RelayCommand.cs" />
     <Compile Include="UserControls\Task.xaml.cs">
       <DependentUpon>Task.xaml</DependentUpon>
@@ -90,7 +90,7 @@
       <DependentUpon>TaskDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\FlagTasksViewModel.cs" />
+    <Compile Include="ViewModels\MemberViewModels\FlagTasksViewModel.cs" />
     <Compile Include="ViewModels\LeaderViewModels\IssueTreatingViewModel.cs" />
     <Compile Include="ViewModels\LeaderViewModels\LeaderMainViewModel.cs" />
     <Compile Include="ViewModels\LeaderViewModels\MembersViewModel.cs" />
@@ -102,7 +102,7 @@
     <Compile Include="ViewModels\ManagerViewModels\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\TeamsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\WorkersViewModel.cs" />
-    <Compile Include="ViewModels\TasksViewModel.cs" />
+    <Compile Include="ViewModels\MemberViewModels\TasksViewModel.cs" />
     <Compile Include="Views\MemberViews\FlagTask.xaml.cs">
       <DependentUpon>FlagTask.xaml</DependentUpon>
     </Compile>
