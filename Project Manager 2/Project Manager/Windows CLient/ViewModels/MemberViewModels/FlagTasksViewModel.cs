@@ -17,7 +17,7 @@ namespace Windows_CLient.ViewModels
         {
             Issue = new Issue();
             Close = new RelayCommand(() => Self.Close());
-            FlagTask = new AsyncRelayCommand(flagTask);
+            FlagTask = new RelayCommandAsync(flagTask);
             FlagMode = true;
         }
         public bool FlagMode { get; set; }
