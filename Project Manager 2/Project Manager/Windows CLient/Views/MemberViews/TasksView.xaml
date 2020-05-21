@@ -7,7 +7,7 @@
         xmlns:VM="clr-namespace:Windows_CLient.ViewModels"
         xmlns:UC="clr-namespace:Windows_CLient.UserControls"
         mc:Ignorable="d"
-        Title="TasksView" Height="560" Width="1010"
+        Title="TasksView" Height="650" Width="1010"
         Background="{StaticResource MainBackgroundBrush}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"

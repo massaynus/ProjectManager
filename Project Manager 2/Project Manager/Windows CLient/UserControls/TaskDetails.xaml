@@ -30,8 +30,10 @@
 
         <!--&#x09; is \t-->
         <TextBlock Text="Description:"/>
-        <TextBlock Text="{Binding Description}"
+        <ScrollViewer MaxHeight="150">
+            <TextBlock Text="{Binding Description}"
                    Margin="30 0 0 10"/>
+        </ScrollViewer>
         <TextBlock Text="{Binding Priority, StringFormat=Priority:&#x09;&#x09;{0}}"/>
         <TextBlock Text="{Binding Difficulty, StringFormat=Difficulty:&#x09;{0}}"/>
         <TextBlock Text="{Binding DeadLine, StringFormat=Dead line:&#x09;{0: dd/MM/yyyy}}"/>
