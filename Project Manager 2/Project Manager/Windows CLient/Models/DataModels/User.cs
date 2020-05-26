@@ -17,6 +17,7 @@ namespace Windows_CLient.Models
         public int? Team { get; set; }
 
         public virtual Role Role1 { get; set; }
+        public virtual Team Team1 { get; set; }
 
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Issue> Issues { get; set; }
