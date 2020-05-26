@@ -69,6 +69,8 @@ namespace Windows_CLient.ViewModels
 
         public async TT.Task AuthHelper()
         {
+            StatusMessage = "Loading...";
+            OnPropertyChanged(nameof(StatusMessage));
             if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(UserPassword))
             {
                 ErrorMessage = "Please provide a username and a password";

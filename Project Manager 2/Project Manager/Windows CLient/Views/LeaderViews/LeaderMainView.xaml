@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Windows_CLient.Views.LeaderViews"
+        xmlns:ViewModels="clr-namespace:Windows_CLient.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -12,11 +13,21 @@
         Title="LeaderMainView" Height="600" Width="1000"
         Background="{StaticResource MainBackgroundBrush}"
         >
+    <Window.DataContext>
+        <ViewModels:LeaderMainViewModel />
+    </Window.DataContext>
+    
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="10" CaptionHeight="10"/>
     </WindowChrome.WindowChrome>
+    
 
     <Grid>
-
+        <StackPanel>
+            <TextBlock Text="{Binding Path=Projects.Count, StringFormat=Projects: {0}}"
+                   Foreground="LightGreen"/>
+            <TextBlock Text="{Binding Path=Issues.Count, StringFormat=Issues: {0}}"
+                   Foreground="Coral"/>
+        </StackPanel>
     </Grid>
 </Window>
