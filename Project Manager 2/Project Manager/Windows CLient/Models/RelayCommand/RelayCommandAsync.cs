@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Windows_CLient
@@ -25,7 +26,14 @@ namespace Windows_CLient
         {
             if (func != null)
             {
-                await func();
+                try
+                {
+                    await func();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"{e.Message}\nInner Exception\t{e.InnerException.GetType()}", e.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             return;
         }
