@@ -23,5 +23,10 @@ namespace Windows_CLient.Views.LeaderViews
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
