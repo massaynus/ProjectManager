@@ -38,7 +38,7 @@
               HorizontalAlignment="Center"
               Width="1173"
               Height="660">
-            
+
             <!--Background Border & Close Button-->
             <Border BorderThickness=".1" Padding="2" BorderBrush="Red"
                     CornerRadius="10" x:Name="ImgBorder" SnapsToDevicePixels="True"
@@ -76,10 +76,10 @@
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
-                    
+
                 </Button>
             </Border>
-            
+
             <StackPanel Orientation="Vertical"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
@@ -120,12 +120,13 @@
 
                 <!--Welcome Message Message-->
                 <Viewbox Margin="0 0 0 40"
-                           MaxWidth="300"
+                           Width="300"
                          MaxHeight="80">
                     <TextBlock Text="{Binding StatusMessage}"
-                           FontSize="40"
-                           FontWeight="Bold"
-                           TextWrapping="Wrap">
+                               FontSize="40"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center">
                         <TextBlock.Effect>
                             <DropShadowEffect Direction="-45"/>
                         </TextBlock.Effect>

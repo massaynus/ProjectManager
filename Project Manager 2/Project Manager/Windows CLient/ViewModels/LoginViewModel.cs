@@ -16,6 +16,7 @@ using Newtonsoft.Json.Linq;
 using System.Linq.Expressions;
 using System.Timers;
 using Windows_CLient.Views;
+using System.Configuration;
 
 namespace Windows_CLient.ViewModels
 {
@@ -31,12 +32,16 @@ namespace Windows_CLient.ViewModels
             Auth = new RelayCommandAsync(AuthHelper);
             Exit = new RelayCommand(() => window.Close());
 
-            if (DateTime.Now.Hour < 11 && DateTime.Now.Hour > 8)
+            if (DateTime.Now.Hour < 11 && DateTime.Now.Hour > 6)
                 StatusMessage = "Good Morning";
             else if (DateTime.Now.Hour < 18 && DateTime.Now.Hour > 11)
                 StatusMessage = "Good Evening";
             else
                 StatusMessage = "Good Night";
+
+            string LastUser = ConfigurationManager.AppSettings["Last User"];
+            if (!string.IsNullOrEmpty(LastUser))
+                StatusMessage += "\nMr. " + LastUser;
         }
         public LoginViewModel(Login window) : this() { this.window = window; }
 
@@ -44,18 +49,19 @@ namespace Windows_CLient.ViewModels
         public string ErrorMessage { get; set; }
         public string UserName { get; set; }
         public string UserPassword { get => window.txtPassword.Password; }
-        public Visibility PasswordVisibility { 
+        public Visibility PasswordVisibility
+        {
             get
             {
                 if (UserPassword.Length > 0) return Visibility.Hidden;
                 else return Visibility.Visible;
-            } 
+            }
         }
 
         public ICommand Auth { get; set; }
         public ICommand Exit { get; set; }
-        public Window Child 
-        { 
+        public Window Child
+        {
             get => child;
             set
             {
@@ -88,11 +94,16 @@ namespace Windows_CLient.ViewModels
                         APIClient.User = JsonConvert.DeserializeObject<User>(await response.Content.ReadAsStringAsync(),
                             new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
 
+                        var conf = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                        conf.AppSettings.Settings["Last User"].Value = APIClient.User.LastName;
+                        conf.Save(ConfigurationSaveMode.Modified);
+
                         string base64 = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(UserName + ":" + UserPassword));
                         APIClient.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64);
 
                         StatusMessage = "Hi Mr." + APIClient.User.LastName;
                         OnPropertyChanged(nameof(APIClient.User));
+
 
                         if (Child != null) Child.Close();
 
@@ -162,7 +173,7 @@ namespace Windows_CLient.ViewModels
                 }
 
                 OnPropertyChanged(nameof(StatusMessage));
-                OnPropertyChanged(nameof(ErrorMessage)); 
+                OnPropertyChanged(nameof(ErrorMessage));
             }
         }
     }
