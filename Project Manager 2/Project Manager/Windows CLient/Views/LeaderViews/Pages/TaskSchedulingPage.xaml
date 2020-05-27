@@ -88,6 +88,28 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
+                        
+                        <DataTrigger Binding="{Binding isBooked}" Value="true">
+                            <Setter TargetName="ItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Orange" Opacity=".4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding isComplete}" Value="true">
+                            <Setter TargetName="ItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="ForestGreen" Opacity=".7"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding HasIssues}" Value="true">
+                            <Setter TargetName="ItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Crimson" Opacity=".5"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
                     </DataTemplate.Triggers>
                 </DataTemplate>
             </ListView.ItemTemplate>
