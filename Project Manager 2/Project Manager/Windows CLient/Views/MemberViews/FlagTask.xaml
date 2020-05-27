@@ -11,51 +11,7 @@
         WindowStyle="None"
         Name="TaskViewWindow">
     <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border BorderBrush="{StaticResource MainForegroundBrush}"
-                                                Background="{TemplateBinding Background}"
-                                                Name="BtnBorder"
-                                                BorderThickness="1.5"
-                                                CornerRadius="10"
-                                                Width="120"
-                                                Height="40"
-                                                Padding="0"
-                                                Margin="25">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                              />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Foreground" Value="{StaticResource MainForegroundBrush}"/>
-
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Trigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation Duration="0:0:0.3"
-                                                                From="Transparent"
-                                                                To="Green"
-                                                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <SolidColorBrush Color="Green" Opacity="0.5"/>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="Crimson"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource RoundButton}"/>
         <Style TargetType="TextBlock">
             <Setter Property="Grid.Column" Value="0"/>
             <Setter Property="Foreground" Value="{StaticResource MainForegroundBrush}"/>
@@ -66,7 +22,12 @@
             <Setter Property="IsEnabled" Value="{Binding FlagMode}"/>
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="Background" Value="{x:Null}"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="AntiqueWhite" Opacity=".1"/>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Foreground" Value="{StaticResource MainForegroundBrush}"/>
             <Setter Property="CaretBrush" Value="{StaticResource MainForegroundBrush}"/>
         </Style>
