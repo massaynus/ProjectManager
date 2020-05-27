@@ -13,9 +13,6 @@ namespace Windows_CLient.ViewModels
 {
     public class SchedulingViewModel : BaseViewModel
     {
-        //TODO : Complete the SchedulingViewModel
-        //TODO : Write functions for actions and ctor
-
         private Project _project = new Project();
         private Task _task = new Task();
 
