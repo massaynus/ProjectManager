@@ -3,12 +3,187 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Windows_CLient.Views.LeaderViews"
+      xmlns:ViewModels="clr-namespace:Windows_CLient.ViewModels"
+      xmlns:Model="clr-namespace:Windows_CLient.Models"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TaskSchedulingPage">
+    <Page.DataContext>
+        <ViewModels:SchedulingViewModel/>
+    </Page.DataContext>
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView ItemsSource="{Binding Projects}"
+                  SelectedItem="{Binding Project}"
+                  Background="Transparent"
+                  BorderThickness="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border x:Name="ItemBorder"
+                            BorderBrush="{StaticResource HighlightedBackgroundBrush}"
+                            SnapsToDevicePixels="True"
+                            BorderThickness="1.5"
+                            CornerRadius="18"
+                            Padding="15 5 5 5">
+                        <StackPanel MaxWidth="{Binding ElementName=ItemBorder, Path=Width}">
+                            <StackPanel.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="WhiteSmoke"/>
+                                    <Setter Property="Margin" Value="0 0 0 5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <TextBlock Text="{Binding Name}"
+                                       FontSize="17"
+                                       FontWeight="DemiBold"/>
+                            <TextBlock Text="{Binding Description}"
+                                       TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Priority, StringFormat=Priority: {0}}"/>
+                            <TextBlock Text="{Binding Complexity, StringFormat=Complexity: {0}}"/>
+                        </StackPanel>
+                    </Border>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="ItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="AntiqueWhite" Opacity=".2"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView ItemsSource="{Binding Project.Tasks}"
+                  SelectedItem="{Binding Task}"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  Margin="10 0"
+                  Grid.Column="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border x:Name="ItemBorder"
+                            BorderBrush="{StaticResource HighlightedBackgroundBrush}"
+                            SnapsToDevicePixels="True"
+                            BorderThickness="1.5"
+                            CornerRadius="15"
+                            Padding="20 10"
+                            Margin="0 0 0 10">
+                        <StackPanel MaxWidth="{Binding ElementName=ItemBorder, Path=Width}">
+                            <TextBlock Text="{Binding Name}"
+                                       FontSize="14"
+                                       Foreground="WhiteSmoke"/>
+                        </StackPanel>
+                    </Border>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="ItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="AntiqueWhite" Opacity=".2"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid Grid.Column="2"
+              VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Grid.Column" Value="0"/>
+                    <Setter Property="Foreground" Value="WhiteSmoke"/>
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="Margin" Value="0 10" />
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value="WhiteSmoke"/>
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="Grid.Column" Value="1"/>
+                    <Setter Property="Margin" Value="0 10" />
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush">
+                        <Setter.Value>
+                            <SolidColorBrush Color="AliceBlue" Opacity="0.2"/>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style TargetType="DatePicker">
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="Margin" Value="0 10" />
+                    <Setter Property="Grid.Column" Value="1"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="Margin" Value="0 10" />
+                    <Setter Property="Grid.Column" Value="1"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style>
+            </Grid.Resources>
+
+            <TextBlock Grid.Row="0" Text="Title: "/>
+            <TextBox Grid.Row="0" Text="{Binding Task.Name}"/>
+
+            <TextBlock Grid.Row="1" Text="Description: "/>
+            <TextBox Grid.Row="1" Text="{Binding Task.Description}"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         AcceptsTab="True"
+                         Height="200"
+                         VerticalScrollBarVisibility="Auto"/>
+
+            <TextBlock Grid.Row="2" Text="Priority: "/>
+            <TextBox Grid.Row="2" Text="{Binding Task.Priority}"/>
+
+            <TextBlock Grid.Row="3" Text="Difficulty: "/>
+            <TextBox Grid.Row="3" Text="{Binding Task.Difficulty}"/>
+
+            <TextBlock Grid.Row="4" Text="Dead line: "/>
+            <DatePicker Grid.Row="4" SelectedDate="{Binding Task.DeadLine}"/>
+
+            <TextBlock Grid.Row="5" Text="Stack: "/>
+            <ComboBox Grid.Row="5" SelectedValue="{Binding Task.Stack}"
+                          ItemsSource="{Binding Stacks}"
+                          DisplayMemberPath="Tools"
+                          SelectedValuePath="StackID"/>
+
+            <WrapPanel Orientation="Horizontal"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="6">
+                <WrapPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource RoundButton}">
+                        <Setter Property="Margin" Value="5 2"/>
+                    </Style>
+                </WrapPanel.Resources>
+
+                <Button Content="New"    Command="{Binding NewTask}"/>
+                <Button Content="Submit" Command="{Binding SubmitTask}" />
+                <Button Content="Update" Command="{Binding ModifytTask}" />
+                <Button Content="Delete" Command="{Binding DeleteTask}" />
+            </WrapPanel>
+        </Grid>
+
     </Grid>
 </Page>
