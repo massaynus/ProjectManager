@@ -99,11 +99,8 @@ namespace Local_Server_API.Controllers
             var user = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
             List<Task> Tasks = new List<Task>();
 
-
             user.Team1.Projects.ToList()
                 .ForEach(P => Tasks.AddRange(P.Tasks));
-
-
 
             if (!ModelState.IsValid)
             {
@@ -115,12 +112,22 @@ namespace Local_Server_API.Controllers
                 return BadRequest();
             }
 
-            if (Tasks.Where(T => T.TaskID == id).FirstOrDefault() is null)
+            var dbTask = Tasks.Where(T => T.TaskID == id).FirstOrDefault();
+            if (dbTask is null || dbTask.Project1.Team != user.Team)
             {
                 return Unauthorized();
             }
+            dbTask.Name = task.Name;
+            dbTask.Description = task.Description;
+            dbTask.Priority = task.Priority;
+            dbTask.Difficulty = task.Difficulty;
+            dbTask.DeadLine = task.DeadLine;
+            dbTask.Stack = task.Stack;
+            dbTask.isBooked = false;
+            dbTask.isComplete = false;
 
-            db.Entry(task).State = EntityState.Modified;
+
+            db.Entry(dbTask).State = EntityState.Modified;
 
             try
             {
@@ -209,10 +216,13 @@ namespace Local_Server_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (task.Project1.Team1.TeamID != user.Team)
+            if (db.Projects.Where(P => P.ProjectID == task.Project).FirstOrDefault().Team != user.Team)
             {
                 return Unauthorized();
             }
+
+            if (task.isBooked is null) task.isBooked = false;
+            if (task.isComplete is null) task.isComplete = false;
 
             db.Tasks.Add(task);
             db.SaveChanges();
@@ -235,6 +245,16 @@ namespace Local_Server_API.Controllers
             if (task == null)
             {
                 return NotFound();
+            }
+
+            if(task.Project1.Team1 != user.Team1)
+            {
+                Unauthorized();
+            }
+
+            if ((task.isBooked ?? false) || (task.isComplete ?? false))
+            {
+                BadRequest("You Can't delete a booked or a completed Task");
             }
 
             db.Tasks.Remove(task);
