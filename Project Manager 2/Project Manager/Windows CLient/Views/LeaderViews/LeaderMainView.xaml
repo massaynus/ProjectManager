@@ -10,17 +10,25 @@
         WindowStyle="None"
         AllowsTransparency="True"
         FontSize="20"
-        Title="LeaderMainView" Height="600" Width="1000"
+        Title="LeaderMainView" Height="620" Width="1200"
         Background="{StaticResource MainBackgroundBrush}"
         >
     <Window.DataContext>
-        <ViewModels:LeaderMainViewModel />
+        <ViewModels:LeaderMainViewModel/>
     </Window.DataContext>
-    
+
+
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="50"/>
     </WindowChrome.WindowChrome>
-    
+
+    <Window.Resources>
+        <local:IssuesTreatingPage x:Key="IssuesPage"/>
+        <local:LeaderStatsPage x:Key="StatsPage"/>
+        <local:TaskSchedulingPage x:Key="SchedulingPage"/>
+        <local:TeamMembersPage x:Key="MembersPage"/>
+    </Window.Resources>
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -83,10 +91,60 @@
                    Foreground="Coral"/>
         </StackPanel>
         <!--#endregion-->
-        
-        <Grid Grid.Row="1">
-            
+
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4.5*"/>
+            </Grid.ColumnDefinitions>
+            <!--Nav Buttons-->
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource NavButton}"/>
+                    <Style TargetType="Image">
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="Width" Value="30"/>
+                    </Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Margin" Value="20 0 0 0"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Foreground" Value="WhiteSmoke"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Command="{Binding GotoStats}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/dashboard.png"/>
+                        <TextBlock Text="Dashboard"/>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding GotoScheduling}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/dashboard.png"/>
+                        <TextBlock Text="Schedule"/>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding GotoIssues}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/dashboard.png"/>
+                        <TextBlock Text="Issues"/>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding GotoMembers}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/dashboard.png"/>
+                        <TextBlock Text="Members"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+
+            <Frame Grid.Column="1" x:Name="WindowContent"
+                   NavigationUIVisibility="Hidden"
+                   Content="{Binding CurrentPage}"
+                   Margin="10 0 0 0"
+                   />
+
         </Grid>
-        
+
     </Grid>
 </Window>
