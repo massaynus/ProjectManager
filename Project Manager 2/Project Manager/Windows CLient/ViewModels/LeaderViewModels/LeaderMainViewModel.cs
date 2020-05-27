@@ -89,7 +89,7 @@ namespace Windows_CLient.ViewModels
 
         public async TT.Task CalculateProgressesAsync()
         {
-            //todo: calculate progresses
+            //TODO: calculate progresses
             await TT.Task.Delay(500);
         }
     }
