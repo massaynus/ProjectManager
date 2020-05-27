@@ -119,19 +119,19 @@
                 </Button>
                 <Button Command="{Binding GotoScheduling}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/dashboard.png"/>
+                        <Image Source="/Resources/Images/calendar.png"/>
                         <TextBlock Text="Schedule"/>
                     </StackPanel>
                 </Button>
                 <Button Command="{Binding GotoIssues}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/dashboard.png"/>
+                        <Image Source="/Resources/Images/issue.png"/>
                         <TextBlock Text="Issues"/>
                     </StackPanel>
                 </Button>
                 <Button Command="{Binding GotoMembers}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/dashboard.png"/>
+                        <Image Source="/Resources/Images/user.png"/>
                         <TextBlock Text="Members"/>
                     </StackPanel>
                 </Button>
