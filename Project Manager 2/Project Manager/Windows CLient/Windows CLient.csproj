@@ -90,6 +90,7 @@
       <DependentUpon>TaskDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\LeaderViewModels\LeaderStatsViewModel.cs" />
     <Compile Include="ViewModels\MemberViewModels\FlagTasksViewModel.cs" />
     <Compile Include="ViewModels\LeaderViewModels\IssueTreatingViewModel.cs" />
     <Compile Include="ViewModels\LeaderViewModels\LeaderMainViewModel.cs" />
@@ -103,6 +104,18 @@
     <Compile Include="ViewModels\ManagerViewModels\TeamsViewModel.cs" />
     <Compile Include="ViewModels\ManagerViewModels\WorkersViewModel.cs" />
     <Compile Include="ViewModels\MemberViewModels\TasksViewModel.cs" />
+    <Compile Include="Views\LeaderViews\Pages\IssuesTreatingPage.xaml.cs">
+      <DependentUpon>IssuesTreatingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LeaderViews\Pages\LeaderStatsPage.xaml.cs">
+      <DependentUpon>LeaderStatsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LeaderViews\Pages\TaskSchedulingPage.xaml.cs">
+      <DependentUpon>TaskSchedulingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LeaderViews\Pages\TeamMembersPage.xaml.cs">
+      <DependentUpon>TeamMembersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MemberViews\FlagTask.xaml.cs">
       <DependentUpon>FlagTask.xaml</DependentUpon>
     </Compile>
@@ -166,6 +179,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\TaskDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LeaderViews\Pages\IssuesTreatingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LeaderViews\Pages\LeaderStatsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LeaderViews\Pages\TaskSchedulingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LeaderViews\Pages\TeamMembersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
