@@ -38,7 +38,7 @@ namespace Local_Server_API.Controllers
             return Ok(issue);
         }
 
-        [AuthAttr(new string[] { Role.TeamLeader, Role.Member })]
+        [AuthAttr(Role.TeamLeader)]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutIssue(int id, Issue issue)
         {
