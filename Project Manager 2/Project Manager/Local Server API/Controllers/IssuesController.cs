@@ -52,12 +52,16 @@ namespace Local_Server_API.Controllers
                 return BadRequest();
             }
 
-            if (GetTeamIssues(ActionContext.Request.Headers.Authorization.Parameter).Where(I => I.IssueID == id).FirstOrDefault() is null)
+            var dbIssue = GetTeamIssues(ActionContext.Request.Headers.Authorization.Parameter).Where(I => I.IssueID == id).FirstOrDefault();
+
+            if (dbIssue is null)
             {
                 return Unauthorized();
             }
 
-            db.Entry(issue).State = EntityState.Modified;
+            dbIssue.isSolved = issue.isSolved;
+
+            db.Entry(dbIssue).State = EntityState.Modified;
 
             try
             {
