@@ -18,6 +18,7 @@ namespace Windows_CLient.Models
         public int? Stack { get ; set ;  }
         public bool? isBooked { get; set; }
         public bool? isComplete { get; set; }
+        [JsonIgnore]
         public bool HasIssues { get => Issues.Count > 0; }
         public int? DoneBy { get; set; }
         public virtual ICollection<Issue> Issues { get; set; }
