@@ -13,6 +13,8 @@
     </Page.DataContext>
 
     <Grid>
-
+        <TextBlock Text="This section isn't available yet"
+                   FontSize="30" FontWeight="DemiBold"
+                   Foreground="WhiteSmoke" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Page>
