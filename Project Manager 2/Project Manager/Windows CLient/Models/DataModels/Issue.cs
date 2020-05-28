@@ -8,5 +8,8 @@ namespace Windows_CLient.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public bool? isSolved { get; set; }
+
+        public Task IssueTask { get; set; } = null;
+        public User IssuerObj { get; set; } = null;
     }
 }
