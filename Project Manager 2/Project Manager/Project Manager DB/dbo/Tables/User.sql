@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[User] (
     [UserID]          INT           IDENTITY (1, 1) NOT NULL,
-    [UserName]        VARCHAR (35)  COLLATE French_CI_AS NOT NULL,
+    [UserName]        VARCHAR (35)  NULL,
     [Password]        VARCHAR (160) COLLATE French_CI_AS NOT NULL,
     [FirstName]       VARCHAR (35)  COLLATE French_CI_AS NOT NULL,
     [LastName]        VARCHAR (35)  COLLATE French_CI_AS NOT NULL,
@@ -19,7 +19,7 @@
     FOREIGN KEY ([Manager]) REFERENCES [dbo].[User] ([UserID]),
     FOREIGN KEY ([Role]) REFERENCES [dbo].[Role] ([RoleID]),
     FOREIGN KEY ([Team]) REFERENCES [dbo].[Team] ([TeamID]),
-    UNIQUE NONCLUSTERED ([UserName] ASC)
+    CONSTRAINT [Unique_UserName] UNIQUE NONCLUSTERED ([UserName] ASC)
 );
 
 
