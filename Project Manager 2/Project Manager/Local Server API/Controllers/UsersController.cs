@@ -67,7 +67,8 @@ namespace Local_Server_API.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
-            var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
+            //RU: RequestingUser
+            var RU = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
 
             if (!ModelState.IsValid)
             {
@@ -79,14 +80,17 @@ namespace Local_Server_API.Controllers
                 return BadRequest();
             }
 
-            if (RequestingUser.Role1.RoleName == Role.TeamLeader)
+            if (RU.Role1.RoleName == Role.TeamLeader)
             {
-                if (RequestingUser.UserID != id && RequestingUser.Team1?.Users?.Where(U => U.UserID == id).FirstOrDefault() is null)
+                if (RU.UserID != id && RU.Team1?.Users?.Where(U => U.UserID == id).FirstOrDefault() is null)
                 {
                     return Unauthorized();
                 }
             }
 
+            user.Password = AuthController.HashPassword(user.Password);
+
+            db.Entry(RU).State = EntityState.Detached;
             db.Entry(user).State = EntityState.Modified;
 
             try

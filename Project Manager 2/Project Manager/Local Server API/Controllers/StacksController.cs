@@ -87,22 +87,6 @@ namespace Local_Server_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = stack.StackID }, stack);
         }
 
-        [AuthAttr(Role.Manager)]
-        [ResponseType(typeof(Stack))]
-        public IHttpActionResult DeleteStack(int id)
-        {
-            Stack stack = db.Stacks.Find(id);
-            if (stack == null)
-            {
-                return NotFound();
-            }
-
-            db.Stacks.Remove(stack);
-            db.SaveChanges();
-
-            return Ok(stack);
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
