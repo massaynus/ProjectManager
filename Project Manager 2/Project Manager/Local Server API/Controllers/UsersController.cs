@@ -42,7 +42,7 @@ namespace Local_Server_API.Controllers
 
             else if (RequestingRole == Role.Manager)
             {
-                res = db.Users.Where(u => u.isAccountActive && u.Manager == RequestingUser.UserID)?.ToList();
+                res = db.Users.Where(u => u.Manager == RequestingUser.UserID)?.ToList();
             }
 
             return res;
@@ -53,7 +53,7 @@ namespace Local_Server_API.Controllers
         public IHttpActionResult GetUser(int id)
         {
             var RequestingUser = GetUserFromAuthHeader(ActionContext.Request.Headers.Authorization.Parameter);
-            User user = db.Users.Where(U => U.isAccountActive && U.UserID == id && U.Team == RequestingUser.Team).FirstOrDefault();
+            User user = db.Users.Where(U => U.UserID == id).FirstOrDefault();
 
             if (user == null)
             {
