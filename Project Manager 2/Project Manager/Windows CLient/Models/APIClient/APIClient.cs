@@ -52,7 +52,7 @@ namespace Windows_CLient
         /// <param name="data">Data</param>
         /// <exception cref="InvalidActionException"/>
         /// <returns>JSON response</returns>
-        public static async TT.Task<string> MakeApiCall(Action action, Controller controller, string id = "", object data = null)
+        public static async TT.Task<string> MakeApiCall(Action action, Controller controller, object data, string id = "")
         {
             HttpResponseMessage res;
             if (action == Action.POST)
@@ -63,6 +63,11 @@ namespace Windows_CLient
 
             if (res.IsSuccessStatusCode) return await res.Content.ReadAsStringAsync();
             else MessageBox.Show($"Status Code: {res.StatusCode}\n{res.ReasonPhrase}"); return "";
+        }
+
+        public static void ShowResMessage(HttpResponseMessage res)
+        {
+            MessageBox.Show($"Status Code: {res.StatusCode}\n{res.ReasonPhrase}");
         }
 
 
