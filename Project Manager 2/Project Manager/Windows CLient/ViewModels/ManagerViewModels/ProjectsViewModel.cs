@@ -64,7 +64,7 @@ namespace Windows_CLient.ViewModels
         async TT.Task assigneProject()
         {
             var content = APIClient.GetStringContent(SelectedProject);
-            var res = await APIClient.client.PostAsync("Projects", content);
+            var res = await APIClient.client.PutAsync("Projects", content);
             if (res.IsSuccessStatusCode)
             {
                 MessageBox.Show($"Project was assigned successfuly!!!", "Great!", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -77,7 +77,7 @@ namespace Windows_CLient.ViewModels
         async TT.Task addProject()
         {
             var content = APIClient.GetStringContent(SelectedProject);
-            var res = await APIClient.client.PutAsync("Projects", content);
+            var res = await APIClient.client.PostAsync("Projects", content);
             if (res.IsSuccessStatusCode)
             {
                 MessageBox.Show($"Project was assigned successfuly!!!", "Great!", MessageBoxButton.OK, MessageBoxImage.Information);
