@@ -116,6 +116,21 @@
     <Compile Include="Views\LeaderViews\Pages\TeamMembersPage.xaml.cs">
       <DependentUpon>TeamMembersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ManagerViews\Pages\PaiementsPage.xaml.cs">
+      <DependentUpon>PaiementsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\Pages\ProjectsPage.xaml.cs">
+      <DependentUpon>ProjectsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\Pages\StatisticsPage.xaml.cs">
+      <DependentUpon>StatisticsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\Pages\TeamsPage.xaml.cs">
+      <DependentUpon>TeamsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagerViews\Pages\WorkersPage.xaml.cs">
+      <DependentUpon>WorkersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MemberViews\FlagTask.xaml.cs">
       <DependentUpon>FlagTask.xaml</DependentUpon>
     </Compile>
@@ -195,6 +210,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LeaderViews\Pages\TeamMembersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManagerViews\Pages\PaiementsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManagerViews\Pages\ProjectsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManagerViews\Pages\StatisticsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManagerViews\Pages\TeamsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManagerViews\Pages\WorkersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
