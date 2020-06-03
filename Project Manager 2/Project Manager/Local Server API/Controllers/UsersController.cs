@@ -42,7 +42,7 @@ namespace Local_Server_API.Controllers
 
             else if (RequestingRole == Role.Manager)
             {
-                res = db.Users.Where(u => u.isAccountActive)?.ToList();
+                res = db.Users.Where(u => u.isAccountActive && u.Manager == RequestingUser.UserID)?.ToList();
             }
 
             return res;
