@@ -86,7 +86,7 @@ namespace Windows_CLient
             Auth,
             Home,
             Issues,
-            Paiments,
+            Paiment,
             Projects,
             Roles,
             Stacks,
