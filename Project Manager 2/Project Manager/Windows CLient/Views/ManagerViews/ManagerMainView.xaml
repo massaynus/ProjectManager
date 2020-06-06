@@ -4,13 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Windows_CLient.Views.ManagerViews"
+        xmlns:VM="clr-namespace:Windows_CLient.ViewModels"
         mc:Ignorable="d"
         Title="ManagerMainView" Height="650" Width="1200"
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
+        WindowStyle="None"
         Background="{StaticResource MainBackgroundBrush}"
         Foreground="{StaticResource MainForegroundBrush}"
         >
+    
+    <Window.DataContext>
+       <VM:ManagerMainViewModel/>
+    </Window.DataContext>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="50"/>
+    </WindowChrome.WindowChrome>
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -24,7 +33,7 @@
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 30 0 0">
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10 30 0 0">
             <StackPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource NavButton}"/>
                 <Style TargetType="Image">
@@ -38,41 +47,47 @@
                 </Style>
             </StackPanel.Resources>
 
-            <Button>
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Images/dashboard.png"/>
-                    <TextBlock Text="Dashboard"/>
-                </StackPanel>
-            </Button>
-            
-            <Button>
+            <Button Command="{Binding GotoStatisitcs}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/chart.png"/>
                     <TextBlock Text="Statistics"/>
                 </StackPanel>
             </Button>
             
-            <Button>
+            <Button Command="{Binding GotoTeams}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/team.png"/>
                     <TextBlock Text="Teams Management"/>
                 </StackPanel>
             </Button>
             
-            <Button>
+            <Button Command="{Binding GotoWorkers}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/employee.png"/>
                     <TextBlock Text="Employee Managemen"/>
                 </StackPanel>
             </Button>
             
-            <Button>
+            <Button Command="{Binding GotoProjects}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/project.png"/>
                     <TextBlock Text="Projects Management"/>
                 </StackPanel>
             </Button>
-            
-        </StackPanel> 
+
+            <Button Command="{Binding GotoPaiements}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Images/money.png"/>
+                    <TextBlock Text="Paiments"/>
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+        <Frame NavigationUIVisibility="Hidden"
+               Content="{Binding CurrentPage}"
+               Margin="10 0 0 0"
+               Grid.Row="1" Grid.Column="1"
+               />
+
     </Grid>
 </Window>

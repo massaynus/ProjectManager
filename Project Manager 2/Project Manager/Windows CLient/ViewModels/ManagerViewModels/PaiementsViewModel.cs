@@ -26,6 +26,7 @@ namespace Windows_CLient.ViewModels
             PayWorkers = new RelayCommandAsync(payWorkers);
             NewPaiment = new RelayCommand(() => SelectedPaiment = new Paiment());
 
+            GetPaiements.Execute(null);
         }
 
         public ObservableCollection<Paiment> Paiments { get; set; }

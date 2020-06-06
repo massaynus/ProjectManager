@@ -5,12 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Windows_CLient.Models;
 using Windows_CLient.Views.ManagerViews.Pages;
 
 namespace Windows_CLient.ViewModels
 {
     public class ManagerMainViewModel : BaseViewModel
     {
+        private StatisticsPage statisticsPage;
+        private ProjectsPage projectsPage;
+        private PaiementsPage paiementsPage;
+        private TeamsPage teamsPage;
+        private WorkersPage workersPage;
+
         public ManagerMainViewModel()
         {
             GotoStatisitcs = new RelayCommand(gotoStatisitcs);
@@ -19,6 +26,7 @@ namespace Windows_CLient.ViewModels
             GotoTeams = new RelayCommand(gotoTeams);
             GotoWorkers = new RelayCommand(gotoWorkers);
         }
+
         public Page CurrentPage { get; set; }
 
         public ICommand GotoStatisitcs { get; set; }
@@ -29,27 +37,32 @@ namespace Windows_CLient.ViewModels
 
         public void gotoStatisitcs()
         {
-            CurrentPage = new StatisticsPage();
+            if (statisticsPage is null) statisticsPage = new StatisticsPage();
+            CurrentPage = statisticsPage;
             OnPropertyChanged(nameof(CurrentPage));
         }
         public void gotoProjects()
         {
-            CurrentPage = new ProjectsPage();
+            if (projectsPage is null) projectsPage = new ProjectsPage();
+            CurrentPage = projectsPage;
             OnPropertyChanged(nameof(CurrentPage));
         }
         public void gotoPaiements()
         {
-            CurrentPage = new PaiementsPage();
+            if (paiementsPage is null) paiementsPage = new PaiementsPage();
+            CurrentPage = paiementsPage;
             OnPropertyChanged(nameof(CurrentPage));
         }
         public void gotoTeams()
         {
-            CurrentPage = new TeamsPage();
+            if (teamsPage is null) teamsPage = new TeamsPage();
+            CurrentPage = teamsPage;
             OnPropertyChanged(nameof(CurrentPage));
         }
         public void gotoWorkers()
         {
-            CurrentPage = new WorkersPage();
+            if (workersPage is null) workersPage = new WorkersPage();
+            CurrentPage = workersPage;
             OnPropertyChanged(nameof(CurrentPage));
         }
 

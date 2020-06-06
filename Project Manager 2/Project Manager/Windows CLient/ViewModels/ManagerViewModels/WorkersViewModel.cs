@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using TT = System.Threading.Tasks;
 using System.Windows.Input;
-using Windows_CLient.Models;$
+using Windows_CLient.Models;
 using static Windows_CLient.APIClient;
 using Newtonsoft.Json;
 using System.Windows;
@@ -29,6 +29,9 @@ namespace Windows_CLient.ViewModels
 
             GetUsers = new RelayCommandAsync(getUsers);
             GetTeams = new RelayCommandAsync(getTeams);
+
+            GetUsers.Execute(null);
+            GetTeams.Execute(null);
         }
         public ObservableCollection<User> Users { get; set; }
         public ObservableCollection<Team> Teams { get; set; }
