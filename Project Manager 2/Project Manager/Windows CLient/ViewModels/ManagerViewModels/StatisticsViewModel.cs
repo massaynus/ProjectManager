@@ -8,6 +8,6 @@ namespace Windows_CLient.ViewModels
 {
     public class StatisticsViewModel : BaseViewModel
     {
-        //TODO: complete the StatisticsViewModel
+        
     }
 }

@@ -63,7 +63,7 @@ namespace Local_Server_API.Controllers
             return Ok(user);
         }
 
-        [AuthAttr(new string[] { Role.Manager, Role.TeamLeader })]
+        [AuthAttr(Role.Manager)]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
@@ -78,14 +78,6 @@ namespace Local_Server_API.Controllers
             if (id != user.UserID)
             {
                 return BadRequest();
-            }
-
-            if (RU.Role1.RoleName == Role.TeamLeader)
-            {
-                if (RU.UserID != id && RU.Team1?.Users?.Where(U => U.UserID == id).FirstOrDefault() is null)
-                {
-                    return Unauthorized();
-                }
             }
 
             user.Password = AuthController.HashPassword(user.Password);
