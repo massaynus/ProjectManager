@@ -11,8 +11,139 @@
     <Page.DataContext>
         <VM:ProjectsViewModel/>
     </Page.DataContext>
-    
+
     <Grid>
-        <DataGrid ItemsSource="{Binding Projects}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*" x:Name="DataSection"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView ItemsSource="{Binding Projects}" Background="Transparent" BorderThickness="0"
+                  SelectedItem="{Binding SelectedProject}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="{StaticResource HighlightedBackgroundBrush}" BorderThickness="1.3 2.5"
+                                CornerRadius="10" Padding="20 10">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name, StringFormat=Project&#160;name:&#009;{0}}"
+                                           Foreground="White" FontSize="15" FontWeight="DemiBold"/>
+                            <TextBlock Text="{Binding Description,  StringFormat=Description:&#009;{0}}"
+                                           Foreground="White" FontSize="13"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="Grid">
+                    <Setter Property="Margin" Value="0 5" />
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="WhiteSmoke"/>
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="FontWeight" Value="DemiBold" />
+                    <Setter Property="Margin" Value="0 0 15 0" />
+                    <Setter Property="Grid.Column" Value="0" />
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0.5" />
+                    <Setter Property="Padding" Value="20 5" />
+                    <Setter Property="Foreground" Value="WhiteSmoke" />
+                    <Setter Property="SelectionBrush" Value="Black" />
+                    <Setter Property="Grid.Column" Value="1" />
+                </Style>
+                <Style TargetType="DatePicker">
+                    <Setter Property="Grid.Column" Value="1" />
+                </Style>
+            </Grid.Resources>
+
+            <StackPanel Orientation="Vertical" Width="{Binding ElementName=DataSection, Path=Width}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Name:"/>
+                    <TextBox Text="{Binding SelectedProject.Name}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Description:"/>
+                    <TextBox Text="{Binding SelectedProject.Description}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Owner ID:"/>
+                    <TextBlock Text="{Binding SelectedProject.Owner}" Grid.Column="1"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Team:"/>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding Teams}"
+                              DisplayMemberPath="Name" SelectedValuePath="TeamID"
+                              SelectedValue="{Binding SelectedProject.Team}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Budget:"/>
+                    <TextBox Text="{Binding SelectedProject.Budget}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Priority:"/>
+                    <TextBox Text="{Binding SelectedProject.Priority}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Complixité:"/>
+                    <TextBox Text="{Binding SelectedProject.Complexity}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Date Debut:"/>
+                    <DatePicker SelectedDate="{Binding SelectedProject.StartinDate}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Date Fin:"/>
+                    <DatePicker SelectedDate="{Binding SelectedProject.DueDate}"/>
+                </Grid>
+                <WrapPanel Margin="0 30 0 0" Height="200">
+                    <Button Style="{StaticResource RoundButton}" Margin="5" Command="{Binding NewProject}" Content="New Project"/>
+                    <Button Style="{StaticResource RoundButton}" Margin="5" Command="{Binding AddProject}" Content="Add project"/>
+                    <Button Style="{StaticResource RoundButton}" Margin="5" Command="{Binding UpdateProject}" Content="Update Project"/>
+                </WrapPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
