@@ -4,11 +4,28 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Windows_CLient.Views.ManagerViews.Pages"
+      xmlns:VM="clr-namespace:Windows_CLient.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TeamsPage">
-
+    <Page.DataContext>
+        <VM:TeamsViewModel />
+    </Page.DataContext>
+    
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3.5*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView ItemsSource="{Binding Teams}" Background="Transparent" BorderThickness="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Page>

@@ -87,7 +87,7 @@
             </StackPanel.Resources>
             <TextBlock Text="{Binding Path=Projects.Count, StringFormat=Projects: {0}}"
                    Foreground="LightGreen"/>
-            <TextBlock Text="{Binding Path=Issues.Count, StringFormat=Issues: {0}}"
+            <TextBlock Text="{Binding Path=UnsolvedIssuesCount, StringFormat=Issues: {0}}"
                    Foreground="Coral"/>
         </StackPanel>
         <!--#endregion-->
