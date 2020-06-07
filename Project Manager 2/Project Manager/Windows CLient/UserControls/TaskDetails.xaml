@@ -30,7 +30,7 @@
 
         <!--&#x09; is \t-->
         <TextBlock Text="Description:"/>
-        <ScrollViewer MaxHeight="150">
+        <ScrollViewer MaxHeight="150" VerticalScrollBarVisibility="Auto">
             <TextBlock Text="{Binding Description}"
                    Margin="30 0 0 10"/>
         </ScrollViewer>
