@@ -55,6 +55,7 @@ namespace Windows_CLient.ViewModels
         public ObservableCollection<Project> Projects { get; set; }
         public ObservableCollection<Issue> Issues { get; set; }
 
+        public int UnsolvedIssuesCount { get => Issues.Where(I => !(I.isSolved ?? false)).Count(); }
 
         public ICommand GetProjects { get; set; }
         public ICommand GetIssues { get; set; }
