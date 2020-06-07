@@ -23,5 +23,10 @@ namespace Windows_CLient.Views.ManagerViews
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

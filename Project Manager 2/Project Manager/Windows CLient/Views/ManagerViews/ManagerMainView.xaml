@@ -28,12 +28,54 @@
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="15"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10 30 0 0">
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="0 5 0 0">
+            <!--Title-->
+            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Title}" 
+                   Grid.Row="0"
+                   
+                   FontSize="35"
+                   FontWeight="DemiBold"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="{StaticResource MainForegroundBrush}"
+                   />
+            <!--Exit btn-->
+            <Button Height="40" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                        Margin="10 0 0 0"
+                        BorderThickness="0"
+                        OverridesDefaultStyle="True"
+                        Click="Button_Click"
+                WindowChrome.IsHitTestVisibleInChrome="True">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                    Width="{TemplateBinding Width}"
+                                    Height="{TemplateBinding Height}"
+                                    CornerRadius="10"
+                                    Padding="5">
+                            <Image Source="/Resources/Images/exit.png" Height="32"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Crimson"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="10 30 0 0">
             <StackPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource NavButton}"/>
                 <Style TargetType="Image">
@@ -86,7 +128,7 @@
         <Frame NavigationUIVisibility="Hidden"
                Content="{Binding CurrentPage}"
                Margin="10 0 0 0"
-               Grid.Row="1" Grid.Column="1"
+               Grid.Row="2" Grid.Column="1"
                />
 
     </Grid>
