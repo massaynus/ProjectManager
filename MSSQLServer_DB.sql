@@ -137,6 +137,7 @@ BEGIN Tran
             COMMIT Tran
 	    Print 'DB and Tables Created Successfully, Creating Default Roles...'
 	    insert into [Role](RoleName) values ('Manager'), ('TeamLeader'), ('Member'), ('Client')
+	    insert into [Team](Name) values ('No Team')
 
         PRINT 'Fixing DB Collation'
         ALTER DATABASE ProjectManagerDB
