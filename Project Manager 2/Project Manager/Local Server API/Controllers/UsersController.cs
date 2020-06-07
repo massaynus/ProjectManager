@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -80,10 +81,11 @@ namespace Local_Server_API.Controllers
                 return BadRequest();
             }
 
-            user.Password = AuthController.HashPassword(user.Password);
+            if (user.Team is null) user.Team1 = null;
+            
+            if (!string.IsNullOrEmpty(user.Password)) user.Password = AuthController.HashPassword(user.Password);
 
-            db.Entry(RU).State = EntityState.Detached;
-            db.Entry(user).State = EntityState.Modified;
+            db.Users.AddOrUpdate(user);
 
             try
             {

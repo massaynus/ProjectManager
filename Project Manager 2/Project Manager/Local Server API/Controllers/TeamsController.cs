@@ -52,7 +52,7 @@ namespace Local_Server_API.Controllers
             if (id != team.TeamID)
             {
                 return BadRequest();
-            }
+            } 
 
             if (user.Role1.RoleName == Role.TeamLeader)
             {
@@ -61,8 +61,11 @@ namespace Local_Server_API.Controllers
                     return Unauthorized();
                 }
             }
+            
+            var t = db.Teams.Where(T => T.TeamID == id).FirstOrDefault();
+            if (t is null) BadRequest("Team doesn't exist");
 
-            db.Entry(team).State = EntityState.Modified;
+            t.Name = team.Name;
 
             try
             {
