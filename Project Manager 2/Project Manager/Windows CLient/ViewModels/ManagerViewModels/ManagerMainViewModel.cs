@@ -13,9 +13,9 @@ namespace Windows_CLient.ViewModels
     public class ManagerMainViewModel : BaseViewModel
     {
         private StatisticsPage statisticsPage;
-        private ProjectsPage projectsPage;
         private PaiementsPage paiementsPage;
         private TeamsPage teamsPage;
+        private ProjectsPage projectsPage;
         private WorkersPage workersPage;
 
         public ManagerMainViewModel()
@@ -45,6 +45,8 @@ namespace Windows_CLient.ViewModels
         {
             if (projectsPage is null) projectsPage = new ProjectsPage();
             CurrentPage = projectsPage;
+            if (teamsPage != null) ((ProjectsViewModel)projectsPage.DataContext).Teams = ((TeamsViewModel)teamsPage.DataContext).Teams.ToList();
+
             OnPropertyChanged(nameof(CurrentPage));
         }
         public void gotoPaiements()
