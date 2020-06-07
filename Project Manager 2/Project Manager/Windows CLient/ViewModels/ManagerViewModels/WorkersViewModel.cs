@@ -79,6 +79,7 @@ namespace Windows_CLient.ViewModels
         
         async TT.Task updateUser()
         {
+            SelectedUser.Password = "";
             string JSON = await MakeApiCall(APIClient.Action.PUT, Controller.Users, SelectedUser, SelectedUser.UserID.ToString());
             if (JSON.Contains("UserID"))
                 MessageBox.Show("User info was updated !!", "Great", MessageBoxButton.OK, MessageBoxImage.Information);
