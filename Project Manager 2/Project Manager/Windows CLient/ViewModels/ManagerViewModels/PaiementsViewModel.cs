@@ -21,15 +21,21 @@ namespace Windows_CLient.ViewModels
         public PaiementsViewModel()
         {
             Paiments = new ObservableCollection<Paiment>();
+            Projects = new ObservableCollection<Project>();
+
             GetPaiements = new RelayCommandAsync(getPaiments);
+            GetProjects = new RelayCommandAsync(getProjects);
             MakePaiement = new RelayCommandAsync(makePaiment);
             PayWorkers = new RelayCommandAsync(payWorkers);
-            NewPaiment = new RelayCommand(() => SelectedPaiment = new Paiment());
+            NewPaiment = new RelayCommand(newPaiment);
 
             GetPaiements.Execute(null);
+
+            if (Projects.Count == 0) GetProjects.Execute(null);
         }
 
         public ObservableCollection<Paiment> Paiments { get; set; }
+        public ObservableCollection<Project> Projects { get; set; }
         public Paiment SelectedPaiment
         {
             get => selectedPaiement;
@@ -44,6 +50,7 @@ namespace Windows_CLient.ViewModels
         }
 
         public ICommand GetPaiements { get; set; }
+        public ICommand GetProjects { get; set; }
         public ICommand NewPaiment { get; set; }
         public ICommand MakePaiement { get; set; }
         public ICommand PayWorkers { get; set; }
@@ -51,11 +58,20 @@ namespace Windows_CLient.ViewModels
         async TT.Task getPaiments()
         {
             Paiments = JsonConvert.DeserializeObject<ObservableCollection<Paiment>>(await MakeApiCall(APIClient.Action.GET, Controller.Paiment));
+            OnPropertyChanged(nameof(Paiments));
+        }
+
+        async TT.Task getProjects()
+        {
+            Projects = JsonConvert.DeserializeObject<ObservableCollection<Project>>(await MakeApiCall(APIClient.Action.GET, Controller.Projects));
+            OnPropertyChanged(nameof(Projects));
         }
 
         async TT.Task makePaiment()
         {
-            await MakeApiCall(APIClient.Action.POST, Controller.Paiment, SelectedPaiment);
+            string res = await MakeApiCall(APIClient.Action.POST, Controller.Paiment, SelectedPaiment);
+            if (string.IsNullOrEmpty(res)) MessageBox.Show("Paiement was made succesflully!!!\n😎😎😎", "Great!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            else MessageBox.Show("Your paiment didn't go through", "Oops!", MessageBoxButton.OK, MessageBoxImage.Warning);
 
         }
         async TT.Task payWorkers()
@@ -104,6 +120,11 @@ namespace Windows_CLient.ViewModels
                 }
             }
             else MessageBox.Show("Operation was canceled!", "Okay!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        void newPaiment()
+        {
+            SelectedPaiment = new Paiment() { SenderFullName = APIClient.User.FullName, SenderID = APIClient.User.UserID };
+            Paiments.Add(SelectedPaiment);
         }
 
     }

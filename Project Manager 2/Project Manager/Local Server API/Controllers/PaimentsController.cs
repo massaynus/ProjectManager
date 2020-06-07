@@ -60,6 +60,8 @@ namespace Local_Server_API.Controllers
                 return Unauthorized();
             }
 
+            Paiment.Date = DateTime.Now;
+
             db.Paiments.Add(Paiment);
             db.SaveChanges();
 

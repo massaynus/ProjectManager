@@ -52,6 +52,8 @@ namespace Windows_CLient.ViewModels
         public void gotoPaiements()
         {
             if (paiementsPage is null) paiementsPage = new PaiementsPage();
+            if (projectsPage != null) ((PaiementsViewModel)paiementsPage.DataContext).Projects = ((ProjectsViewModel)projectsPage.DataContext).Projects;
+
             CurrentPage = paiementsPage;
             OnPropertyChanged(nameof(CurrentPage));
         }
