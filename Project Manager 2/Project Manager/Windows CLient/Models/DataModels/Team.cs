@@ -1,6 +1,8 @@
 namespace Windows_CLient.Models
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+
     public partial class Team
     {
         public int TeamID { get; set; }
