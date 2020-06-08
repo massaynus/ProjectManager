@@ -17,6 +17,7 @@ namespace Windows_CLient.ViewModels
         public class ProjectCompletion
         {
             public Project Project { get; set; }
+            public string ProjectName { get => Project.Name; }
             public int Issues { get; set; }
             public int TasksCompleted { get; set; }
             public int TasksRemaining { get; set; }
@@ -24,6 +25,7 @@ namespace Windows_CLient.ViewModels
         public class UserStats : IComparable
         {
             public User User { get; set; }
+            public string FullName { get => User.FullName; }
             public int Score { get; set; }
 
             public int CompareTo(object obj)
@@ -33,6 +35,11 @@ namespace Windows_CLient.ViewModels
                 else if (U.Score > this.Score) return 1;
                 else return -1;
             }
+        }
+        public class VS
+        {
+            public string Name { get; set; }
+            public int Value { get; set; }
         }
 
         public StatisticsViewModel()
@@ -44,23 +51,26 @@ namespace Windows_CLient.ViewModels
             GetPaiments.Execute(null);
             GetProjects.Execute(null);
             GetUsers.Execute(null);
+
+            IVC.Add(new VS { Name = "Issues", Value = 0 });
+            IVC.Add(new VS { Name = "Completions", Value = 0 });
         }
 
 
-        public ObservableCollection<ProjectCompletion> ProjectCompletions { get; internal set; } = new ObservableCollection<ProjectCompletion>(); // BARS
-        public int[] IssuesVsCompletions { get; set; } = new int[] { 0, 0 }; // Pie
+        public List<ProjectCompletion> ProjectCompletions { get; set; } = new List<ProjectCompletion>(); // BARS
+        public List<VS> IVC { get; set; } = new List<VS>();// Pie
 
 
-        
-        
-        public ObservableCollection<Paiment> Paiments { get; set; } = new ObservableCollection<Paiment>(); // Lines
-        
-        public List<Paiment> Incomes { get; internal set; } = new List<Paiment>(); // Area
-        public List<Paiment> Expenses { get; internal set; } = new List<Paiment>(); // Same Area
 
-        
-        
-        public List<UserStats> Top5 { get; internal set; } = new List<UserStats>(); // Bars
+
+        public List<Paiment> Paiments { get; set; } = new List<Paiment>(); 
+
+        public List<Paiment> Incomes { get; set; } = new List<Paiment>(); // Area
+        public List<Paiment> Expenses { get; set; } = new List<Paiment>(); // Same Area
+
+
+
+        public List<UserStats> Top5 { get; set; } = new List<UserStats>(); // Bars
 
 
         public ICommand GetPaiments { get; set; }
@@ -69,7 +79,7 @@ namespace Windows_CLient.ViewModels
 
         async TT.Task getPaiments()
         {
-            Paiments = JsonConvert.DeserializeObject<ObservableCollection<Paiment>>(await MakeApiCall(APIClient.Action.GET, Controller.Paiment));
+            Paiments = JsonConvert.DeserializeObject<List<Paiment>>(await MakeApiCall(APIClient.Action.GET, Controller.Paiment));
 
             foreach (var P in Paiments)
             {
@@ -95,8 +105,8 @@ namespace Windows_CLient.ViewModels
 
                 project.Tasks?.ToList().ForEach(T => ProjectStat.Issues += T.Issues?.Count ?? 0);
 
-                IssuesVsCompletions[0] += ProjectStat.Issues;
-                IssuesVsCompletions[1] += ProjectStat.TasksCompleted;
+                IVC[0].Value += ProjectStat.Issues;
+                IVC[1].Value += ProjectStat.TasksCompleted;
 
                 ProjectCompletions.Add(ProjectStat);
             }
@@ -106,7 +116,7 @@ namespace Windows_CLient.ViewModels
 
         async TT.Task getUsers()
         {
-            var users = JsonConvert.DeserializeObject<ObservableCollection<User>>(await MakeApiCall(APIClient.Action.GET, Controller.Users));
+            var users = JsonConvert.DeserializeObject<List<User>>(await MakeApiCall(APIClient.Action.GET, Controller.Users));
 
             foreach (var user in users)
             {
