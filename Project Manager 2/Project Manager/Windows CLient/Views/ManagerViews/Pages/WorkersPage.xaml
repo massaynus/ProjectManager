@@ -11,8 +11,132 @@
     <Page.DataContext>
         <VM:WorkersViewModel/>
     </Page.DataContext>
-    
+
     <Grid>
-        <DataGrid ItemsSource="{Binding Users}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}"
+                  SelectionMode="Single" ColumnWidth="*" Background="Transparent" BorderThickness="0" 
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
+                  IsReadOnly="True">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="User Name" Binding="{Binding UserName}"/>
+                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
+                <DataGridTextColumn Header="Date of birht" Binding="{Binding BirthDtae}"/>
+                <DataGridTextColumn Header="Sexe" Binding="{Binding Sexe}"/>
+                <DataGridTextColumn Header="RIB" Binding="{Binding RIB}"/>
+                <DataGridTextColumn Header="Role" Binding="{Binding Role1.RoleName}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <Grid Grid.Row="1">
+
+            <Grid.Resources>
+                
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="WhiteSmoke"/>
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="FontWeight" Value="DemiBold" />
+                    <Setter Property="Margin" Value="10 5 15 5" />
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0.5" />
+                    <Setter Property="Padding" Value="20 5" />
+                    <Setter Property="Margin" Value="0 5" />
+                    <Setter Property="Foreground" Value="WhiteSmoke" />
+                    <Setter Property="SelectionBrush" Value="Black" />
+                </Style>
+                <Style TargetType="CheckBox">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Margin" Value="0 5" />
+                    <Setter Property="Padding" Value="10 5" />
+                </Style>
+                <Style TargetType="DatePicker">
+                    <Setter Property="Margin" Value="0 5" />
+                    <Setter Property="BorderThickness" Value="0" />
+                </Style>
+                
+                
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+
+            <TextBlock Text="User Name"  Grid.Row="0" />
+            <TextBox Text="{Binding SelectedUser.UserName}" Grid.Row="0" Grid.Column="1" />
+
+            <TextBlock Text="Password" Grid.Row="1" Grid.Column="0" />
+            <TextBox Text="{Binding SelectedUser.Password}" Grid.Row="1" Grid.Column="1" />
+
+            <TextBlock Text="First Name" Grid.Row="2" Grid.Column="0" />
+            <TextBox Text="{Binding SelectedUser.FirstName}" Grid.Row="2" Grid.Column="1" />
+
+            <TextBlock Text="Last Name" Grid.Row="3" Grid.Column="0" />
+            <TextBox Text="{Binding SelectedUser.LastName}" Grid.Row="3" Grid.Column="1" />
+
+            <TextBlock Text="Birth date" Grid.Row="4" Grid.Column="0" />
+            <DatePicker SelectedDate="{Binding SelectedUser.BirthDtae}" Grid.Row="4" Grid.Column="1" />
+
+            <TextBlock Text="Sexe" Grid.Row="5" Grid.Column="0" />
+            <ComboBox SelectedValue="{Binding SelectedUser.Sexe}" ItemsSource="{Binding Sexes}" DisplayMemberPath="T" SelectedValuePath="V" Grid.Row="5" Grid.Column="1" />
+
+            <TextBlock Text="GSM" Grid.Row="6" Grid.Column="0" />
+            <TextBox Text="{Binding SelectedUser.GSM}" Grid.Row="6" Grid.Column="1" />
+
+            <TextBlock Text="Email" Grid.Row="0" Grid.Column="2" />
+            <TextBox Text="{Binding SelectedUser.Email}" Grid.Row="0" Grid.Column="3" />
+
+            <TextBlock Text="RIB" Grid.Row="1" Grid.Column="2" />
+            <TextBox Text="{Binding SelectedUser.RIB}" Grid.Row="1" Grid.Column="3" />
+
+            <TextBlock Text="Role" Grid.Row="2" Grid.Column="2" />
+            <ComboBox SelectedValue="{Binding SelectedUser.Role}" ItemsSource="{Binding Roles}" DisplayMemberPath="RoleName" SelectedValuePath="RoleID" Grid.Row="2" Grid.Column="3" />
+
+            <TextBlock Text="Team" Grid.Row="3" Grid.Column="2" />
+            <ComboBox SelectedValue="{Binding SelectedUser.Team}" ItemsSource="{Binding Teams}" DisplayMemberPath="Name" SelectedValuePath="TeamID" Grid.Row="3" Grid.Column="3" />
+
+            <TextBlock Text="Is Account enabled" Grid.Row="4" Grid.Column="2" />
+            <CheckBox IsChecked="{Binding SelectedUser.isAccountActive}" Grid.Row="4" Grid.Column="3" />
+
+            <TextBlock Text="Leader" Grid.Row="5" Grid.Column="2" />
+            <ComboBox SelectedValue="{Binding SelectedUser.Leader}" ItemsSource="{Binding Leaders}" DisplayMemberPath="FullName" SelectedValuePath="UserID" Grid.Row="5" Grid.Column="3" />
+
+            <TextBlock Text="Manager" Grid.Row="6" Grid.Column="2" />
+            <TextBlock Text="{Binding Manager.FullName}" Grid.Row="6" Grid.Column="3" />
+
+        </Grid>
+
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+            <Button Style="{StaticResource RoundButton}" Margin="5" Command="{Binding NewUser}" Content="New User"/>
+            <Button Style="{StaticResource RoundButton}" Margin="5" Command="{Binding AddUser}" Content="Add User"/>
+            <Button Style="{StaticResource RoundButton}" Margin="5" Command="{Binding UpdateUser}" Content="Update User"/>
+            <Button Style="{StaticResource RoundButton}" Margin="5" Command="{Binding DisableUserAccount}" Content="Disable User Account"/>
+            <Button Style="{StaticResource RoundButton}" Margin="5" Command="{Binding EnableUserAccount}" Content="Enable User Account"/>
+        </WrapPanel>
+
     </Grid>
 </Page>
