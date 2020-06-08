@@ -17,14 +17,11 @@ namespace Windows_CLient.ViewModels
 {
     public class LeaderMainViewModel : BaseViewModel
     {
-        //TODO : Complete the LeaderMainViewModel 
-        //TODO : Write functions for commands
         private Timer timer;
         public LeaderMainViewModel()
         {
             GotoIssues = new RelayCommand(gotoissues);
             GotoMembers = new RelayCommand(gotomembers);
-            GotoStats = new RelayCommand(gotostats);
             GotoScheduling = new RelayCommand(gotoscheduling);
 
             GetProjects = new RelayCommandAsync(GetProjectsAsync);
@@ -97,18 +94,12 @@ namespace Windows_CLient.ViewModels
 
         #region Navigation
 
-        public Page CurrentPage { get; set; } = new LeaderStatsPage();
-        public ICommand GotoStats { get; set; }
+        public Page CurrentPage { get; set; } = new TeamMembersPage();
         public ICommand GotoScheduling { get; set; }
         public ICommand GotoIssues { get; set; }
         public ICommand GotoMembers { get; set; }
 
         #region Nav Helpers
-        void gotostats()
-        {
-            CurrentPage = new LeaderStatsPage();
-            OnPropertyChanged(nameof(CurrentPage));
-        }
         void gotoscheduling()
         {
             
@@ -128,6 +119,8 @@ namespace Windows_CLient.ViewModels
         void gotoissues()
         {
             CurrentPage = new IssuesTreatingPage();
+            ((IssueTreatingViewModel)CurrentPage.DataContext).Issues = Issues;
+
             OnPropertyChanged(nameof(CurrentPage));
         }
 
