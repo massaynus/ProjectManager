@@ -78,12 +78,13 @@ namespace Local_Server_API.Controllers
 
             if (id != user.UserID)
             {
-                return BadRequest();
+                return BadRequest("ID and user.UserID don't match");
             }
 
             if (user.Team is null) user.Team1 = null;
-            
-            if (!string.IsNullOrEmpty(user.Password)) user.Password = AuthController.HashPassword(user.Password);
+
+            if (!string.IsNullOrEmpty(user.Password) && user.Password != "Don't change") user.Password = AuthController.HashPassword(user.Password);
+            else user.Password = db.Users.Where(U => U.UserID == id).FirstOrDefault()?.Password;
 
             db.Users.AddOrUpdate(user);
 
