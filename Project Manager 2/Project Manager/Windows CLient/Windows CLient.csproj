@@ -90,7 +90,6 @@
       <DependentUpon>TaskDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\LeaderViewModels\LeaderStatsViewModel.cs" />
     <Compile Include="ViewModels\MemberViewModels\FlagTasksViewModel.cs" />
     <Compile Include="ViewModels\LeaderViewModels\IssueTreatingViewModel.cs" />
     <Compile Include="ViewModels\LeaderViewModels\LeaderMainViewModel.cs" />
@@ -106,9 +105,6 @@
     <Compile Include="ViewModels\MemberViewModels\TasksViewModel.cs" />
     <Compile Include="Views\LeaderViews\Pages\IssuesTreatingPage.xaml.cs">
       <DependentUpon>IssuesTreatingPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\LeaderViews\Pages\LeaderStatsPage.xaml.cs">
-      <DependentUpon>LeaderStatsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LeaderViews\Pages\TaskSchedulingPage.xaml.cs">
       <DependentUpon>TaskSchedulingPage.xaml</DependentUpon>
@@ -198,10 +194,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LeaderViews\Pages\IssuesTreatingPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\LeaderViews\Pages\LeaderStatsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
