@@ -4,11 +4,140 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Windows_CLient.Views.LeaderViews"
+      xmlns:VM="clr-namespace:Windows_CLient.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TeamMembersPage">
 
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BTV"/>
+    </Page.Resources>
+
+    <Page.DataContext>
+        <VM:MembersViewModel/>
+    </Page.DataContext>
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}"
+                  SelectionMode="Single" ColumnWidth="*" Background="Transparent" BorderThickness="0" 
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
+                  IsReadOnly="True" Grid.RowSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
+                <DataGridTextColumn Header="Tasks Booked" Binding="{Binding TasksBookedCount}"/>
+                <DataGridTextColumn Header="Tasks Completed" Binding="{Binding TasksCompletedCount}"/>
+                <DataGridTextColumn Header="Issues" Binding="{Binding IssuesCount}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <ListView ItemsSource="{Binding TasksDoneByUser}" Grid.Column="1"
+                  Background="Transparent" BorderThickness="0"  Padding="10 0" Margin="15">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border x:Name="ItemBorder"
+                            BorderBrush="{StaticResource HighlightedBackgroundBrush}"
+                            SnapsToDevicePixels="True"
+                            BorderThickness="1.5"
+                            CornerRadius="15"
+                            Padding="20 10"
+                            Margin="0 0 0 10">
+                        <StackPanel MaxWidth="{Binding ElementName=ItemBorder, Path=Width}">
+                            <TextBlock Text="{Binding Name}"
+                                       FontSize="14"
+                                       Foreground="WhiteSmoke"/>
+                        </StackPanel>
+                    </Border>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="ItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="AntiqueWhite" Opacity=".2"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding isComplete}" Value="true">
+                            <Setter TargetName="ItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="ForestGreen" Opacity=".4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Border Grid.Column="1" CornerRadius="10" BorderThickness="0" Padding="0" Margin="15" IsHitTestVisible="False"
+                Visibility="{Binding ShowTasksDoneShadow, Converter={StaticResource BTV}}">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1 0" EndPoint="1 1" Opacity=".7">
+                    <GradientStop Offset="0" Color="Transparent"/>
+                    <GradientStop Offset=".8" Color="Transparent"/>
+                    <GradientStop Offset=".9" Color="Gray"/>
+                    <GradientStop Offset="1" Color="DimGray"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <ListView ItemsSource="{Binding IssuesByUser}" Grid.Column="1" Grid.Row="1"
+                  Background="Transparent" BorderThickness="0" Margin="15" Padding="10 0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border x:Name="ItemBorder"
+                            BorderBrush="{StaticResource HighlightedBackgroundBrush}"
+                            SnapsToDevicePixels="True"
+                            BorderThickness="1.5"
+                            CornerRadius="15"
+                            Padding="20 10"
+                            Margin="0 0 0 10">
+                        <StackPanel MaxWidth="{Binding ElementName=ItemBorder, Path=Width}">
+                            <TextBlock Text="{Binding Title}"
+                                       FontSize="14"
+                                       Foreground="WhiteSmoke"/>
+                        </StackPanel>
+                    </Border>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="ItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="AntiqueWhite" Opacity=".2"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding isSolved}" Value="true">
+                            <Setter TargetName="ItemBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="ForestGreen" Opacity=".4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Border Grid.Column="1" Grid.Row="1" CornerRadius="10" BorderThickness="0" Padding="0" Margin="15" IsHitTestVisible="False"
+                Visibility="{Binding ShowIssuesShadow, Converter={StaticResource BTV}}">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1 0" EndPoint="1 1" Opacity=".7">
+                    <GradientStop Offset="0" Color="Transparent"/>
+                    <GradientStop Offset=".8" Color="Transparent"/>
+                    <GradientStop Offset=".9" Color="Gray"/>
+                    <GradientStop Offset="1" Color="DimGray"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
     </Grid>
 </Page>
