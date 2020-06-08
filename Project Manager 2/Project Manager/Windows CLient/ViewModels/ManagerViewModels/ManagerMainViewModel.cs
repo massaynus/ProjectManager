@@ -25,6 +25,8 @@ namespace Windows_CLient.ViewModels
             GotoPaiements = new RelayCommand(gotoPaiements);
             GotoTeams = new RelayCommand(gotoTeams);
             GotoWorkers = new RelayCommand(gotoWorkers);
+
+            GotoStatisitcs.Execute(null);
         }
 
         public Page CurrentPage { get; set; }

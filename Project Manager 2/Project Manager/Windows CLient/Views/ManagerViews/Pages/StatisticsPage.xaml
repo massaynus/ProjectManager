@@ -5,14 +5,84 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Windows_CLient.Views.ManagerViews.Pages"
       xmlns:VM="clr-namespace:Windows_CLient.ViewModels"
+      xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"  
+      xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"  
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StatisticsPage">
+    
     <Page.DataContext>
-        <VM:StatisticsViewModel/>
+        <VM:StatisticsViewModel />
     </Page.DataContext>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DVC:Chart Grid.ColumnSpan="2" Background="Transparent" BorderThickness="0">
+            <DVC:Chart.Series>
+                <DVC:StackedBarSeries Background="{StaticResource MainBackgroundBrush}" BorderThickness="0">
+                    
+                    <DVC:StackedBarSeries.DependentAxis>
+                        <DVC:LinearAxis Orientation="Y" Minimum="0" Foreground="White"/>
+                    </DVC:StackedBarSeries.DependentAxis>
+
+                    <DVC:StackedBarSeries.IndependentAxis>
+                        <DVC:CategoryAxis Orientation="X" Foreground="WhiteSmoke"/>
+                    </DVC:StackedBarSeries.IndependentAxis>
+
+                    <DVC:SeriesDefinition Title="Issues" ItemsSource="{Binding ProjectCompletions}" DependentValuePath="Issues" IndependentValuePath="ProjectName"/>
+                    <DVC:SeriesDefinition Title="Tasks Remaining" ItemsSource="{Binding ProjectCompletions}" DependentValuePath="TasksRemaining" IndependentValuePath="ProjectName"/>
+                    <DVC:SeriesDefinition Title="Tasks Completed" ItemsSource="{Binding ProjectCompletions}" DependentValuePath="TasksCompleted" IndependentValuePath="ProjectName"/>
+                
+                </DVC:StackedBarSeries>
+            </DVC:Chart.Series>
+        </DVC:Chart>
+
+        <DVC:Chart Grid.Column="2" Background="{StaticResource MainBackgroundBrush}" BorderThickness="0">
+            <DVC:Chart.Series>
+                <DVC:PieSeries ItemsSource="{Binding IVC}" DependentValuePath="Value" IndependentValuePath="Name" Background="{StaticResource MainBackgroundBrush}"/>
+            </DVC:Chart.Series>
+        </DVC:Chart>
+
+        <DVC:Chart Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" BorderThickness="0">
+            <DVC:Chart.Series >
+                <DVC:StackedAreaSeries Background="{StaticResource MainBackgroundBrush}">
+                    
+                    <DVC:SeriesDefinition Title="Expenses" ItemsSource="{Binding Expenses}" IndependentValuePath="Date" DependentValuePath="Amount" />
+                    <DVC:SeriesDefinition Title="Income" ItemsSource="{Binding Incomes}" IndependentValuePath="Date" DependentValuePath="Amount" />
+               
+                </DVC:StackedAreaSeries>
+            </DVC:Chart.Series>
+        </DVC:Chart>
+
+
+        <ListView ItemsSource="{Binding Top5}" Grid.Row="1" Grid.Column="2" Background="Transparent" BorderThickness="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Margin="0 0 0 10">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="WhiteSmoke"/>
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="DemiBold" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Text="{Binding FullName, StringFormat=Full Name:     {0}}"/>
+                        <TextBlock Text="{Binding Score, StringFormat=↑ Score:            {0}}" Foreground="ForestGreen"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
     </Grid>
 </Page>
