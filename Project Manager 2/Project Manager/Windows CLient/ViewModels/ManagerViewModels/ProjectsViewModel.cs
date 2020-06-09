@@ -92,6 +92,9 @@ namespace Windows_CLient.ViewModels
             {
                 MessageBox.Show($"Status Code: {res.StatusCode}\n{res.ReasonPhrase}", "Oops!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
+            GetProjects.Execute(null);
+            GetTeams.Execute(null);
         }
         void newProject()
         {
