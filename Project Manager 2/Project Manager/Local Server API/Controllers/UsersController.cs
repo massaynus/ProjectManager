@@ -123,7 +123,7 @@ namespace Local_Server_API.Controllers
 
             if (db.Users.Where(U => U.UserName == user.UserName).FirstOrDefault() != null)
             {
-                return BadRequest("-1");
+                return BadRequest("User name is taken");
             }
 
             user.isAccountActive = true;
