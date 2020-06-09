@@ -40,7 +40,7 @@ namespace Windows_CLient
             else throw new InvalidActionException("Provide either GET or DELETE actions");
 
             if (res.IsSuccessStatusCode) return await res.Content.ReadAsStringAsync();
-            else MessageBox.Show($"Status Code: {res.StatusCode}\n{res.ReasonPhrase}"); return "";
+            else MessageBox.Show($"Status Code: {res.StatusCode}\n{await res.Content.ReadAsStringAsync()}"); return "";
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Windows_CLient
             else throw new InvalidActionException("Provide either GET or DELETE actions");
 
             if (res.IsSuccessStatusCode) return await res.Content.ReadAsStringAsync();
-            else MessageBox.Show($"Status Code: {res.StatusCode}\n{res.ReasonPhrase}"); return "";
+            else MessageBox.Show($"Status Code: {res.StatusCode}\n{await res.Content.ReadAsStringAsync()}"); return "";
         }
 
         public static void ShowResMessage(HttpResponseMessage res)
