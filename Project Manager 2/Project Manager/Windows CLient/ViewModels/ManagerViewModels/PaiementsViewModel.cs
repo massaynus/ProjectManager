@@ -70,8 +70,10 @@ namespace Windows_CLient.ViewModels
         async TT.Task makePaiment()
         {
             string res = await MakeApiCall(APIClient.Action.POST, Controller.Paiment, SelectedPaiment);
-            if (string.IsNullOrEmpty(res)) MessageBox.Show("Paiement was made succesflully!!!\n😎😎😎", "Great!!", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (res.Contains("PaymentID")) MessageBox.Show("Paiement was made succesflully!!!\n😎😎😎", "Great!!", MessageBoxButton.OK, MessageBoxImage.Information);
             else MessageBox.Show("Your paiment didn't go through", "Oops!", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            GetPaiements.Execute(null);
 
         }
         async TT.Task payWorkers()
@@ -120,6 +122,8 @@ namespace Windows_CLient.ViewModels
                 }
             }
             else MessageBox.Show("Operation was canceled!", "Okay!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            GetPaiements.Execute(null);
         }
         void newPaiment()
         {
