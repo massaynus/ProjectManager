@@ -103,6 +103,9 @@ namespace Windows_CLient.ViewModels
                 MessageBox.Show("User info was added !!", "Great", MessageBoxButton.OK, MessageBoxImage.Information);
             else
                 MessageBox.Show("User info wasn't added", "Oops!", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            GetUsers.Execute(null);
+            GetTeams.Execute(null);
         }
         
         async TT.Task updateUser()

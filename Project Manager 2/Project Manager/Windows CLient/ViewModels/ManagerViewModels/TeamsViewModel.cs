@@ -58,8 +58,11 @@ namespace Windows_CLient.ViewModels
             users.ForEach(u =>
             {
                 var team = Teams.Where(T => T.TeamID == u.Team).FirstOrDefault();
-                if (team.Users is null) team.Users = new List<User>();
-                team.Users.Add(u);
+                if (!(team is null))
+                {
+                    if (team.Users is null) team.Users = new List<User>();
+                    team.Users.Add(u);
+                }
             });
 
             var No_Team = Teams.Where(T => T.Name == "No Team").FirstOrDefault();
@@ -85,6 +88,8 @@ namespace Windows_CLient.ViewModels
             {
                 MessageBox.Show("Team wasn't added", "Oops!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
+            GetTeams.Execute(null);
         }
         async TT.Task updateTeams()
         {
