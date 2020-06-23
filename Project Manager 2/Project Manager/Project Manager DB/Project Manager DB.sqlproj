@@ -62,6 +62,7 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="dbo\Tables\ActionLog.sql" />
     <Build Include="dbo\Tables\Team.sql" />
     <Build Include="dbo\Tables\Stack.sql" />
     <Build Include="dbo\Tables\TeamStack.sql" />
@@ -72,6 +73,5 @@
     <Build Include="dbo\Tables\Paiments.sql" />
     <Build Include="dbo\Tables\Task.sql" />
     <Build Include="dbo\Tables\Issue.sql" />
-    <Build Include="dbo\Tables\ActionLog.sql" />
   </ItemGroup>
 </Project>

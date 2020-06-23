@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[ActionLog] (
-    [ActionID]     INT          IDENTITY (1, 1) NOT NULL,
+    [ActionID]     BIGINT       IDENTITY (1, 1) NOT NULL,
     [UserName]     VARCHAR (35) COLLATE French_CI_AS NOT NULL,
     [UserFullName] VARCHAR (60) COLLATE French_CI_AS NOT NULL,
     [ActionName]   VARCHAR (35) COLLATE French_CI_AS NOT NULL,
